@@ -1,7 +1,7 @@
 <br />
 <div align="center">
   <a href="./internal/badassitron-logo.png">
-    <img src="./internal/badassitron-logo.png" alt="badassitron Logo" width="150" height="150">
+    <img src="./internal/badassitron-logo.png" alt="badassitron Logo" width="300" height="auto">
   </a>
 
 # Badassitron
