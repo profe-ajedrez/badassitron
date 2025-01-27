@@ -1,10 +1,11 @@
+# Badassitron
+
 <br />
 <div align="center">
   <a href="./internal/badassitron-logo.png">
     <img src="./internal/badassitron-logo.png" alt="badassitron Logo" width="300" height="auto">
   </a>
 
-# Badassitron
 
 ![](internal/optimus_prime_says_his_line%20.png)
 
