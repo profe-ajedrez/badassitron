@@ -1,0 +1,6 @@
+github.com/alpacahq/alpacadecimal v0.0.5 h1:IAhAR7Hs/mUXjcx8jnrswuG245+Dkck+hSptCao8Qtg=
+github.com/alpacahq/alpacadecimal v0.0.5/go.mod h1:RGlrk0IdAzlsqnONx7wnfvhO5g/9parrcU3HELvbfSI=
+github.com/alpacahq/alpacadecimal v1.0.8 h1:xxVXH8VZhiniR0+gMRSBk+7nxDWQex4MwPPLSY7+uXE=
+github.com/alpacahq/alpacadecimal v1.0.8/go.mod h1:Ma9N3JyZ9aAV41I7+ms8tyVbENDzwRVL0PbNZsJ2EPo=
+github.com/shopspring/decimal v1.3.1 h1:2Usl1nmF/WZucqkFZhnfFYxxxu8LG21F6nPQBE5gKV8=
+github.com/shopspring/decimal v1.3.1/go.mod h1:DKyhrW/HYNuLGql+MJL6WCR6knT2jwCFRcu2hWCYk4o=
