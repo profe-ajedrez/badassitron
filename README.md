@@ -8,6 +8,8 @@
 
 
 ![](internal/optimus_prime_says_his_line%20.png)
+</div>
+
 
 The more than meets the eye, no nonsense chain of responsability based library to implement modern sales calculation 'til all are one.
 
