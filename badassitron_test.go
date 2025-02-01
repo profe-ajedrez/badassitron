@@ -7,6 +7,94 @@ import (
 	"github.com/alpacahq/alpacadecimal"
 )
 
+func TestCompleteFlow(t *testing.T) {
+
+	for i, tt := range completeFlowTestCases() {
+		err := tt.process(&tt.input)
+
+		if err != nil && !tt.wantError {
+			t.Logf("[ TestCompleteFlow %d  %s ] unexpected error %v", i, tt.name, err)
+			t.FailNow()
+		}
+
+		if err == nil && tt.wantError {
+			t.Logf("[ TestCompleteFlow %d  %s ] Expecting error %s  got nil", i, tt.name, tt.explain)
+			t.FailNow()
+		}
+
+		if err != nil && tt.wantError {
+			continue
+		}
+
+		if !tt.input.Uv.Equal(tt.want.Uv) {
+			t.Logf("[ TestCompleteFlow %d  %s ] different Uv. expecting %v  got %v", i, tt.name, tt.want.Uv, tt.input.Uv)
+			t.FailNow()
+		}
+
+		if !tt.input.Net.Equal(tt.want.Net) {
+			t.Logf("[ TestCompleteFlow %d  %s ] different Net. expecting %v  got %v", i, tt.name, tt.want.Net, tt.input.Net)
+			t.FailNow()
+		}
+
+		if !tt.input.NetWd.Equal(tt.want.NetWd) {
+			t.Logf("[ TestCompleteFlow %d  %s ] different NetWd. expecting %v  got %v", i, tt.name, tt.want.NetWd, tt.input.NetWd)
+			t.FailNow()
+		}
+
+		if !tt.input.Brute.Equal(tt.want.Brute) {
+			t.Logf("[ TestCompleteFlow %d  %s ] different Brute. expecting %v  got %v", i, tt.name, tt.want.Brute, tt.input.Brute)
+			t.FailNow()
+		}
+
+		if !tt.input.BruteWd.Equal(tt.want.BruteWd) {
+			t.Logf("[ TestCompleteFlow %d  %s ] different BruteWd. expecting %v  got %v", i, tt.name, tt.want.BruteWd, tt.input.BruteWd)
+			t.FailNow()
+		}
+
+		if !tt.input.DiscountAmount.Equal(tt.want.DiscountAmount) {
+			t.Logf("[ TestCompleteFlow %d  %s ] different DiscountAmount. expecting %v  got %v", i, tt.name, tt.want.DiscountAmount, tt.input.DiscountAmount)
+			t.FailNow()
+		}
+
+		if !tt.input.DiscountRatio.Equal(tt.want.DiscountRatio) {
+			t.Logf("[ TestCompleteFlow %d  %s ] different DiscountRatio. expecting %v  got %v", i, tt.name, tt.want.DiscountRatio, tt.input.DiscountRatio)
+			t.FailNow()
+		}
+
+		if !tt.input.Tax.Equal(tt.want.Tax) {
+			t.Logf("[ TestCompleteFlow %d  %s ] different Tax. expecting %v  got %v", i, tt.name, tt.want.Tax, tt.input.Tax)
+			t.FailNow()
+		}
+
+		if !tt.input.TaxRatio.Equal(tt.want.TaxRatio) {
+			t.Logf("[ TestCompleteFlow %d  %s ] different TaxRatio. expecting %v  got %v", i, tt.name, tt.want.TaxRatio, tt.input.TaxRatio)
+			t.FailNow()
+		}
+
+		if len(tt.input.Taxes) != len(tt.want.Taxes) {
+			t.Logf("[ TestCompleteFlow %d  %s ] different Taxes len. expecting %v  got %v", i, tt.name, len(tt.want.Taxes), len(tt.input.Taxes))
+			t.FailNow()
+		}
+
+		for k := range tt.input.Taxes {
+			if !tt.input.Taxes[k].Amount.Equal(tt.want.Taxes[k].Amount) {
+				t.Logf("[ TestCompleteFlow %d  %s ] different Taxes[%d].Amount    expecting  %v  got %v", i, tt.name, k, tt.want.Taxes[k].Amount, tt.input.Taxes[k].Amount)
+				t.FailNow()
+			}
+
+			if !tt.input.Taxes[k].Ratio.Equal(tt.want.Taxes[k].Ratio) {
+				t.Logf("[ TestCompleteFlow %d  %s ] different Taxes[%d].Ratio expecting %v  got %v", i, tt.name, k, tt.want.Taxes[k].Ratio, tt.input.Taxes[k].Ratio)
+				t.FailNow()
+			}
+
+			if !tt.input.Taxes[k].Taxable.Equal(tt.want.Taxes[k].Taxable) {
+				t.Logf("[ TestCompleteFlow %d  %s ] different Taxes[%d].Taxable expecting %v  got %v", i, tt.name, k, tt.want.Taxes[k].Taxable, tt.input.Taxes[k].Taxable)
+				t.FailNow()
+			}
+		}
+	}
+}
+
 func TestTaxToTaxDetail(t *testing.T) {
 
 	_ = TaxToTaxDetail(Tax{
@@ -160,12 +248,12 @@ func TestDetail_serialize(t *testing.T) {
 		Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
 		Qty: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
 		Discounts: []Discount{
-			{Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("70"); return d }(), true},
-			{Line, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("500"); return d }(), false},
-			{Line, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("500"); return d }(), false},
+			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("70"); return d }(), Unit, true},
+			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("500"); return d }(), Line, false},
+			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("500"); return d }(), Line, false},
 		},
 		Taxes: []TaxDetail{
-			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("5"); return d }(), Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), alpacadecimal.Zero, 1, true},
+			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("5"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), alpacadecimal.Zero, Unit, 1, true},
 		},
 	}
 
@@ -323,12 +411,12 @@ func TestSecondStageTaxes_Execute(t *testing.T) {
 				Tax:   func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("291"); return d }(),
 				TaxWd: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("291"); return d }(),
 				Taxes: []TaxDetail{
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("19"); return d }(), Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(), 1, true},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(), 1, false},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), Line, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(), 1, false},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("19"); return d }(), Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1291"); return d }(), 2, true},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1291"); return d }(), 2, false},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), Line, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1291"); return d }(), 2, false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("19"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(), Unit, 1, true},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(), Unit, 1, false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(), Line, 1, false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("19"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1291"); return d }(), Unit, 2, true},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1291"); return d }(), Unit, 2, false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1291"); return d }(), Line, 2, false},
 				},
 			}},
 			func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("637.29"); return d }(),
@@ -400,9 +488,9 @@ func TestFirstStageTaxes_Execute(t *testing.T) {
 				Net:   func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(),
 				NetWd: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(),
 				Taxes: []TaxDetail{
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("19"); return d }(), Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), 1, true},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), 1, false},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), Line, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), 1, false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("19"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, 1, true},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, 1, false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Line, 1, false},
 				},
 			}},
 			func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("291"); return d }(),
@@ -419,9 +507,9 @@ func TestFirstStageTaxes_Execute(t *testing.T) {
 				Net:   func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(),
 				NetWd: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("2000"); return d }(),
 				Taxes: []TaxDetail{
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("19"); return d }(), Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), 1, true},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), 1, false},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), Line, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), 1, false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("19"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, 1, true},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, 1, false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Line, 1, false},
 				},
 			}},
 			func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("291"); return d }(),
@@ -479,7 +567,7 @@ func TestSetTaxable(t *testing.T) {
 		{
 			"mutable taxable",
 			args{
-				[]TaxDetail{{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("18"); return d }(), Unit, alpacadecimal.Zero, alpacadecimal.Zero, 1, true}},
+				[]TaxDetail{{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("18"); return d }(), alpacadecimal.Zero, alpacadecimal.Zero, Unit, 1, true}},
 				func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
 			},
 			func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
@@ -488,6 +576,7 @@ func TestSetTaxable(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+
 			SetTaxesValues(tt.args.detail, tt.args.taxable)
 
 			if !tt.args.taxable.Equal(tt.want) {
@@ -524,9 +613,9 @@ func TestDiscounter_Execute(t *testing.T) {
 				Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
 				Qty: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
 				Discounts: []Discount{
-					{Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("8"); return d }(), true},
-					{Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), false},
-					{Line, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("8"); return d }(), Unit, true},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), Line, false},
 				},
 			}},
 			false,
@@ -546,9 +635,9 @@ func TestDiscounter_Execute(t *testing.T) {
 				Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
 				Qty: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
 				Discounts: []Discount{
-					{Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("-8"); return d }(), true},
-					{Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), false},
-					{Line, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("-8"); return d }(), Unit, true},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), Line, false},
 				},
 			}},
 			true,
@@ -568,9 +657,9 @@ func TestDiscounter_Execute(t *testing.T) {
 				Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
 				Qty: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
 				Discounts: []Discount{
-					{Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("8"); return d }(), true},
-					{Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("-10"); return d }(), false},
-					{Line, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("8"); return d }(), Unit, true},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("-10"); return d }(), Unit, false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), Line, false},
 				},
 			}},
 			true,
@@ -590,9 +679,9 @@ func TestDiscounter_Execute(t *testing.T) {
 				Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
 				Qty: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
 				Discounts: []Discount{
-					{Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("8"); return d }(), true},
-					{Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), false},
-					{Line, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("-1"); return d }(), false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("8"); return d }(), Unit, true},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("-1"); return d }(), Line, false},
 				},
 			}},
 			true,
@@ -612,9 +701,9 @@ func TestDiscounter_Execute(t *testing.T) {
 				Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
 				Qty: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
 				Discounts: []Discount{
-					{Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("99.99"); return d }(), true},
-					{Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), false},
-					{Line, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("99.99"); return d }(), Unit, true},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, false},
+					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Line, false},
 				},
 			}},
 			false,

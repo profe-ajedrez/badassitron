@@ -6,6 +6,16 @@ import (
 	"github.com/alpacahq/alpacadecimal"
 )
 
+func BenchmarkCompleteFlow(b *testing.B) {
+	for i, tt := range completeFlowTestCases() {
+		func(i int) {
+			b.Run(tt.name, func(b2 *testing.B) {
+				_ = tt.process(&tt.input)
+			})
+		}(i)
+	}
+}
+
 func BenchmarkUnitRndr(b *testing.B) {
 	for i, tt := range unitRndrCases() {
 		func(i int) {
@@ -54,12 +64,12 @@ func BenchmarkDetail_serialize(b *testing.B) {
 		Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
 		Qty: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
 		Discounts: []Discount{
-			{Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("70"); return d }(), true},
-			{Line, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("500"); return d }(), false},
-			{Line, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("500"); return d }(), false},
+			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("70"); return d }(), Unit, true},
+			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("500"); return d }(), Line, false},
+			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("500"); return d }(), Line, false},
 		},
 		Taxes: []TaxDetail{
-			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("5"); return d }(), Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), alpacadecimal.Zero, 1, true},
+			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("5"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), alpacadecimal.Zero, Unit, 1, true},
 		},
 	}
 

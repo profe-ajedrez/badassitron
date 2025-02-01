@@ -5,20 +5,31 @@ import (
 	"github.com/profe-ajedrez/badassitron/internal"
 )
 
+func NewPercentualTax(v alpacadecimal.Decimal, stage int8) TaxDetail {
+	return TaxDetail{
+		Ratio:      v,
+		Applies:    AppliesToUnit,
+		Amount:     alpacadecimal.Zero, // because we dont know the amount yet
+		Taxable:    alpacadecimal.Zero, // because we dont know the taxable yet
+		Stage:      stage,
+		Percentual: Percentual,
+	}
+}
+
 // TaxDetail contains info about a tax to be returned to client
 type TaxDetail struct {
 	Ratio      alpacadecimal.Decimal `json:"ratio"`
-	Applies    AppliesTo             `json:"applies"`
 	Amount     alpacadecimal.Decimal `json:"amount"`
 	Taxable    alpacadecimal.Decimal `json:"taxable"`
-	applyOn    int8
-	Percentual bool `json:"percentual"`
+	Applies    AppliesTo             `json:"applies"`
+	Stage      int8                  `json:"stage"`
+	Percentual bool                  `json:"percentual"`
 }
 
 // Tax represents a mandatory payment or charge collected by someone
 type Tax struct {
-	Applies    AppliesTo             `json:"applies"`
 	Value      alpacadecimal.Decimal `json:"value"`
+	Applies    AppliesTo             `json:"applies"`
 	Percentual bool                  `json:"percentual"`
 	ApplyOn    int8                  `json:"applyOn"`
 }
@@ -27,7 +38,7 @@ type Tax struct {
 func TaxToTaxDetail(a Tax) TaxDetail {
 	b := TaxDetail{
 		Applies:    a.Applies,
-		applyOn:    a.ApplyOn,
+		Stage:      a.ApplyOn,
 		Percentual: a.Percentual,
 	}
 
@@ -97,7 +108,7 @@ func TaxesByStage(txs []TaxDetail, stage int8) []TaxDetail {
 	j := 0
 
 	for i := 0; i < len(txs); i++ {
-		if txs[i].applyOn == stage {
+		if txs[i].Stage == stage {
 			stagered[j] = txs[i]
 			j += 1
 		}
@@ -116,17 +127,17 @@ func TaxesByStage(txs []TaxDetail, stage int8) []TaxDetail {
 
 // SetTaxesValues calculates and stores in the elements of detail
 // the values of taxable, ratio and/or amount
-func SetTaxesValues(detail []TaxDetail, taxable alpacadecimal.Decimal) {
-	for i := range detail {
-		detail[i].Taxable = taxable
+func SetTaxesValues(stageredTaxes []TaxDetail, taxable alpacadecimal.Decimal) {
+	for i := range stageredTaxes {
+		stageredTaxes[i].Taxable = taxable
 		// when percentual, calulate the amount and store it
-		if detail[i].Amount.Equal(alpacadecimal.Zero) && detail[i].Percentual && detail[i].Ratio.GreaterThan(alpacadecimal.Zero) {
-			detail[i].Amount = internal.Part(taxable, detail[i].Ratio)
+		if stageredTaxes[i].Amount.Equal(alpacadecimal.Zero) && stageredTaxes[i].Percentual && stageredTaxes[i].Ratio.GreaterThan(alpacadecimal.Zero) {
+			stageredTaxes[i].Amount = internal.Part(taxable, stageredTaxes[i].Ratio)
 		}
 
 		// when amount, calculate the percentage ratio from it
-		if detail[i].Ratio.Equal(alpacadecimal.Zero) && !detail[i].Percentual && taxable.GreaterThan(alpacadecimal.Zero) {
-			detail[i].Ratio, _ = internal.Percentage(detail[i].Amount, taxable)
+		if stageredTaxes[i].Ratio.Equal(alpacadecimal.Zero) && !stageredTaxes[i].Percentual && taxable.GreaterThan(alpacadecimal.Zero) {
+			stageredTaxes[i].Ratio, _ = internal.Percentage(stageredTaxes[i].Amount, taxable)
 		}
 	}
 }

@@ -10,8 +10,9 @@ import (
 )
 
 var (
-	ErrNegativeValue error = e.New("value is negative")
-	ErrZeroDivision  error = e.New("dividing by zero")
+	ErrNegativeValue          error = e.New("value is negative")
+	ErrZeroDivision           error = e.New("dividing by zero")
+	ErrCantUndiscountFromZero       = e.New("cant calculate the value without discount from zero when there are discounts presents")
 )
 
 type WrappingError struct {

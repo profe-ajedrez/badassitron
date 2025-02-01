@@ -4,8 +4,8 @@ import "github.com/alpacahq/alpacadecimal"
 
 // Discount is a value which could be substracted to a value to pay
 type Discount struct {
-	Applies    AppliesTo
 	Value      alpacadecimal.Decimal
+	Applies    AppliesTo
 	Percentual bool
 }
 

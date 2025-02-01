@@ -9,53 +9,25 @@ import (
 
 // Detail contains the values calculated to make the sale
 type Detail struct {
-	// Uv unitary value of the product being sold
-	Uv alpacadecimal.Decimal `json:"unitValue"`
-
-	// UvWd unitary value without discount of the product being sold
-	UvWd alpacadecimal.Decimal `json:"unitValueWd"`
-
-	// Qty quantity being sold
-	Qty alpacadecimal.Decimal `json:"quantity"`
-
-	// Discounts list of applied discounts
-	Discounts []Discount `json:"discounts"`
-
-	// Taxes detail of applied taxes over the sale
-	Taxes []TaxDetail `json:"taxes"`
-
-	// Net total value without taxes of the sale. The result of: Uv * Qty - discounts
-	Net alpacadecimal.Decimal `json:"net"`
-
-	// NetWd total value without taxes and without discounts of the sale. The result of: Uv * Qty
-	NetWd alpacadecimal.Decimal `json:"netWd"`
-
-	// Brute total value including taxes.  net + taxes
-	Brute alpacadecimal.Decimal `json:"brute"`
-
-	// BruteWd total value including taxes without discounts. netWd + taxesWd
-	BruteWd alpacadecimal.Decimal `json:"bruteWd"`
-
-	// Tax value of the taxes being applied considering discounts
-	Tax alpacadecimal.Decimal `json:"tax"`
-
-	// TaxRatio percentual ratio of the tax value over the brute
-	TaxRatio alpacadecimal.Decimal `json:"taxRatio"`
-
-	// TaxWd value of the taxes being applied without consider discounts
-	TaxWd alpacadecimal.Decimal `json:"taxWd"`
-
-	// TaxRatioWd percentual ratio of the tax value over the bruteWd
-	TaxRatioWd alpacadecimal.Decimal `json:"taxRatioWd"`
-
-	// DiscountAmount cummulated amount of the discounts applied
-	DiscountAmount alpacadecimal.Decimal `json:"discountAmount"`
-	// DiscountRatio percentual ratio of DiscountAmount over Brute
-	DiscountRatio alpacadecimal.Decimal `json:"discountRatio"`
-
-	EntryUVScale int8 `json:"entryUvScale"`
-
-	ValuesMaxScale int8 `json:"valuesMaxScale"`
+	TaxRatioWd        alpacadecimal.Decimal `json:"taxRatioWd"`
+	DiscountNetAmount alpacadecimal.Decimal `json:"discountNetAmount"`
+	BruteWd           alpacadecimal.Decimal `json:"bruteWd"`
+	Tax               alpacadecimal.Decimal `json:"tax"`
+	DiscountRatio     alpacadecimal.Decimal `json:"discountRatio"`
+	Net               alpacadecimal.Decimal `json:"net"`
+	NetWd             alpacadecimal.Decimal `json:"netWd"`
+	Brute             alpacadecimal.Decimal `json:"brute"`
+	Qty               alpacadecimal.Decimal `json:"quantity"`
+	DiscountAmount    alpacadecimal.Decimal `json:"discountAmount"`
+	TaxWd             alpacadecimal.Decimal `json:"taxWd"`
+	TaxRatio          alpacadecimal.Decimal `json:"taxRatio"`
+	Uv                alpacadecimal.Decimal `json:"unitValue"`
+	UvWd              alpacadecimal.Decimal `json:"unitValueWd"`
+	DiscountNetRatio  alpacadecimal.Decimal `json:"discountNetRatio"`
+	Taxes             []TaxDetail           `json:"taxes"`
+	Discounts         []Discount            `json:"discounts"`
+	ValuesMaxScale    int8                  `json:"valuesMaxScale"`
+	EntryUVScale      int8                  `json:"entryUvScale"`
 }
 
 func (d *Detail) serialize() string {

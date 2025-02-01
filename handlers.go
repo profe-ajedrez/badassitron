@@ -5,6 +5,33 @@ import (
 	"github.com/profe-ajedrez/badassitron/internal"
 )
 
+type TaxRater struct {
+	next Stage
+}
+
+func NewTaxRater() *TaxRater {
+	return &TaxRater{}
+}
+
+func (stage *TaxRater) SetNext(next Stage) {
+	stage.next = next
+}
+
+func (stage *TaxRater) Execute(dt *Detail) (err error) {
+
+	dt.TaxRatio, err = internal.Percentage(dt.Tax, dt.Net)
+
+	if err != nil {
+		return WrapWithWrappingError(err, " trying to obtain total tax rate ")
+	}
+
+	if stage.next != nil {
+		return stage.next.Execute(dt)
+	}
+
+	return nil
+}
+
 // BruteUntaxer tries to remove the registered taxes from the brute value in the [Detail]
 // storing it in the Net value of the [Detail]
 //
@@ -27,12 +54,12 @@ import (
 //	OUTPUT:
 //	brute untaxed: 1111.1111111111111111111
 type BruteUntaxer struct {
-	taxStageNumber int8
 	next           Stage
+	taxStageNumber int8
 }
 
 func NewBruteUntaxer(taxStageNumber int8) *BruteUntaxer {
-	return &BruteUntaxer{taxStageNumber, nil}
+	return &BruteUntaxer{nil, taxStageNumber}
 }
 
 func (d *BruteUntaxer) SetNext(next Stage) {
@@ -68,6 +95,32 @@ func (d *UnitValueRounder) Execute(dt *Detail) (err error) {
 
 	if dt.EntryUVScale > emptyValue {
 		dt.Uv = dt.Uv.Round(int32(dt.EntryUVScale))
+	}
+
+	if d.next != nil {
+		return d.next.Execute(dt)
+	}
+
+	return nil
+}
+
+type Unquantifier struct {
+	next Stage
+}
+
+// NewUnquantifier returns a new Unquantifier stage able to get the unit value from netWd / qty
+func NewUnquantifier() *Unquantifier {
+	return &Unquantifier{}
+}
+
+func (d *Unquantifier) SetNext(next Stage) {
+	d.next = next
+}
+
+func (d *Unquantifier) Execute(dt *Detail) (err error) {
+
+	if dt.Qty.GreaterThan(alpacadecimal.Zero) {
+		dt.Uv = dt.NetWd.Div(dt.Qty)
 	}
 
 	if d.next != nil {
@@ -203,6 +256,10 @@ func (d *NetUnDiscounter) SetNext(next Stage) {
 
 func (d *NetUnDiscounter) Execute(dt *Detail) (err error) {
 
+	if dt.Net.Equal(alpacadecimal.Zero) && len(dt.Discounts) > 0 {
+		return WrapWithWrappingError(ErrCantUndiscountFromZero, " undiscounting net handler . "+dt.serialize())
+	}
+
 	if dt.NetWd, err = discountable(dt.Net, dt.Qty, dt.Discounts, "NetUndiscounter Net: "); err != nil {
 
 		return WrapWithWrappingError(err, "undiscounting net handler. "+dt.serialize())
@@ -323,10 +380,41 @@ func (d *Discounter) Execute(dt *Detail) error {
 		dt.Net = alpacadecimal.Zero
 	}
 
-	dt.DiscountAmount = dt.NetWd.Sub(dt.Net)
+	dt.DiscountNetAmount = dt.NetWd.Sub(dt.Net)
 
 	var err error
-	dt.DiscountRatio, err = discountRatio(dt.Net, dt.NetWd, dt.DiscountAmount)
+	dt.DiscountNetRatio, err = discountRatio(dt.Net, dt.NetWd, dt.DiscountNetAmount)
+
+	if err != nil {
+		return WrapWithWrappingError(err, "Discounter executing")
+	}
+
+	if d.next != nil {
+		return d.next.Execute(dt)
+	}
+
+	return nil
+}
+
+type BruteDiscounter struct {
+	next Stage
+}
+
+// NewBruteDiscounter returns a new Discounter stage
+func NewBruteDiscounter() *BruteDiscounter {
+	return &BruteDiscounter{}
+}
+
+func (d *BruteDiscounter) SetNext(next Stage) {
+	d.next = next
+}
+
+func (d *BruteDiscounter) Execute(dt *Detail) error {
+
+	dt.DiscountAmount = dt.BruteWd.Sub(dt.Brute)
+
+	var err error
+	dt.DiscountRatio, err = discountRatio(dt.Brute, dt.BruteWd, dt.DiscountAmount)
 
 	if err != nil {
 		return WrapWithWrappingError(err, "Discounter executing")
@@ -403,8 +491,8 @@ func (d *Discounter) Execute(dt *Detail) error {
 //		OUTPUT:
 //	 { "unitValue": 100, "quantity": 1, "net": 100, "brute": 119.18, "tax": 19.18 }
 type TaxStage struct {
-	stageNumber int8
 	next        Stage
+	stageNumber int8
 }
 
 func NewTaxStage(stNumber int8) *TaxStage {
@@ -485,6 +573,19 @@ func commmontaxStageProcess(dt *Detail, stage int8) {
 	dt.Tax = dt.Tax.Add(amount).Add(line).Add(internal.Part(stageTaxable, perc))
 	// taxWd is the addition of the previous stages taxes without discounts with the current stage taxes without discounts
 	dt.TaxWd = dt.TaxWd.Add(amount).Add(line).Add(internal.Part(dt.NetWd.Add(dt.TaxWd), perc))
+
+	k := 0
+	for j := range dt.Taxes {
+		if dt.Taxes[j].Stage == stage {
+			dt.Taxes[j].Amount = stageredTaxes[k].Amount
+			dt.Taxes[j].Percentual = stageredTaxes[k].Percentual
+			dt.Taxes[j].Ratio = stageredTaxes[k].Ratio
+			dt.Taxes[j].Taxable = stageredTaxes[k].Taxable
+			dt.Taxes[j].Applies = stageredTaxes[k].Applies
+			k += 1
+		}
+	}
+
 }
 
 func discountRatio(net, netWd, discountAmount alpacadecimal.Decimal) (alpacadecimal.Decimal, error) {
