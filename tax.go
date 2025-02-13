@@ -18,6 +18,7 @@ func NewPercentualTax(v alpacadecimal.Decimal, stage int8) TaxDetail {
 
 // TaxDetail contains info about a tax to be returned to client
 type TaxDetail struct {
+	ID         string                `json:"id"`
 	Ratio      alpacadecimal.Decimal `json:"ratio"`
 	Amount     alpacadecimal.Decimal `json:"amount"`
 	Taxable    alpacadecimal.Decimal `json:"taxable"`

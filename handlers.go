@@ -22,7 +22,7 @@ func (stage *TaxRater) Execute(dt *Detail) (err error) {
 	dt.TaxRatio, err = internal.Percentage(dt.Tax, dt.Net)
 
 	if err != nil {
-		return WrapWithWrappingError(err, " trying to obtain total tax rate ")
+		return WrapWithWrappingError(err, " trying to obtain total tax rate in [TaxRater] with  dt.TaxRatio, err = internal.Percentage(dt.Tax, dt.Net) ")
 	}
 
 	if stage.next != nil {
@@ -68,6 +68,7 @@ func (d *BruteUntaxer) SetNext(next Stage) {
 
 func (d *BruteUntaxer) Execute(dt *Detail) (err error) {
 	taxes := TaxesByStage(dt.Taxes, d.taxStageNumber)
+
 	dt.Net = getTaxable(dt.Brute, dt.Qty, taxes)
 
 	if d.next != nil {
@@ -493,6 +494,7 @@ func (d *BruteDiscounter) Execute(dt *Detail) error {
 type TaxStage struct {
 	next        Stage
 	stageNumber int8
+	taxable     alpacadecimal.Decimal
 }
 
 func NewTaxStage(stNumber int8) *TaxStage {
@@ -508,13 +510,71 @@ func (stage *TaxStage) SetNext(next Stage) {
 
 func (stage *TaxStage) Execute(dt *Detail) error {
 
-	commmontaxStageProcess(dt, stage.stageNumber)
+	stage.taxable = dt.Net
+
+	if stage.stageNumber == SecondStage {
+		stage.taxable = stage.taxable.Add(dt.Tax)
+	}
+
+	commmontaxStageProcess(dt, stage.taxable, stage.stageNumber)
 
 	if stage.next != nil {
 		return stage.next.Execute(dt)
 	}
 
 	return nil
+}
+
+func (stage *TaxStage) Taxable() alpacadecimal.Decimal {
+	return stage.taxable
+}
+
+func UndiscountByRatio(discounts []Discount, qty, value, netWd alpacadecimal.Decimal) alpacadecimal.Decimal {
+	if netWd.Equal(z) {
+		return z
+	}
+
+	ratio := value.Div(netWd)
+
+	amount, perc, line := GroupDiscounts(discounts, qty)
+
+	amount = amount.Mul(ratio)
+	line = line.Mul(ratio)
+	perc = (internal.Hundred.Sub(perc))
+
+	if perc.Equal(internal.Zero) {
+		return value.Add(line).Add(amount)
+	}
+
+	return (value.Add(line).Add(amount)).Div(perc).Mul(internal.Hundred)
+
+}
+
+func UntaxByRatio(taxDetail []TaxDetail, qty, value, brute alpacadecimal.Decimal) alpacadecimal.Decimal {
+
+	if brute.Equal(z) {
+		return z
+	}
+
+	ratio := value.Div(brute)
+	taxable := value
+
+	for i := int8(3); i > int8(0); i-- {
+		stageredTaxes := TaxesByStage(taxDetail, i)
+		amount, perc, line := GroupTaxes(stageredTaxes, qty)
+
+		line = line.Mul(ratio)
+		amount = amount.Mul(ratio)
+		perc = internal.One.Add(perc.Div(internal.Hundred))
+
+		if perc.Equal(value) {
+			taxable = taxable.Sub(line).Sub(amount)
+		} else if !perc.Equal(internal.Zero) {
+			taxable = (taxable.Sub(line).Sub(amount)).Div(perc.Abs())
+		}
+	}
+
+	return taxable
 }
 
 // BruteSnapshot is a handler able to calculate the brute and brute without discount values.
@@ -559,11 +619,9 @@ func (stage *BruteSnapshot) Execute(dt *Detail) error {
 // 5 add this values to the current value of tax
 //
 // 6 The same for taxWd
-func commmontaxStageProcess(dt *Detail, stage int8) {
+func commmontaxStageProcess(dt *Detail, stageTaxable alpacadecimal.Decimal, stage int8) {
 	// stageredTaxes are the taxes associated to this stage
 	stageredTaxes := TaxesByStage(dt.Taxes, stage)
-	// stageTaxable is the taxable of this stage
-	stageTaxable := dt.Net.Add(dt.Tax)
 
 	SetTaxesValues(stageredTaxes, stageTaxable)
 	amount, perc, line := GroupTaxes(stageredTaxes, dt.Qty)
@@ -596,7 +654,7 @@ func discountRatio(net, netWd, discountAmount alpacadecimal.Decimal) (alpacadeci
 		discountRatio, err = internal.Percentage(discountAmount, netWd)
 
 		if err != nil {
-			return discountRatio, WrapWithWrappingError(err, "calculating total tiscount ratio")
+			return discountRatio, WrapWithWrappingError(err, "calculating total discount ratio")
 		}
 	} else if net.Equal(alpacadecimal.Zero) && netWd.GreaterThan(alpacadecimal.Zero) {
 		discountRatio = internal.Hundred

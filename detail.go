@@ -106,3 +106,71 @@ func (d *Detail) serialize() string {
 
 	return sb.String()
 }
+
+func (d *Detail) Add(d2 *Detail) Detail {
+	r := Detail{
+		TaxRatioWd:        d.TaxRatioWd.Add(d2.TaxRatioWd),
+		DiscountNetAmount: d.DiscountNetAmount.Add(d2.DiscountNetAmount),
+		BruteWd:           d.BruteWd.Add(d2.BruteWd),
+		Tax:               d.Tax.Add(d2.Tax),
+		DiscountRatio:     d.DiscountRatio.Add(d2.DiscountRatio),
+		Net:               d.Net.Add(d2.Net),
+		NetWd:             d.NetWd.Add(d2.NetWd),
+		Brute:             d.Brute.Add(d2.Brute),
+		Qty:               d.Qty.Add(d2.Qty),
+		DiscountAmount:    d.DiscountAmount.Add(d2.DiscountAmount),
+		TaxWd:             d.TaxWd.Add(d2.TaxWd),
+		TaxRatio:          d.TaxRatio.Add(d2.TaxRatio),
+		Uv:                d.Uv.Add(d2.Uv),
+		UvWd:              d.UvWd.Add(d2.UvWd),
+		DiscountNetRatio:  d.DiscountNetRatio.Add(d2.DiscountNetRatio),
+	}
+
+	found := false
+	index := -1
+
+	for i, tx2 := range d2.Taxes {
+
+		for k, tx1 := range d.Taxes {
+			if tx2.ID == tx1.ID {
+				index = k
+				found = true
+				break
+			}
+		}
+
+		if found {
+			d.Taxes[index].Amount = d.Taxes[index].Amount.Add(d2.Taxes[i].Amount)
+			d.Taxes[index].Taxable = d.Taxes[index].Taxable.Add(d2.Taxes[i].Taxable)
+		} else {
+			d.Taxes = append(d.Taxes, tx2)
+		}
+
+		found = false
+		index = -1
+	}
+
+	r.Taxes = d.Taxes
+
+	return r
+}
+
+func (d *Detail) Reset() {
+	d.TaxRatioWd = z
+	d.DiscountNetAmount = z
+	d.BruteWd = z
+	d.Tax = z
+	d.DiscountRatio = z
+	d.Net = z
+	d.NetWd = z
+	d.Brute = z
+	d.Qty = z
+	d.DiscountAmount = z
+	d.TaxWd = z
+	d.TaxRatio = z
+	d.Uv = z
+	d.UvWd = z
+	d.DiscountNetRatio = z
+	d.Taxes = nil
+	d.Discounts = nil
+}
