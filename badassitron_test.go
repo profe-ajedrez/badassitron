@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/alpacahq/alpacadecimal"
+	"github.com/profe-ajedrez/badassitron/dec128"
 )
 
 func TestCompleteFlow(t *testing.T) {
@@ -99,7 +99,7 @@ func TestTaxToTaxDetail(t *testing.T) {
 
 	_ = TaxToTaxDetail(Tax{
 		Applies:    Unit,
-		Value:      alpacadecimal.NewFromInt(0),
+		Value:      dec128.NewFromInt(0),
 		Percentual: true,
 		ApplyOn:    1,
 	})
@@ -204,22 +204,22 @@ func TestNetUndiscounter(t *testing.T) {
 			err := (NewNetUnDiscounter()).Execute(&tt.args)
 
 			if err != nil && !tt.wantError {
-				t.Logf("[ TestNetUndiscounter  case %d,  %s ] Fails!  error %v", i, tt.name, err)
-				t.FailNow()
+				t2.Logf("[ TestNetUndiscounter  case %d,  %s ] Fails!  error %v", i, tt.name, err)
+				t2.FailNow()
 			}
 
 			if err == nil && tt.wantError {
-				t.Logf("[ TestNetUndiscounter  case %d,  %s ] Fails!  getting nil when expecting error %v", i, tt.name, tt.explain)
-				t.FailNow()
+				t2.Logf("[ TestNetUndiscounter  case %d,  %s ] Fails!  getting nil when expecting error %v", i, tt.name, tt.explain)
+				t2.FailNow()
 			}
 
 			if err != nil && tt.wantError {
-				t.SkipNow()
+				t2.SkipNow()
 			}
 
 			if !tt.args.NetWd.Equal(tt.wantUndiscounted) {
-				t.Logf("[ TestNetUndiscounter  case %d,  %s ] Fails!  NetWd value. Expecting %v    Got %v", i, tt.name, tt.wantUndiscounted, tt.args.NetWd)
-				t.FailNow()
+				t2.Logf("[ TestNetUndiscounter  case %d,  %s ] Fails!  NetWd value. Expecting %v    Got %v", i, tt.name, tt.wantUndiscounted, tt.args.NetWd)
+				t2.FailNow()
 			}
 		})
 	}
@@ -245,48 +245,48 @@ func TestWrappingError(t *testing.T) {
 
 func TestDetail_serialize(t *testing.T) {
 	dt := &Detail{
-		Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
-		Qty: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
+		Uv:  func() dec128.Dec128 { d, _ := dec128.NewFromString("100"); return d }(),
+		Qty: func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(),
 		Discounts: []Discount{
-			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("70"); return d }(), Unit, true},
-			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("500"); return d }(), Line, false},
-			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("500"); return d }(), Line, false},
+			{func() dec128.Dec128 { d, _ := dec128.NewFromString("70"); return d }(), Unit, true},
+			{func() dec128.Dec128 { d, _ := dec128.NewFromString("500"); return d }(), Line, false},
+			{func() dec128.Dec128 { d, _ := dec128.NewFromString("500"); return d }(), Line, false},
 		},
 		Taxes: []TaxDetail{
-			{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("5"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), alpacadecimal.Zero, Unit, 1, true},
+			{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("5"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(), dec128.Zero, Unit, 1, true},
 		},
 	}
 
 	got := dt.serialize()
 
 	want := `	// Uv unitary value of the product being sold
-	Uv alpacadecimal.Decimal      = 100
+	Uv dec128.Dec128      = 100
 	// Qty quantity being sold
-	Qty alpacadecimal.Decimal     = 10
+	Qty dec128.Dec128     = 10
 	// Discounts list of applied discounts
 	Discounts []Discount  = [{"Applies":0,"Value":"70","Percentual":true},{"Applies":1,"Value":"500","Percentual":false},{"Applies":1,"Value":"500","Percentual":false}]
 	// Taxes detail of applied taxes over the sale
 	Taxes []TaxDetail     = [{"ratio":"5","applies":0,"amount":"0","taxable":"0","percentual":true}]
 	// Net total value without taxes of the sale. The result of: Uv * Qty - discounts
-	Net alpacadecimal.Decimal     = 0
+	Net dec128.Dec128     = 0
 	// NetWd total value without taxes and without discounts of the sale. The result of: Uv * Qty
-	NetWd alpacadecimal.Decimal   = 0
+	NetWd dec128.Dec128   = 0
 	// Brute total value including taxes.  net + taxes
-	Brute alpacadecimal.Decimal   = 0
+	Brute dec128.Dec128   = 0
 	// BruteWd total value including taxes without discounts. netWd + taxesWd
-	BruteWd alpacadecimal.Decimal = 0
+	BruteWd dec128.Dec128 = 0
 	// Tax value of the taxes being applied considering discounts
-	Tax alpacadecimal.Decimal     = 0
+	Tax dec128.Dec128     = 0
 	// TaxRatio percentual ratio of the tax value over the brute
-	TaxRatio alpacadecimal.Decimal = 0
+	TaxRatio dec128.Dec128 = 0
 	// TaxWd value of the taxes being applied without consider discounts
-	TaxWd alpacadecimal.Decimal    = 0
+	TaxWd dec128.Dec128    = 0
 	// TaxRatioWd percentual ratio of the tax value over the bruteWd
-	TaxRatioWd alpacadecimal.Decimal = 0
+	TaxRatioWd dec128.Dec128 = 0
 	// DiscountAmount cummulated amount of the discounts applied
-	DiscountAmount alpacadecimal.Decimal = 0
+	DiscountAmount dec128.Dec128 = 0
 	// DiscountRatio percentual ratio of DiscountAmount over Brute
-	DiscountRatio alpacadecimal.Decimal = 0`
+	DiscountRatio dec128.Dec128 = 0`
 
 	if got != want {
 		t.Log("[ TestDetail_serialize ] Fails! want differs got!")
@@ -310,7 +310,7 @@ func TestBruteUndiscounter(t *testing.T) {
 			}
 
 			if err != nil && tt.wantError {
-				t.SkipNow()
+				t2.SkipNow()
 			}
 
 			if !tt.args.BruteWd.Equal(tt.wantUndiscounted) {
@@ -395,8 +395,8 @@ func TestSecondStageTaxes_Execute(t *testing.T) {
 		name      string
 		fields    fields
 		args      args
-		wantTax   alpacadecimal.Decimal
-		wantTaxWd alpacadecimal.Decimal
+		wantTax   dec128.Dec128
+		wantTaxWd dec128.Dec128
 		wantErr   bool
 		explain   string
 	}{
@@ -404,23 +404,23 @@ func TestSecondStageTaxes_Execute(t *testing.T) {
 			"Tax Second stage | 19 percentual - 10 amount - 1 line",
 			fields{nil},
 			args{&Detail{
-				Uv:    func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
-				Qty:   func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
-				Net:   func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(),
-				NetWd: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(),
-				Tax:   func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("291"); return d }(),
-				TaxWd: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("291"); return d }(),
+				Uv:    func() dec128.Dec128 { d, _ := dec128.NewFromString("100"); return d }(),
+				Qty:   func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(),
+				Net:   func() dec128.Dec128 { d, _ := dec128.NewFromString("1000"); return d }(),
+				NetWd: func() dec128.Dec128 { d, _ := dec128.NewFromString("1000"); return d }(),
+				Tax:   func() dec128.Dec128 { d, _ := dec128.NewFromString("291"); return d }(),
+				TaxWd: func() dec128.Dec128 { d, _ := dec128.NewFromString("291"); return d }(),
 				Taxes: []TaxDetail{
-					{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("19"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(), Unit, 1, true},
-					{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(), Unit, 1, false},
-					{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(), Line, 1, false},
-					{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("19"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1291"); return d }(), Unit, 2, true},
-					{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1291"); return d }(), Unit, 2, false},
-					{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1291"); return d }(), Line, 2, false},
+					{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("19"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("1000"); return d }(), Unit, 1, true},
+					{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("1000"); return d }(), Unit, 1, false},
+					{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("1"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("1000"); return d }(), Line, 1, false},
+					{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("19"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("1291"); return d }(), Unit, 2, true},
+					{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("1291"); return d }(), Unit, 2, false},
+					{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("1"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("1291"); return d }(), Line, 2, false},
 				},
 			}},
-			func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("637.29"); return d }(),
-			func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("637.29"); return d }(),
+			func() dec128.Dec128 { d, _ := dec128.NewFromString("637.29"); return d }(),
+			func() dec128.Dec128 { d, _ := dec128.NewFromString("637.29"); return d }(),
 			false,
 			"",
 		},
@@ -474,8 +474,8 @@ func TestFirstStageTaxes_Execute(t *testing.T) {
 		name      string
 		fields    fields
 		args      args
-		wantTax   alpacadecimal.Decimal
-		wantTaxWd alpacadecimal.Decimal
+		wantTax   dec128.Dec128
+		wantTaxWd dec128.Dec128
 		wantErr   bool
 		explain   string
 	}{
@@ -483,18 +483,18 @@ func TestFirstStageTaxes_Execute(t *testing.T) {
 			"Tax First stage | 19 percentual - 10 amount - 1 line",
 			fields{nil},
 			args{&Detail{
-				Uv:    func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
-				Qty:   func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
-				Net:   func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(),
-				NetWd: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(),
+				Uv:    func() dec128.Dec128 { d, _ := dec128.NewFromString("100"); return d }(),
+				Qty:   func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(),
+				Net:   func() dec128.Dec128 { d, _ := dec128.NewFromString("1000"); return d }(),
+				NetWd: func() dec128.Dec128 { d, _ := dec128.NewFromString("1000"); return d }(),
 				Taxes: []TaxDetail{
-					{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("19"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, 1, true},
-					{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, 1, false},
-					{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Line, 1, false},
+					{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("19"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), Unit, 1, true},
+					{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), Unit, 1, false},
+					{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("1"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), Line, 1, false},
 				},
 			}},
-			func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("291"); return d }(),
-			func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("291"); return d }(),
+			func() dec128.Dec128 { d, _ := dec128.NewFromString("291"); return d }(),
+			func() dec128.Dec128 { d, _ := dec128.NewFromString("291"); return d }(),
 			false,
 			"",
 		},
@@ -502,18 +502,18 @@ func TestFirstStageTaxes_Execute(t *testing.T) {
 			"Tax First stage | 19 percentual - 10 amount - 1 line | different tax and taxWd",
 			fields{nil},
 			args{&Detail{
-				Uv:    func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("200"); return d }(),
-				Qty:   func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
-				Net:   func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(),
-				NetWd: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("2000"); return d }(),
+				Uv:    func() dec128.Dec128 { d, _ := dec128.NewFromString("200"); return d }(),
+				Qty:   func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(),
+				Net:   func() dec128.Dec128 { d, _ := dec128.NewFromString("1000"); return d }(),
+				NetWd: func() dec128.Dec128 { d, _ := dec128.NewFromString("2000"); return d }(),
 				Taxes: []TaxDetail{
-					{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("19"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, 1, true},
-					{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, 1, false},
-					{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Line, 1, false},
+					{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("19"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), Unit, 1, true},
+					{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), Unit, 1, false},
+					{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("1"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), Line, 1, false},
 				},
 			}},
-			func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("291"); return d }(),
-			func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("481"); return d }(),
+			func() dec128.Dec128 { d, _ := dec128.NewFromString("291"); return d }(),
+			func() dec128.Dec128 { d, _ := dec128.NewFromString("481"); return d }(),
 			false,
 			"",
 		},
@@ -557,20 +557,20 @@ func TestFirstStageTaxes_Execute(t *testing.T) {
 func TestSetTaxable(t *testing.T) {
 	type args struct {
 		detail  []TaxDetail
-		taxable alpacadecimal.Decimal
+		taxable dec128.Dec128
 	}
 	tests := []struct {
 		name string
 		args args
-		want alpacadecimal.Decimal
+		want dec128.Dec128
 	}{
 		{
 			"mutable taxable",
 			args{
-				[]TaxDetail{{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("18"); return d }(), alpacadecimal.Zero, alpacadecimal.Zero, Unit, 1, true}},
-				func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
+				[]TaxDetail{{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("18"); return d }(), dec128.Zero, dec128.Zero, Unit, 1, true}},
+				func() dec128.Dec128 { d, _ := dec128.NewFromString("100"); return d }(),
 			},
-			func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
+			func() dec128.Dec128 { d, _ := dec128.NewFromString("100"); return d }(),
 		},
 	}
 
@@ -601,8 +601,8 @@ func TestDiscounter_Execute(t *testing.T) {
 		wantErr bool
 		explain string
 		want    struct {
-			netWd alpacadecimal.Decimal
-			net   alpacadecimal.Decimal
+			netWd dec128.Dec128
+			net   dec128.Dec128
 		}
 	}{
 
@@ -610,110 +610,110 @@ func TestDiscounter_Execute(t *testing.T) {
 			"3 Discounts 8% | 10 amount | 1 line",
 			fields{nil},
 			args{&Detail{
-				Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
-				Qty: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
+				Uv:  func() dec128.Dec128 { d, _ := dec128.NewFromString("100"); return d }(),
+				Qty: func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(),
 				Discounts: []Discount{
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("8"); return d }(), Unit, true},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, false},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), Line, false},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("8"); return d }(), Unit, true},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), Unit, false},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("1"); return d }(), Line, false},
 				},
 			}},
 			false,
 			"",
 			struct {
-				netWd alpacadecimal.Decimal
-				net   alpacadecimal.Decimal
+				netWd dec128.Dec128
+				net   dec128.Dec128
 			}{
-				func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(),
-				func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("819"); return d }(),
+				func() dec128.Dec128 { d, _ := dec128.NewFromString("1000"); return d }(),
+				func() dec128.Dec128 { d, _ := dec128.NewFromString("819"); return d }(),
 			},
 		},
 		{
 			"want error | negative percentual",
 			fields{nil},
 			args{&Detail{
-				Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
-				Qty: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
+				Uv:  func() dec128.Dec128 { d, _ := dec128.NewFromString("100"); return d }(),
+				Qty: func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(),
 				Discounts: []Discount{
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("-8"); return d }(), Unit, true},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, false},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), Line, false},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("-8"); return d }(), Unit, true},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), Unit, false},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("1"); return d }(), Line, false},
 				},
 			}},
 			true,
 			"invalid negative percentual discount",
 			struct {
-				netWd alpacadecimal.Decimal
-				net   alpacadecimal.Decimal
+				netWd dec128.Dec128
+				net   dec128.Dec128
 			}{
-				func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(),
-				func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("819"); return d }(),
+				func() dec128.Dec128 { d, _ := dec128.NewFromString("1000"); return d }(),
+				func() dec128.Dec128 { d, _ := dec128.NewFromString("819"); return d }(),
 			},
 		},
 		{
 			"want error | negative amount",
 			fields{nil},
 			args{&Detail{
-				Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
-				Qty: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
+				Uv:  func() dec128.Dec128 { d, _ := dec128.NewFromString("100"); return d }(),
+				Qty: func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(),
 				Discounts: []Discount{
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("8"); return d }(), Unit, true},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("-10"); return d }(), Unit, false},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1"); return d }(), Line, false},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("8"); return d }(), Unit, true},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("-10"); return d }(), Unit, false},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("1"); return d }(), Line, false},
 				},
 			}},
 			true,
 			"invalid negative amount discount",
 			struct {
-				netWd alpacadecimal.Decimal
-				net   alpacadecimal.Decimal
+				netWd dec128.Dec128
+				net   dec128.Dec128
 			}{
-				func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(),
-				func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("819"); return d }(),
+				func() dec128.Dec128 { d, _ := dec128.NewFromString("1000"); return d }(),
+				func() dec128.Dec128 { d, _ := dec128.NewFromString("819"); return d }(),
 			},
 		},
 		{
 			"want error | negative line",
 			fields{nil},
 			args{&Detail{
-				Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
-				Qty: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
+				Uv:  func() dec128.Dec128 { d, _ := dec128.NewFromString("100"); return d }(),
+				Qty: func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(),
 				Discounts: []Discount{
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("8"); return d }(), Unit, true},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, false},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("-1"); return d }(), Line, false},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("8"); return d }(), Unit, true},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), Unit, false},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("-1"); return d }(), Line, false},
 				},
 			}},
 			true,
 			"invalid negative line discount",
 			struct {
-				netWd alpacadecimal.Decimal
-				net   alpacadecimal.Decimal
+				netWd dec128.Dec128
+				net   dec128.Dec128
 			}{
-				func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(),
-				func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("819"); return d }(),
+				func() dec128.Dec128 { d, _ := dec128.NewFromString("1000"); return d }(),
+				func() dec128.Dec128 { d, _ := dec128.NewFromString("819"); return d }(),
 			},
 		},
 		{
 			"cummulated discount over 100%  should be overwrite to 100",
 			fields{nil},
 			args{&Detail{
-				Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
-				Qty: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
+				Uv:  func() dec128.Dec128 { d, _ := dec128.NewFromString("100"); return d }(),
+				Qty: func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(),
 				Discounts: []Discount{
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("99.99"); return d }(), Unit, true},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Unit, false},
-					{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), Line, false},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("99.99"); return d }(), Unit, true},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), Unit, false},
+					{func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), Line, false},
 				},
 			}},
 			false,
 			"",
 			struct {
-				netWd alpacadecimal.Decimal
-				net   alpacadecimal.Decimal
+				netWd dec128.Dec128
+				net   dec128.Dec128
 			}{
-				func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("1000"); return d }(),
-				func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(),
+				func() dec128.Dec128 { d, _ := dec128.NewFromString("1000"); return d }(),
+				func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(),
 			},
 		},
 	}

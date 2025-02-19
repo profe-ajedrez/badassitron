@@ -21,13 +21,17 @@ But, [What is chain of responsability about?](https://www.geeksforgeeks.org/chai
 
 But, this look like middlewares? Yes! that is it! i'ts the same pattern.
 
-## Motivation
 
-We see a lot of legacy sales system at my job. In them, the calculations of important values of the process are convoluted and coupled with the data model, which makes it very difficult and laborious to modify parts of it, adapt it or check for bugs.
+<br />
+<div align="center">
+  <a href="./internal/badassitron-logo.png">
+    <img src="./internal/megs_meme.png" alt="badassitron Logo" width="300" height="auto">
+  </a>
+  
+![](internal/megs_meme%20.png)
+</div>
 
-Seeing this over a long period of time, we began to think about how to organize the process of these calculations so that it was unintrusive, decoupled and possible to dynamically compose according to different requirements.
 
-So that's where our motivation comes from for this little side project.
 
 
 ## Installation
@@ -42,7 +46,7 @@ $ go get github.com/profe-ajedrez/badassitron
 ## Usage
 
 
-You can use some of the included stages to cosntruct your calculation flow, or code your own. You just have to make them implement the stage [Stage] interface.
+You can use some of the included stages to construct your calculation flow, or code your own. You just have to make them implement the stage [Stage] interface.
 
 
 ### Example
@@ -53,13 +57,13 @@ We just have to invoke the handlers needed for the flow we are implementing and 
 
 ```go
     detail :=  Detail{
-        Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
-        Qty: alpacadecimal.NewFromFloat(2.5),
+        Uv:  func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(),
+        Qty: dec128.NewFromFloat(2.5),
         Discounts: []Discount{
-            {Unit, func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(), true},
+            {Unit, func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(), true},
         },
         Taxes: []TaxDetail{
-            {func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("19"); return d }(), Unit, alpacadecimal.Zero, alpacadecimal.Zero, 2, true},					
+            {func() dec128.Dec128 { d, _ := dec128.NewFromString("19"); return d }(), Unit, dec128.Zero, dec128.Zero, 2, true},					
         },
         EntryUVScale: 2,
     }
