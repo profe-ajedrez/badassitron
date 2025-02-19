@@ -3,7 +3,7 @@ package badassitron
 import (
 	"testing"
 
-	"github.com/alpacahq/alpacadecimal"
+	"github.com/profe-ajedrez/badassitron/dec128"
 )
 
 func BenchmarkCompleteFlow(b *testing.B) {
@@ -61,15 +61,15 @@ func BenchmarkNetUndiscounter(b *testing.B) {
 
 func BenchmarkDetail_serialize(b *testing.B) {
 	dt := &Detail{
-		Uv:  func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("100"); return d }(),
-		Qty: func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("10"); return d }(),
+		Uv:  func() dec128.Dec128 { d, _ := dec128.NewFromString("100"); return d }(),
+		Qty: func() dec128.Dec128 { d, _ := dec128.NewFromString("10"); return d }(),
 		Discounts: []Discount{
-			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("70"); return d }(), Unit, true},
-			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("500"); return d }(), Line, false},
-			{func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("500"); return d }(), Line, false},
+			{func() dec128.Dec128 { d, _ := dec128.NewFromString("70"); return d }(), Unit, true},
+			{func() dec128.Dec128 { d, _ := dec128.NewFromString("500"); return d }(), Line, false},
+			{func() dec128.Dec128 { d, _ := dec128.NewFromString("500"); return d }(), Line, false},
 		},
 		Taxes: []TaxDetail{
-			{"1", func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("5"); return d }(), func() alpacadecimal.Decimal { d, _ := alpacadecimal.NewFromString("0"); return d }(), alpacadecimal.Zero, Unit, 1, true},
+			{"1", func() dec128.Dec128 { d, _ := dec128.NewFromString("5"); return d }(), func() dec128.Dec128 { d, _ := dec128.NewFromString("0"); return d }(), dec128.Zero, Unit, 1, true},
 		},
 	}
 

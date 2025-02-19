@@ -1,16 +1,16 @@
 package badassitron
 
 import (
-	"github.com/alpacahq/alpacadecimal"
+	"github.com/profe-ajedrez/badassitron/dec128"
 	"github.com/profe-ajedrez/badassitron/internal"
 )
 
-func NewPercentualTax(v alpacadecimal.Decimal, stage int8) TaxDetail {
+func NewPercentualTax(v dec128.Dec128, stage int8) TaxDetail {
 	return TaxDetail{
 		Ratio:      v,
 		Applies:    AppliesToUnit,
-		Amount:     alpacadecimal.Zero, // because we dont know the amount yet
-		Taxable:    alpacadecimal.Zero, // because we dont know the taxable yet
+		Amount:     dec128.Zero, // because we dont know the amount yet
+		Taxable:    dec128.Zero, // because we dont know the taxable yet
 		Stage:      stage,
 		Percentual: Percentual,
 	}
@@ -18,21 +18,21 @@ func NewPercentualTax(v alpacadecimal.Decimal, stage int8) TaxDetail {
 
 // TaxDetail contains info about a tax to be returned to client
 type TaxDetail struct {
-	ID         string                `json:"id"`
-	Ratio      alpacadecimal.Decimal `json:"ratio"`
-	Amount     alpacadecimal.Decimal `json:"amount"`
-	Taxable    alpacadecimal.Decimal `json:"taxable"`
-	Applies    AppliesTo             `json:"applies"`
-	Stage      int8                  `json:"stage"`
-	Percentual bool                  `json:"percentual"`
+	ID         string        `json:"id"`
+	Ratio      dec128.Dec128 `json:"ratio"`
+	Amount     dec128.Dec128 `json:"amount"`
+	Taxable    dec128.Dec128 `json:"taxable"`
+	Applies    AppliesTo     `json:"applies"`
+	Stage      int8          `json:"stage"`
+	Percentual bool          `json:"percentual"`
 }
 
 // Tax represents a mandatory payment or charge collected by someone
 type Tax struct {
-	Value      alpacadecimal.Decimal `json:"value"`
-	Applies    AppliesTo             `json:"applies"`
-	Percentual bool                  `json:"percentual"`
-	ApplyOn    int8                  `json:"applyOn"`
+	Value      dec128.Dec128 `json:"value"`
+	Applies    AppliesTo     `json:"applies"`
+	Percentual bool          `json:"percentual"`
+	ApplyOn    int8          `json:"applyOn"`
 }
 
 // TaxToTaxDetail converts a [Tax] into a [TaxDetail]
@@ -58,19 +58,19 @@ func TaxToTaxDetail(a Tax) TaxDetail {
 // Example:
 //
 //	ds := []Tax{
-//		{ Unit, alpacadecimal.FromString("10"), true },
-//		{ Unit, alpacadecimal.FromString("7"), true },
-//		{ Unit, alpacadecimal.FromString("0.8"), false },
+//		{ Unit, dec128.FromString("10"), true },
+//		{ Unit, dec128.FromString("7"), true },
+//		{ Unit, dec128.FromString("0.8"), false },
 //	}
 //
-//	qty := alpacadecimal.FromString("7")
+//	qty := dec128.FromString("7")
 //
 //	amount, perc, line := GroupDiscounts(ds, qty)
 //	fmt.Printf("cummulated amount * qty: %s   cummulated percentual: %s   cummulated line: %v", amount, perc, line)
 //
 //	Output:
 //	cummulated amount * qty: 5.6   cummulated percentual: 17   cummulated line: 0
-func GroupTaxes(ds []TaxDetail, qty alpacadecimal.Decimal) (amount, perc, lineAmount alpacadecimal.Decimal) {
+func GroupTaxes(ds []TaxDetail, qty dec128.Dec128) (amount, perc, lineAmount dec128.Dec128) {
 	for i := range ds {
 		switch {
 		case ds[i].Applies == Line:
@@ -91,12 +91,12 @@ func GroupTaxes(ds []TaxDetail, qty alpacadecimal.Decimal) (amount, perc, lineAm
 // Example
 //
 //	taxes := []Tax{
-//		{Unit, alpacadecimal.FromString("16"), true, 1},
-//		{Unit, alpacadecimal.FromString("1"), true, 1},
-//		{Unit, alpacadecimal.FromString("19"), true, 2},
+//		{Unit, dec128.FromString("16"), true, 1},
+//		{Unit, dec128.FromString("1"), true, 1},
+//		{Unit, dec128.FromString("19"), true, 2},
 //	}
 //
-//	taxable = alpacadecimal.FromString("100")
+//	taxable = dec128.FromString("100")
 //
 //	fmt.Println("taxes         ", taxes)
 //	fmt.Println("stageredTaxes ", stagedTaxes)
@@ -128,16 +128,16 @@ func TaxesByStage(txs []TaxDetail, stage int8) []TaxDetail {
 
 // SetTaxesValues calculates and stores in the elements of detail
 // the values of taxable, ratio and/or amount
-func SetTaxesValues(stageredTaxes []TaxDetail, taxable alpacadecimal.Decimal) {
+func SetTaxesValues(stageredTaxes []TaxDetail, taxable dec128.Dec128) {
 	for i := range stageredTaxes {
 		stageredTaxes[i].Taxable = taxable
 		// when percentual, calulate the amount and store it
-		if stageredTaxes[i].Amount.Equal(alpacadecimal.Zero) && stageredTaxes[i].Percentual && stageredTaxes[i].Ratio.GreaterThan(alpacadecimal.Zero) {
+		if stageredTaxes[i].Amount.Equal(dec128.Zero) && stageredTaxes[i].Percentual && stageredTaxes[i].Ratio.GreaterThan(dec128.Zero) {
 			stageredTaxes[i].Amount = internal.Part(taxable, stageredTaxes[i].Ratio)
 		}
 
 		// when amount, calculate the percentage ratio from it
-		if stageredTaxes[i].Ratio.Equal(alpacadecimal.Zero) && !stageredTaxes[i].Percentual && taxable.GreaterThan(alpacadecimal.Zero) {
+		if stageredTaxes[i].Ratio.Equal(dec128.Zero) && !stageredTaxes[i].Percentual && taxable.GreaterThan(dec128.Zero) {
 			stageredTaxes[i].Ratio, _ = internal.Percentage(stageredTaxes[i].Amount, taxable)
 		}
 	}

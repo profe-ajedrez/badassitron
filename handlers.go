@@ -1,7 +1,7 @@
 package badassitron
 
 import (
-	"github.com/alpacahq/alpacadecimal"
+	"github.com/profe-ajedrez/badassitron/dec128"
 	"github.com/profe-ajedrez/badassitron/internal"
 )
 
@@ -38,9 +38,9 @@ func (stage *TaxRater) Execute(dt *Detail) (err error) {
 // # Example
 //
 //	detail := Detail{
-//	Uv: alpacadecimal.FromString("1000"),
+//	Uv: dec128.FromString("1000"),
 //		Taxes: []TaxDetail{
-//			{alpacadecimal.FromString("10"), Unit, alpacadecimal.Decimal0, alpacadecimal.Decimal0, 1, true},
+//			{dec128.FromString("10"), Unit, dec128.Dec1280, dec128.Dec1280, 1, true},
 //		},
 //	}
 //
@@ -95,7 +95,7 @@ func (d *UnitValueRounder) SetNext(next Stage) {
 func (d *UnitValueRounder) Execute(dt *Detail) (err error) {
 
 	if dt.EntryUVScale > emptyValue {
-		dt.Uv = dt.Uv.Round(int32(dt.EntryUVScale))
+		dt.Uv = dt.Uv.Round(uint8(dt.EntryUVScale))
 	}
 
 	if d.next != nil {
@@ -120,7 +120,7 @@ func (d *Unquantifier) SetNext(next Stage) {
 
 func (d *Unquantifier) Execute(dt *Detail) (err error) {
 
-	if dt.Qty.GreaterThan(alpacadecimal.Zero) {
+	if dt.Qty.GreaterThan(dec128.Zero) {
 		dt.Uv = dt.NetWd.Div(dt.Qty)
 	}
 
@@ -136,9 +136,9 @@ func (d *Unquantifier) Execute(dt *Detail) (err error) {
 // # Example
 //
 //	detail := Detail{
-//	Uv: alpacadecimal.FromString("1000"),
+//	Uv: dec128.FromString("1000"),
 //		Discounts: []Discount{
-//			{Unit, alpacadecimal.FromString("10"), true},
+//			{Unit, dec128.FromString("10"), true},
 //		},
 //	}
 //
@@ -158,9 +158,9 @@ func (d *Unquantifier) Execute(dt *Detail) (err error) {
 // # Example discount 100%
 //
 //	detail := Detail{
-//	Uv: alpacadecimal.FromString("0"), // we cannot know which was the original net without discount
+//	Uv: dec128.FromString("0"), // we cannot know which was the original net without discount
 //		Discounts: []Discount{
-//			{Unit, alpacadecimal.FromString("100"), true},
+//			{Unit, dec128.FromString("100"), true},
 //		},
 //	}
 //
@@ -205,9 +205,9 @@ func (d *UnitValueUnDiscounter) Execute(dt *Detail) (err error) {
 // # Example
 //
 //	detail := Detail{
-//	Net: alpacadecimal.FromString("1000"),
+//	Net: dec128.FromString("1000"),
 //		Discounts: []Discount{
-//			{Unit, alpacadecimal.FromString("10"), true},
+//			{Unit, dec128.FromString("10"), true},
 //		},
 //	}
 //
@@ -227,9 +227,9 @@ func (d *UnitValueUnDiscounter) Execute(dt *Detail) (err error) {
 // # Example discount 100%
 //
 //	detail := Detail{
-//	Net: alpacadecimal.FromString("0"), // we cannot know which was the original net without discount
+//	Net: dec128.FromString("0"), // we cannot know which was the original net without discount
 //		Discounts: []Discount{
-//			{Unit, alpacadecimal.FromString("100"), true},
+//			{Unit, dec128.FromString("100"), true},
 //		},
 //	}
 //
@@ -257,7 +257,7 @@ func (d *NetUnDiscounter) SetNext(next Stage) {
 
 func (d *NetUnDiscounter) Execute(dt *Detail) (err error) {
 
-	if dt.Net.Equal(alpacadecimal.Zero) && len(dt.Discounts) > 0 {
+	if dt.Net.Equal(dec128.Zero) && len(dt.Discounts) > 0 {
 		return WrapWithWrappingError(ErrCantUndiscountFromZero, " undiscounting net handler . "+dt.serialize())
 	}
 
@@ -278,9 +278,9 @@ func (d *NetUnDiscounter) Execute(dt *Detail) (err error) {
 // # Example
 //
 //	detail := Detail{
-//	Brute: alpacadecimal.FromString("1000"),
+//	Brute: dec128.FromString("1000"),
 //		Discounts: []Discount{
-//			{Unit, alpacadecimal.FromString("10"), true},
+//			{Unit, dec128.FromString("10"), true},
 //		},
 //	}
 //
@@ -300,9 +300,9 @@ func (d *NetUnDiscounter) Execute(dt *Detail) (err error) {
 // # Example discount 100%
 //
 //	detail := Detail{
-//	Brute: alpacadecimal.FromString("0"), // we cannot know which was the original brute without discount
+//	Brute: dec128.FromString("0"), // we cannot know which was the original brute without discount
 //		Discounts: []Discount{
-//			{Unit, alpacadecimal.FromString("100"), true},
+//			{Unit, dec128.FromString("100"), true},
 //		},
 //	}
 //
@@ -368,7 +368,7 @@ func (d *Discounter) Execute(dt *Detail) error {
 	}
 
 	// protection against the case when percentual >= 100 avoid divition by zero
-	dt.Net = alpacadecimal.Zero
+	dt.Net = dec128.Zero
 	if percentual.LessThan(internal.Hundred) {
 		part := internal.Hundred.Sub(percentual)
 		dt.Net = internal.Part(dt.NetWd, part)
@@ -377,8 +377,8 @@ func (d *Discounter) Execute(dt *Detail) error {
 	// protection against the case percentual + amount + line > 100% of value being sold
 	dt.Net = dt.Net.Sub(amount).Sub(line)
 
-	if dt.Net.LessThan(alpacadecimal.Zero) {
-		dt.Net = alpacadecimal.Zero
+	if dt.Net.LessThan(dec128.Zero) {
+		dt.Net = dec128.Zero
 	}
 
 	dt.DiscountNetAmount = dt.NetWd.Sub(dt.Net)
@@ -455,25 +455,25 @@ func (d *BruteDiscounter) Execute(dt *Detail) error {
 //
 //		taxes := []TaxDetail{
 //			{
-//				Ratio: alpacadecimal.FromString("18"),
+//				Ratio: dec128.FromString("18"),
 //				Applies: Unit,
-//				Amount: alpacadecimal.Zero,
-//				Taxable: alpacadecimal.Zero,
+//				Amount: dec128.Zero,
+//				Taxable: dec128.Zero,
 //				applyOn: 2,
 //				Percentual: true,
 //			},
 //			{
-//				Ratio: alpacadecimal.Zero,
+//				Ratio: dec128.Zero,
 //				Applies: Unit,
-//				Amount: alpacadecimal.FromString("1"),
-//				Taxable: alpacadecimal.Zero,
+//				Amount: dec128.FromString("1"),
+//				Taxable: dec128.Zero,
 //				applyOn: 1,
 //				Percentual: false,
 //			},
 //		}
 //
 //		unitValue := internal.Hundred
-//		qty  := alpacadecimal.Decimal1
+//		qty  := dec128.Dec1281
 //
 //		result := &Detail{ Uv: unitValue, Qty: qty, Taxes: taxes }
 //
@@ -494,7 +494,7 @@ func (d *BruteDiscounter) Execute(dt *Detail) error {
 type TaxStage struct {
 	next        Stage
 	stageNumber int8
-	taxable     alpacadecimal.Decimal
+	taxable     dec128.Dec128
 }
 
 func NewTaxStage(stNumber int8) *TaxStage {
@@ -525,11 +525,11 @@ func (stage *TaxStage) Execute(dt *Detail) error {
 	return nil
 }
 
-func (stage *TaxStage) Taxable() alpacadecimal.Decimal {
+func (stage *TaxStage) Taxable() dec128.Dec128 {
 	return stage.taxable
 }
 
-func UndiscountByRatio(discounts []Discount, qty, value, netWd alpacadecimal.Decimal) alpacadecimal.Decimal {
+func UndiscountByRatio(discounts []Discount, qty, value, netWd dec128.Dec128) dec128.Dec128 {
 	if netWd.Equal(z) {
 		return z
 	}
@@ -550,7 +550,7 @@ func UndiscountByRatio(discounts []Discount, qty, value, netWd alpacadecimal.Dec
 
 }
 
-func UntaxByRatio(taxDetail []TaxDetail, qty, value, brute alpacadecimal.Decimal) alpacadecimal.Decimal {
+func UntaxByRatio(taxDetail []TaxDetail, qty, value, brute dec128.Dec128) dec128.Dec128 {
 
 	if brute.Equal(z) {
 		return z
@@ -619,7 +619,7 @@ func (stage *BruteSnapshot) Execute(dt *Detail) error {
 // 5 add this values to the current value of tax
 //
 // 6 The same for taxWd
-func commmontaxStageProcess(dt *Detail, stageTaxable alpacadecimal.Decimal, stage int8) {
+func commmontaxStageProcess(dt *Detail, stageTaxable dec128.Dec128, stage int8) {
 	// stageredTaxes are the taxes associated to this stage
 	stageredTaxes := TaxesByStage(dt.Taxes, stage)
 
@@ -646,29 +646,29 @@ func commmontaxStageProcess(dt *Detail, stageTaxable alpacadecimal.Decimal, stag
 
 }
 
-func discountRatio(net, netWd, discountAmount alpacadecimal.Decimal) (alpacadecimal.Decimal, error) {
-	discountRatio := alpacadecimal.Zero
+func discountRatio(net, netWd, discountAmount dec128.Dec128) (dec128.Dec128, error) {
+	discountRatio := dec128.Zero
 
-	if discountAmount.GreaterThan(alpacadecimal.Zero) {
+	if discountAmount.GreaterThan(dec128.Zero) {
 		var err error
 		discountRatio, err = internal.Percentage(discountAmount, netWd)
 
 		if err != nil {
 			return discountRatio, WrapWithWrappingError(err, "calculating total discount ratio")
 		}
-	} else if net.Equal(alpacadecimal.Zero) && netWd.GreaterThan(alpacadecimal.Zero) {
+	} else if net.Equal(dec128.Zero) && netWd.GreaterThan(dec128.Zero) {
 		discountRatio = internal.Hundred
 	}
 	return discountRatio, nil
 }
 
-func discountable(value, qty alpacadecimal.Decimal, discounts []Discount, msg string) (alpacadecimal.Decimal, error) {
+func discountable(value, qty dec128.Dec128, discounts []Discount, msg string) (dec128.Dec128, error) {
 	amount, percentual, line := GroupDiscounts(discounts, qty)
 
 	part := value.Add(amount).Add(line)
 	perc := internal.Hundred.Sub(percentual)
 
-	if perc.Equal(alpacadecimal.Zero) {
+	if perc.Equal(dec128.Zero) {
 		return part, nil
 	}
 
@@ -684,13 +684,13 @@ func discountable(value, qty alpacadecimal.Decimal, discounts []Discount, msg st
 		sb.WriteString(msg)
 		sb.WriteString(" ")
 		sb.WriteString(value.String())
-		return alpacadecimal.Zero, WrapWithWrappingError(err, sb.String())
+		return dec128.Zero, WrapWithWrappingError(err, sb.String())
 	}
 
 	return discountable, nil
 }
 
-func getTaxable(value, qty alpacadecimal.Decimal, taxes []TaxDetail) alpacadecimal.Decimal {
+func getTaxable(value, qty dec128.Dec128, taxes []TaxDetail) dec128.Dec128 {
 
 	amount, percentual, line := GroupTaxes(taxes, qty)
 

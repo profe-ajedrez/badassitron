@@ -3,31 +3,31 @@ package badassitron
 import (
 	"encoding/json"
 
-	"github.com/alpacahq/alpacadecimal"
+	"github.com/profe-ajedrez/badassitron/dec128"
 	"github.com/profe-ajedrez/badassitron/internal"
 )
 
 // Detail contains the values calculated to make the sale
 type Detail struct {
-	TaxRatioWd        alpacadecimal.Decimal `json:"taxRatioWd"`
-	DiscountNetAmount alpacadecimal.Decimal `json:"discountNetAmount"`
-	BruteWd           alpacadecimal.Decimal `json:"bruteWd"`
-	Tax               alpacadecimal.Decimal `json:"tax"`
-	DiscountRatio     alpacadecimal.Decimal `json:"discountRatio"`
-	Net               alpacadecimal.Decimal `json:"net"`
-	NetWd             alpacadecimal.Decimal `json:"netWd"`
-	Brute             alpacadecimal.Decimal `json:"brute"`
-	Qty               alpacadecimal.Decimal `json:"quantity"`
-	DiscountAmount    alpacadecimal.Decimal `json:"discountAmount"`
-	TaxWd             alpacadecimal.Decimal `json:"taxWd"`
-	TaxRatio          alpacadecimal.Decimal `json:"taxRatio"`
-	Uv                alpacadecimal.Decimal `json:"unitValue"`
-	UvWd              alpacadecimal.Decimal `json:"unitValueWd"`
-	DiscountNetRatio  alpacadecimal.Decimal `json:"discountNetRatio"`
-	Taxes             []TaxDetail           `json:"taxes"`
-	Discounts         []Discount            `json:"discounts"`
-	ValuesMaxScale    int8                  `json:"valuesMaxScale"`
-	EntryUVScale      int8                  `json:"entryUvScale"`
+	TaxRatioWd        dec128.Dec128 `json:"taxRatioWd"`
+	DiscountNetAmount dec128.Dec128 `json:"discountNetAmount"`
+	BruteWd           dec128.Dec128 `json:"bruteWd"`
+	Tax               dec128.Dec128 `json:"tax"`
+	DiscountRatio     dec128.Dec128 `json:"discountRatio"`
+	Net               dec128.Dec128 `json:"net"`
+	NetWd             dec128.Dec128 `json:"netWd"`
+	Brute             dec128.Dec128 `json:"brute"`
+	Qty               dec128.Dec128 `json:"quantity"`
+	DiscountAmount    dec128.Dec128 `json:"discountAmount"`
+	TaxWd             dec128.Dec128 `json:"taxWd"`
+	TaxRatio          dec128.Dec128 `json:"taxRatio"`
+	Uv                dec128.Dec128 `json:"unitValue"`
+	UvWd              dec128.Dec128 `json:"unitValueWd"`
+	DiscountNetRatio  dec128.Dec128 `json:"discountNetRatio"`
+	Taxes             []TaxDetail   `json:"taxes"`
+	Discounts         []Discount    `json:"discounts"`
+	ValuesMaxScale    int8          `json:"valuesMaxScale"`
+	EntryUVScale      int8          `json:"entryUvScale"`
 }
 
 func (d *Detail) serialize() string {
@@ -35,11 +35,11 @@ func (d *Detail) serialize() string {
 	defer internal.PutSB(sb)
 
 	sb.WriteString(`	// Uv unitary value of the product being sold
-	Uv alpacadecimal.Decimal      = `)
+	Uv dec128.Dec128      = `)
 	sb.WriteString(d.Uv.String())
 	sb.WriteString(`
 	// Qty quantity being sold
-	Qty alpacadecimal.Decimal     = `)
+	Qty dec128.Dec128     = `)
 	sb.WriteString(d.Qty.String())
 	sb.WriteString(`
 	// Discounts list of applied discounts
@@ -65,66 +65,65 @@ func (d *Detail) serialize() string {
 
 	sb.WriteString(`
 	// Net total value without taxes of the sale. The result of: Uv * Qty - discounts
-	Net alpacadecimal.Decimal     = `)
+	Net dec128.Dec128     = `)
 	sb.WriteString(d.Net.String())
 	sb.WriteString(`
 	// NetWd total value without taxes and without discounts of the sale. The result of: Uv * Qty
-	NetWd alpacadecimal.Decimal   = `)
+	NetWd dec128.Dec128   = `)
 	sb.WriteString(d.NetWd.String())
 	sb.WriteString(`
 	// Brute total value including taxes.  net + taxes
-	Brute alpacadecimal.Decimal   = `)
+	Brute dec128.Dec128   = `)
 	sb.WriteString(d.Brute.String())
 	sb.WriteString(`
 	// BruteWd total value including taxes without discounts. netWd + taxesWd
-	BruteWd alpacadecimal.Decimal = `)
+	BruteWd dec128.Dec128 = `)
 	sb.WriteString(d.BruteWd.String())
 	sb.WriteString(`
 	// Tax value of the taxes being applied considering discounts
-	Tax alpacadecimal.Decimal     = `)
+	Tax dec128.Dec128     = `)
 	sb.WriteString(d.Tax.String())
 	sb.WriteString(`
 	// TaxRatio percentual ratio of the tax value over the brute
-	TaxRatio alpacadecimal.Decimal = `)
+	TaxRatio dec128.Dec128 = `)
 	sb.WriteString(d.TaxRatio.String())
 	sb.WriteString(`
 	// TaxWd value of the taxes being applied without consider discounts
-	TaxWd alpacadecimal.Decimal    = `)
+	TaxWd dec128.Dec128    = `)
 	sb.WriteString(d.TaxWd.String())
 	sb.WriteString(`
 	// TaxRatioWd percentual ratio of the tax value over the bruteWd
-	TaxRatioWd alpacadecimal.Decimal = `)
+	TaxRatioWd dec128.Dec128 = `)
 	sb.WriteString(d.TaxRatioWd.String())
 	sb.WriteString(`
 	// DiscountAmount cummulated amount of the discounts applied
-	DiscountAmount alpacadecimal.Decimal = `)
+	DiscountAmount dec128.Dec128 = `)
 	sb.WriteString(d.DiscountAmount.String())
 	sb.WriteString(`
 	// DiscountRatio percentual ratio of DiscountAmount over Brute
-	DiscountRatio alpacadecimal.Decimal = `)
+	DiscountRatio dec128.Dec128 = `)
 	sb.WriteString(d.DiscountRatio.String())
 
 	return sb.String()
 }
 
-func (d *Detail) Add(d2 *Detail) Detail {
-	r := Detail{
-		TaxRatioWd:        d.TaxRatioWd.Add(d2.TaxRatioWd),
-		DiscountNetAmount: d.DiscountNetAmount.Add(d2.DiscountNetAmount),
-		BruteWd:           d.BruteWd.Add(d2.BruteWd),
-		Tax:               d.Tax.Add(d2.Tax),
-		DiscountRatio:     d.DiscountRatio.Add(d2.DiscountRatio),
-		Net:               d.Net.Add(d2.Net),
-		NetWd:             d.NetWd.Add(d2.NetWd),
-		Brute:             d.Brute.Add(d2.Brute),
-		Qty:               d.Qty.Add(d2.Qty),
-		DiscountAmount:    d.DiscountAmount.Add(d2.DiscountAmount),
-		TaxWd:             d.TaxWd.Add(d2.TaxWd),
-		TaxRatio:          d.TaxRatio.Add(d2.TaxRatio),
-		Uv:                d.Uv.Add(d2.Uv),
-		UvWd:              d.UvWd.Add(d2.UvWd),
-		DiscountNetRatio:  d.DiscountNetRatio.Add(d2.DiscountNetRatio),
-	}
+func (d *Detail) Add(d2 *Detail) {
+
+	d.TaxRatioWd = d.TaxRatioWd.Add(d2.TaxRatioWd)
+	d.DiscountNetAmount = d.DiscountNetAmount.Add(d2.DiscountNetAmount)
+	d.BruteWd = d.BruteWd.Add(d2.BruteWd)
+	d.Tax = d.Tax.Add(d2.Tax)
+	d.DiscountRatio = d.DiscountRatio.Add(d2.DiscountRatio)
+	d.Net = d.Net.Add(d2.Net)
+	d.NetWd = d.NetWd.Add(d2.NetWd)
+	d.Brute = d.Brute.Add(d2.Brute)
+	d.Qty = d.Qty.Add(d2.Qty)
+	d.DiscountAmount = d.DiscountAmount.Add(d2.DiscountAmount)
+	d.TaxWd = d.TaxWd.Add(d2.TaxWd)
+	d.TaxRatio = d.TaxRatio.Add(d2.TaxRatio)
+	d.Uv = d.Uv.Add(d2.Uv)
+	d.UvWd = d.UvWd.Add(d2.UvWd)
+	d.DiscountNetRatio = d.DiscountNetRatio.Add(d2.DiscountNetRatio)
 
 	found := false
 	index := -1
@@ -150,9 +149,6 @@ func (d *Detail) Add(d2 *Detail) Detail {
 		index = -1
 	}
 
-	r.Taxes = d.Taxes
-
-	return r
 }
 
 func (d *Detail) Reset() {
