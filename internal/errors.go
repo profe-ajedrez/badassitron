@@ -1,12 +1,10 @@
-package badassitron
+package internal
 
 import (
 	e "errors"
 	"runtime"
 	"strconv"
 	str "strings"
-
-	"github.com/profe-ajedrez/badassitron/internal"
 )
 
 var (
@@ -15,6 +13,8 @@ var (
 	ErrCantUndiscountFromZero       = e.New("cant calculate the value without discount from zero when there are discounts presents")
 )
 
+var ()
+
 type WrappingError struct {
 	Inner      error
 	Message    string
@@ -22,8 +22,8 @@ type WrappingError struct {
 }
 
 func (e *WrappingError) Error() string {
-	sb := internal.GetSB()
-	defer internal.PutSB(sb)
+	sb := GetSB()
+	defer PutSB(sb)
 
 	sb.WriteString(e.Inner.Error())
 	sb.WriteString(" --- ")

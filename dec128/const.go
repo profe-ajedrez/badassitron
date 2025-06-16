@@ -34,6 +34,9 @@ var (
 	Decimal366  = FromInt(366)
 	Decimal1000 = FromInt(1000)
 
+	Ten     = Decimal10
+	Hundred = Decimal100
+
 	ZeroStr          = "0"
 	ZeroStrBytes     = []byte(ZeroStr)
 	ZeroJsonStrBytes = []byte(`"0"`)

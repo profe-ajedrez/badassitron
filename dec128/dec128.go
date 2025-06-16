@@ -347,24 +347,24 @@ func (decimal *Dec128) UnmarshalJSON(data []byte) error {
 }
 
 // Scan implements the sql.Scanner interface.
-func (decimal *Dec128) Scan(src any) error {
+func (decimal Dec128) Scan(src any) error {
 	var err error
 	switch v := src.(type) {
 	case string:
-		*decimal = FromString(v)
+		decimal = FromString(v)
 		if decimal.IsNaN() {
 			err = decimal.ErrorDetails()
 		}
 	case int:
-		*decimal = FromInt(v)
+		decimal = FromInt(v)
 	case int64:
-		*decimal = FromInt64(v)
+		decimal = FromInt64(v)
 	case float32:
-		*decimal = FromString(fmt.Sprintf("%f", v))
+		decimal = FromString(fmt.Sprintf("%f", v))
 	case float64:
-		*decimal = FromFloat64(v)
+		decimal = FromFloat64(v)
 	case nil:
-		*decimal = Zero
+		decimal = Zero
 	default:
 		err = fmt.Errorf("can't scan %T to Dec128: %T is not supported", src, src)
 	}
