@@ -1,0 +1,8 @@
+=== RUN   TestPhaseBDivisionDirected
+--- PASS: TestPhaseBDivisionDirected (0.00s)
+=== RUN   TestPhaseBDivisionDifferential
+--- PASS: TestPhaseBDivisionDifferential (0.06s)
+=== RUN   TestPhaseBPowIntervalScale
+--- PASS: TestPhaseBPowIntervalScale (0.00s)
+PASS
+ok  	github.com/profe-ajedrez/badassitron/optimus	0.062s

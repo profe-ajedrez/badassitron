@@ -1,0 +1,23 @@
+--- a/optimus/optimus.go
++++ b/optimus/optimus.go
+@@ -1062,6 +1062,20 @@
+ 	if d.IsNaN() {
+ 		return d, false
+ 	}
++	// Dec512 rescaling uses fixed-width arithmetic. It avoids allocating
++	// big.Int temporaries for the common case, while preserving all seven
++	// rounding modes and the inexact status. Do not take this path for
++	// invalid inputs: the original decimalwide implementation remains the
++	// authority for error handling and unrepresentable results.
++	if p <= MaxPrecision && m <= RoundingHalfEven {
++		rescaled, inexact := dec512.New(d.Coefficient(), d.exp, d.neg).RescaleRoundWithStatus(p, m)
++		if !rescaled.IsNaN() {
++			return New(rescaled.Coefficient(), p, rescaled.IsNegative()), inexact
++		}
++	}
++	// A fixed-width intermediate can overflow even if a later rounding
++	// operation would succeed. Keep the existing exact fallback for every
++	// such case, and for invalid precision or rounding mode.
+ 	n, inx := decimalwide.Quantize(d.core(), int(p), 512, int(MaxPrecision), m)
+ 	return pack(n), inx
+ }

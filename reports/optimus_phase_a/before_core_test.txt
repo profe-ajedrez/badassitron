@@ -1,0 +1,17 @@
+ok  	github.com/profe-ajedrez/badassitron/optimus	(cached)
+?   	github.com/profe-ajedrez/badassitron/dec128/errors	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/dec128	0.003s
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/benchmark	0.006s [no tests to run]
+?   	github.com/profe-ajedrez/badassitron/dec128/uint128	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/unit	1.250s
+ok  	github.com/profe-ajedrez/badassitron/dec256	0.696s
+ok  	github.com/profe-ajedrez/badassitron/dec256/uint256	0.162s
+?   	github.com/profe-ajedrez/badassitron/internal/decimalwide	[no test files]
+?   	github.com/profe-ajedrez/badassitron/internal/uintwide	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withdec128	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withdec128/handler	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withdec128/internal	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/dec512	0.476s
+ok  	github.com/profe-ajedrez/badassitron/dec512/uint512	0.640s
+ok  	github.com/profe-ajedrez/badassitron/withdec128/tests	0.005s
+elapsed=5.29

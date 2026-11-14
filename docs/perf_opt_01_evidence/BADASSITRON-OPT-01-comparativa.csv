@@ -1,0 +1,6 @@
+case,before_ns_op,after_ns_op,time_delta_pct,before_B_op,after_B_op,before_allocs_op,after_allocs_op,repetitions,iterations_per_sample
+same_scale,491,263,-46.33,185,1,9,0,3,30
+round_half_even,651,595,-8.56,305,1,14,0,3,30
+round_negative_floor,584,518,-11.45,249,1,12,0,3,30
+wide_76_digits,807,530,-34.27,672,72,14,1,3,30
+widen_scale,581,501,-13.69,321,1,11,0,3,30
