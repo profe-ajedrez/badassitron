@@ -1,0 +1,27 @@
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/optimus
+cpu: INTEL(R) XEON(R) PLATINUM 8573C
+BenchmarkAddSmall-5                	13217929	        31.66 ns/op	       0 B/op	       0 allocs/op
+BenchmarkAddSmall-5                	13573509	        32.00 ns/op	       0 B/op	       0 allocs/op
+BenchmarkAddSmall-5                	12572054	        31.73 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMulSmall-5                	12736644	        32.62 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMulSmall-5                	12626431	        31.58 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMulSmall-5                	13261495	        32.53 ns/op	       0 B/op	       0 allocs/op
+BenchmarkAddWide-5                 	 2045466	       184.4 ns/op	      64 B/op	       1 allocs/op
+BenchmarkAddWide-5                 	 2173026	       202.7 ns/op	      64 B/op	       1 allocs/op
+BenchmarkAddWide-5                 	 2181061	       196.6 ns/op	      64 B/op	       1 allocs/op
+BenchmarkMulWide-5                 	 1000000	       388.9 ns/op	      64 B/op	       1 allocs/op
+BenchmarkMulWide-5                 	 1204362	       385.3 ns/op	      64 B/op	       1 allocs/op
+BenchmarkMulWide-5                 	  925449	       393.4 ns/op	      64 B/op	       1 allocs/op
+BenchmarkDivSmall-5                	11380441	        36.54 ns/op	       0 B/op	       0 allocs/op
+BenchmarkDivSmall-5                	11245683	        38.07 ns/op	       0 B/op	       0 allocs/op
+BenchmarkDivSmall-5                	11033496	        35.13 ns/op	       0 B/op	       0 allocs/op
+BenchmarkDivRepeating-5            	 6534950	        57.29 ns/op	       0 B/op	       0 allocs/op
+BenchmarkDivRepeating-5            	 7857013	        79.67 ns/op	       0 B/op	       0 allocs/op
+BenchmarkDivRepeating-5            	 7378148	        75.79 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPhaseAPowNearMidpoint-5   	     945	    447866 ns/op	  266206 B/op	    1690 allocs/op
+BenchmarkPhaseAPowNearMidpoint-5   	     921	    412915 ns/op	  266199 B/op	    1690 allocs/op
+BenchmarkPhaseAPowNearMidpoint-5   	     949	    593257 ns/op	  266194 B/op	    1690 allocs/op
+PASS
+ok  	github.com/profe-ajedrez/badassitron/optimus	11.297s

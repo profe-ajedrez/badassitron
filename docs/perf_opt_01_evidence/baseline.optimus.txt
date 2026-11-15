@@ -1,0 +1,21 @@
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/optimus
+cpu: INTEL(R) XEON(R) PLATINUM 8573C
+BenchmarkNativeRescale/same_scale         	      30	       616.7 ns/op	     185 B/op	       9 allocs/op
+BenchmarkNativeRescale/same_scale         	      30	       490.8 ns/op	     185 B/op	       9 allocs/op
+BenchmarkNativeRescale/same_scale         	      30	       490.6 ns/op	     185 B/op	       9 allocs/op
+BenchmarkNativeRescale/round_half_even    	      30	       690.5 ns/op	     305 B/op	      14 allocs/op
+BenchmarkNativeRescale/round_half_even    	      30	       648.0 ns/op	     305 B/op	      14 allocs/op
+BenchmarkNativeRescale/round_half_even    	      30	       650.7 ns/op	     305 B/op	      14 allocs/op
+BenchmarkNativeRescale/round_negative_floor         	      30	       600.5 ns/op	     249 B/op	      12 allocs/op
+BenchmarkNativeRescale/round_negative_floor         	      30	       584.4 ns/op	     249 B/op	      12 allocs/op
+BenchmarkNativeRescale/round_negative_floor         	      30	       568.2 ns/op	     249 B/op	      12 allocs/op
+BenchmarkNativeRescale/wide_76_digits               	      30	       965.3 ns/op	     672 B/op	      14 allocs/op
+BenchmarkNativeRescale/wide_76_digits               	      30	       806.6 ns/op	     672 B/op	      14 allocs/op
+BenchmarkNativeRescale/wide_76_digits               	      30	       794.1 ns/op	     672 B/op	      14 allocs/op
+BenchmarkNativeRescale/widen_scale                  	      30	       580.6 ns/op	     321 B/op	      11 allocs/op
+BenchmarkNativeRescale/widen_scale                  	      30	       585.7 ns/op	     321 B/op	      11 allocs/op
+BenchmarkNativeRescale/widen_scale                  	      30	       555.6 ns/op	     321 B/op	      11 allocs/op
+PASS
+ok  	github.com/profe-ajedrez/badassitron/optimus	0.008s

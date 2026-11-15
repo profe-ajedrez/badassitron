@@ -1,0 +1,24 @@
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/optimus
+cpu: INTEL(R) XEON(R) PLATINUM 8573C
+BenchmarkAddSmall-5       	13558324	        31.68 ns/op	       0 B/op	       0 allocs/op
+BenchmarkAddSmall-5       	14534835	        31.74 ns/op	       0 B/op	       0 allocs/op
+BenchmarkAddSmall-5       	13311201	        30.73 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMulSmall-5       	12441663	        32.25 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMulSmall-5       	13356574	        34.16 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMulSmall-5       	13072418	        40.78 ns/op	       0 B/op	       0 allocs/op
+BenchmarkAddWide-5        	 2276545	       200.1 ns/op	      64 B/op	       1 allocs/op
+BenchmarkAddWide-5        	 2140352	       252.1 ns/op	      64 B/op	       1 allocs/op
+BenchmarkAddWide-5        	 1301700	       271.1 ns/op	      64 B/op	       1 allocs/op
+BenchmarkMulWide-5        	 1000000	       455.4 ns/op	      64 B/op	       1 allocs/op
+BenchmarkMulWide-5        	 1000000	       453.4 ns/op	      64 B/op	       1 allocs/op
+BenchmarkMulWide-5        	 1000000	       435.3 ns/op	      64 B/op	       1 allocs/op
+BenchmarkDivSmall-5       	 9143299	        45.23 ns/op	       0 B/op	       0 allocs/op
+BenchmarkDivSmall-5       	11520186	        32.35 ns/op	       0 B/op	       0 allocs/op
+BenchmarkDivSmall-5       	12748066	        39.69 ns/op	       0 B/op	       0 allocs/op
+BenchmarkDivRepeating-5   	 7322172	        81.97 ns/op	       0 B/op	       0 allocs/op
+BenchmarkDivRepeating-5   	 7370073	        56.38 ns/op	       0 B/op	       0 allocs/op
+BenchmarkDivRepeating-5   	 5501551	        77.99 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/profe-ajedrez/badassitron/optimus	9.776s

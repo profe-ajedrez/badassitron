@@ -1,0 +1,9 @@
+fuzz: elapsed: 0s, gathering baseline coverage: 0/3 completed
+fuzz: elapsed: 0s, gathering baseline coverage: 3/3 completed, now fuzzing with 2 workers
+fuzz: elapsed: 3s, execs: 39710 (13236/sec), new interesting: 95 (total: 98)
+fuzz: elapsed: 6s, execs: 86149 (15475/sec), new interesting: 123 (total: 126)
+fuzz: elapsed: 9s, execs: 139288 (17714/sec), new interesting: 143 (total: 146)
+fuzz: elapsed: 12s, execs: 142028 (913/sec), new interesting: 144 (total: 147)
+fuzz: elapsed: 12s, execs: 142028 (0/sec), new interesting: 144 (total: 147)
+PASS
+ok  	github.com/profe-ajedrez/badassitron/optimus	12.050s
