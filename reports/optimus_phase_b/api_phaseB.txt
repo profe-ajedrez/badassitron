@@ -1,0 +1,263 @@
+package optimus // import "github.com/profe-ajedrez/badassitron/optimus"
+
+Package optimus provides an adaptive fixed-point decimal with the same ordinary
+arithmetic API as dec128. Coefficients use the smallest of 64, 128, 256 or 512
+bits. Operations never use binary floating-point arithmetic.
+
+Ordinary arithmetic preserves exact results whenever possible; otherwise it
+rounds half-even to the highest representable scale (up to 154). Division and
+square root use defaultPrecision for non-terminating/irrational results.
+
+CONSTANTS
+
+const (
+	RoundingTowardZero       = dec128.RoundingTowardZero
+	RoundingAwayFromZero     = dec128.RoundingAwayFromZero
+	RoundingFloor            = dec128.RoundingFloor
+	RoundingCeil             = dec128.RoundingCeil
+	RoundingHalfTowardZero   = dec128.RoundingHalfTowardZero
+	RoundingHalfAwayFromZero = dec128.RoundingHalfAwayFromZero
+	RoundingHalfEven         = dec128.RoundingHalfEven
+)
+const MaxPrecision uint8 = 154
+const MaxScale = MaxPrecision
+const MaxStrLen = uint512.MaxStrLen + int(MaxPrecision) + 3
+
+VARIABLES
+
+var (
+	Zero             = Optimus{}
+	One              = FromInt(1)
+	NegativeOne      = FromInt(-1)
+	Decimal0         = Zero
+	Decimal1         = One
+	Decimal2         = FromInt(2)
+	Decimal3         = FromInt(3)
+	Decimal4         = FromInt(4)
+	Decimal5         = FromInt(5)
+	Decimal6         = FromInt(6)
+	Decimal7         = FromInt(7)
+	Decimal8         = FromInt(8)
+	Decimal9         = FromInt(9)
+	Decimal10        = FromInt(10)
+	Decimal100       = FromInt(100)
+	Decimal365       = FromInt(365)
+	Decimal366       = FromInt(366)
+	Decimal1000      = FromInt(1000)
+	Ten              = Decimal10
+	Hundred          = Decimal100
+	ZeroStr          = "0"
+	ZeroStrBytes     = []byte("0")
+	ZeroJsonStrBytes = []byte(`"0"`)
+	NaNStr           = "NaN"
+	NaNStrBytes      = []byte("NaN")
+	NaNJsonStrBytes  = []byte(`"NaN"`)
+)
+
+FUNCTIONS
+
+func ScanDestination(dst *Optimus) sql.Scanner
+func ScanInto(dst *Optimus, src any) error
+func SetDefaultPrecision(p uint8)
+
+TYPES
+
+type Optimus struct {
+	// Has unexported fields.
+}
+    Optimus is an immutable-by-convention value. The coefficient is inline for
+    64/128-bit values and indirect only for 256/512-bit values. The pointed-to
+    word array is never modified after construction, including by copies.
+    This representation is intentionally non-comparable: use Equal/Compare.
+
+func Avg(a Optimus, rest ...Optimus) Optimus
+
+func DecodeFromUint128(c uint128.Uint128, exp uint8) Optimus
+
+func DecodeFromUint256(c uint256.Uint256, exp uint8) Optimus
+
+func DecodeFromUint512(c uint512.Uint512, exp uint8) Optimus
+
+func DecodeFromUint64(c uint64, exp uint8) Optimus
+
+func FromDec128(d dec128.Dec128) Optimus
+
+func FromDec256(d dec256.Dec256) Optimus
+
+func FromDec512(d dec512.Dec512) Optimus
+
+func FromFloat64(v float64) Optimus
+
+func FromInt(i int) Optimus
+
+func FromInt64(i int64) Optimus
+
+func FromString[S string | []byte](input S) Optimus
+    FromString parses an ordinary fixed-point decimal, with optional sign.
+    A valid numeric literal beyond 154 fractional places or 512 coefficient bits
+    is approximated half-even when an approximation remains representable.
+
+func Max(a Optimus, rest ...Optimus) Optimus
+
+func Min(a Optimus, rest ...Optimus) Optimus
+
+func NaN(reason errors.Error) Optimus
+
+func New(c uint512.Uint512, exp uint8, neg bool) Optimus
+    New uses a 512-bit coefficient because it must accept every Optimus tier.
+    Unlike automatic arithmetic, explicit construction rejects an invalid scale.
+
+func NewFromInt(i int) Optimus
+
+func NewFromString(s string) (Optimus, error)
+
+func NewFromUint128(c uint128.Uint128, exp uint8, neg bool) Optimus
+
+func NewFromUint256(c uint256.Uint256, exp uint8, neg bool) Optimus
+
+func Sum(a Optimus, rest ...Optimus) Optimus
+
+func (d Optimus) Abs() Optimus
+
+func (d Optimus) Add(b Optimus) Optimus
+
+func (d Optimus) AddInt(b int) Optimus
+
+func (d Optimus) Canonical() Optimus
+
+func (d Optimus) Coefficient() uint512.Uint512
+
+func (d Optimus) Compare(b Optimus) int
+
+func (d Optimus) Copy() Optimus
+
+func (d Optimus) Dec128Exact() (dec128.Dec128, error)
+
+func (d Optimus) Dec256Exact() (dec256.Dec256, error)
+
+func (d Optimus) Dec512Exact() (dec512.Dec512, error)
+
+func (d Optimus) Div(b Optimus) Optimus
+
+func (d Optimus) DivInt(b int) Optimus
+
+func (d Optimus) DivRound(b Optimus, p uint8, m RoundingMode) Optimus
+
+func (d Optimus) DivRoundWithStatus(b Optimus, p uint8, m RoundingMode) (Optimus, bool)
+
+func (d Optimus) EncodeToUint128(p uint8) (uint128.Uint128, error)
+
+func (d Optimus) EncodeToUint256(p uint8) (uint256.Uint256, error)
+
+func (d Optimus) EncodeToUint512(p uint8) (uint512.Uint512, error)
+
+func (d Optimus) EncodeToUint64(p uint8) (uint64, error)
+
+func (d Optimus) Equal(b Optimus) bool
+
+func (d Optimus) ErrorDetails() error
+
+func (d Optimus) Exponent() uint8
+
+func (d Optimus) GreaterThan(b Optimus) bool
+
+func (d Optimus) GreaterThanOrEqual(b Optimus) bool
+
+func (d Optimus) InexactFloat64() (float64, error)
+
+func (d Optimus) Int() (int, error)
+
+func (d Optimus) Int64() (int64, error)
+
+func (d Optimus) IsNaN() bool
+
+func (d Optimus) IsNegative() bool
+
+func (d Optimus) IsPositive() bool
+
+func (d Optimus) IsZero() bool
+
+func (d Optimus) LessThan(b Optimus) bool
+
+func (d Optimus) LessThanOrEqual(b Optimus) bool
+
+func (d Optimus) MarshalJSON() ([]byte, error)
+
+func (d Optimus) MarshalText() ([]byte, error)
+
+func (d Optimus) Mod(b Optimus) Optimus
+
+func (d Optimus) ModInt(b int) Optimus
+
+func (d Optimus) Mul(b Optimus) Optimus
+
+func (d Optimus) MulInt(b int) Optimus
+
+func (d Optimus) MulRound(b Optimus, p uint8, m RoundingMode) Optimus
+
+func (d Optimus) MulRoundWithStatus(b Optimus, p uint8, m RoundingMode) (Optimus, bool)
+
+func (d Optimus) Neg() Optimus
+
+func (d Optimus) PowInt(n int) Optimus
+
+func (d Optimus) Precision() uint8
+
+func (d Optimus) QuoRem(b Optimus) (Optimus, Optimus)
+
+func (d Optimus) QuoRemInt(b int) (Optimus, Optimus)
+
+func (d Optimus) Rescale(p uint8) Optimus
+
+func (d Optimus) RescaleRound(p uint8, m RoundingMode) Optimus
+
+func (d Optimus) RescaleRoundWithStatus(p uint8, m RoundingMode) (Optimus, bool)
+
+func (d Optimus) Round(p uint8) Optimus
+
+func (d Optimus) RoundAwayFromZero(p uint8) Optimus
+
+func (d Optimus) RoundBank(p uint8) Optimus
+
+func (d Optimus) RoundDown(p uint8) Optimus
+
+func (d Optimus) RoundHalfAwayFromZero(p uint8) Optimus
+
+func (d Optimus) RoundHalfTowardZero(p uint8) Optimus
+
+func (d Optimus) RoundTowardZero(p uint8) Optimus
+
+func (d Optimus) RoundUp(p uint8) Optimus
+
+func (d *Optimus) Scan(src any) error
+
+func (d Optimus) Sign() int
+
+func (d Optimus) Sqrt() Optimus
+
+func (d Optimus) SqrtRound(p uint8, m RoundingMode) Optimus
+
+func (d Optimus) SqrtRoundWithStatus(p uint8, m RoundingMode) (Optimus, bool)
+
+func (d Optimus) String() string
+
+func (d Optimus) StringFixed() string
+
+func (d Optimus) Sub(b Optimus) Optimus
+
+func (d Optimus) SubInt(b int) Optimus
+
+func (d Optimus) Trunc(p uint8) Optimus
+
+func (d *Optimus) UnmarshalJSON(src []byte) error
+
+func (d *Optimus) UnmarshalText(src []byte) error
+
+func (d Optimus) Value() (driver.Value, error)
+
+func (d Optimus) Width() int
+    Width reports the current coefficient tier, not the nominal maximum.
+
+type RoundingMode = dec128.RoundingMode
+    The same seven rounding modes are shared across the decimal family.
+
