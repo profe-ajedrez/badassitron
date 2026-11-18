@@ -22,12 +22,12 @@ func benchmarkFastPath(b *testing.B, op string, mode string) {
 	aa, bb := benchOperands()
 	if mode == "DifferentScale" {
 		for i := range bb {
-			bb[i] = New(bb[i].coef, 3, false)
+			bb[i] = New(bb[i].Coefficient(), 3, false)
 		}
 	}
 	if mode == "OppositeSign" {
 		for i := range bb {
-			bb[i] = New(bb[i].coef, 2, true)
+			bb[i] = New(bb[i].Coefficient(), 2, true)
 		}
 	}
 	if mode == "Wide" {

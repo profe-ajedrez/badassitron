@@ -89,4 +89,5 @@ normal and boundary values. A tax framework must define these policies;
 Badassitron cannot infer them from the numbers alone.
 
 See the [rounding example program](../examples/02_rounding/README.md)
-and [invoice example](../examples/03_invoice/README.md).
+[invoice example](../examples/03_invoice/README.md), and
+[rounding boundaries](../examples/13_rounding_boundaries/README.md).

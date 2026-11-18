@@ -1,0 +1,16 @@
+package uint128
+
+import (
+	ju "github.com/jokruger/dec128/uint128"
+	"github.com/profe-ajedrez/badassitron/dec128/errors"
+)
+
+// FromString delegates all digit parsing to Jokruger v1.4.0. Its unsigned
+// parser returns only states OK=0, Overflow=5 or InvalidFormat=9, and returns
+// zero for either error; both properties are pinned by the compatibility tests.
+// The arithmetic translation maps 0->0, 5->3 and 9->7 without a switch.
+func FromString[S string | []byte](s S) (Uint128, errors.Error) {
+	n, status := ju.FromString(s)
+	code := uint8(status)
+	return Uint128(n), errors.Error(code - 2*((code+3)>>3))
+}

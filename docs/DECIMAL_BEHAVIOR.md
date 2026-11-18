@@ -86,5 +86,5 @@ mandatory rounding stages. Your application must decide when to round and
 whether to reject inexact results. The older [calculation pipeline](CALCULATION_PIPELINE.md)
 is separate from the arithmetic APIs and has incomplete paths.
 
-See [examples](../examples/README.md), the [Optimus guide](OPTIMUS_STAGE.md),
+See [examples](../examples/README.md), the [Optimus guide](OPTIMUS.md),
 and [Dec128 precision](../dec128/PRECISION.md) for details.

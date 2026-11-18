@@ -1,0 +1,7 @@
+../upstream/uint128/from.go:44:6: cannot inline uint128.FromString[go.shape.string]: function too complex: cost 241 exceeds budget 80
+dec128/uint128/from_upstream_string.go:11:6: cannot inline uint128.FromString[go.shape.string]: function too complex: cost 142 exceeds budget 80
+../upstream/uint128/from.go:44:6: cannot inline uint128.FromString[go.shape.[]uint8]: function too complex: cost 241 exceeds budget 80
+dec128/uint128/from_upstream_string.go:11:6: cannot inline uint128.FromString[go.shape.[]uint8]: function too complex: cost 142 exceeds budget 80
+../upstream/uint128/from.go:44:6: can inline uint128.FromString[string] with cost 72 as: func(string) (uint128.Uint128, state.State) { return .autotmp_3, .autotmp_4 }
+dec128/uint128/from_upstream_string.go:11:6: can inline uint128.FromString[string] with cost 72 as: func(string) (uint128.Uint128, errors.Error) { return .autotmp_3, .autotmp_4 }
+dec128/uint128/from_upstream_string.go:11:6: can inline uint128.FromString[[]uint8] with cost 72 as: func([]byte) (uint128.Uint128, errors.Error) { return .autotmp_3, .autotmp_4 }

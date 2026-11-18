@@ -1,0 +1,6 @@
+Round trip: 123.45
+Same value: true
+Trailing zeros removed: 1.2
+Lossy conversion rejected: true
+Rounded conversion: 0
+Rounding lost digits: true

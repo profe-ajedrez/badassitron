@@ -1,0 +1,10 @@
+PASS: Go 1.27 + imported Jokruger v1.4.0; no replace/vendor/workspace
+PASS: one production 128-bit engine; rollback sources absent; unsupported tags fail closed
+PASS: 1030 historical public identifiers preserved; 2 additions: [('dec128', 'func', 'Dec128.DivAtPrecision'), ('dec128', 'func', 'Dec128.ErrorCode')]
+PASS: all 66 unsigned public declarations retain exact source signatures
+.........................
+----------------------------------------------------------------------
+Ran 25 tests in 0.832s
+
+OK
+PASS: 384 local links in 102 Markdown files

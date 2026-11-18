@@ -1,0 +1,8 @@
+dec128/uint128/m3_adapter.go:45:6: can inline Uint128.Add with cost 60 as: method(Uint128) func(Uint128) (Uint128, errors.Error) { r, s := uint128.Uint128(.autotmp_6), .autotmp_7; if s != state.State(0) { return Zero, errors.Error(3) }; return Uint128(r), errors.Error(0) }
+dec128/uint128/m3_adapter.go:52:6: can inline Uint128.Add64 with cost 58 as: method(Uint128) func(uint64) (Uint128, errors.Error) { r, st := uint128.Uint128(.autotmp_6), .autotmp_7; if st != state.State(0) { return Zero, errors.Error(3) }; return Uint128(r), errors.Error(0) }
+dec128/uint128/m3_adapter.go:73:6: can inline Uint128.Mul with cost 77 as: method(Uint128) func(Uint128) (Uint128, errors.Error) { r, s := uint128.Uint128(.autotmp_6), .autotmp_7; if s != state.State(0) { return Zero, errors.Error(3) }; return Uint128(r), errors.Error(0) }
+dec128/uint128/m3_adapter.go:80:6: can inline Uint128.Mul64 with cost 72 as: method(Uint128) func(uint64) (Uint128, errors.Error) { r, st := uint128.Uint128(.autotmp_6), .autotmp_7; if st != state.State(0) { return Zero, errors.Error(3) }; return Uint128(r), errors.Error(0) }
+dec128/uint128/m3_adapter.go:87:6: cannot inline Uint128.MulCarry: function too complex: cost 110 exceeds budget 80
+dec128/uint128/m3_adapter.go:117:6: cannot inline Uint128.QuoRem: function too complex: cost 96 exceeds budget 80
+dec128/uint128/m3_adapter.go:128:6: cannot inline Uint128.QuoRem64: function too complex: cost 81 exceeds budget 80
+dec128/uint128/m3_adapter.go:151:6: cannot inline QuoRem256By128: function too complex: cost 158 exceeds budget 80

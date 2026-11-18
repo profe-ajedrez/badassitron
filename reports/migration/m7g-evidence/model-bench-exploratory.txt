@@ -1,0 +1,10 @@
+goos: linux
+goarch: amd64
+pkg: example.net/m7g-adapter-model
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkAdapters/M7D-5         	100674138	         2.998 ns/op	       0 B/op	       0 allocs/op
+BenchmarkAdapters/M7E-5         	100000000	         3.005 ns/op	       0 B/op	       0 allocs/op
+BenchmarkAdapters/G2-5          	81513010	         3.340 ns/op	       0 B/op	       0 allocs/op
+BenchmarkAdapters/G3-5          	91446406	         3.260 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	example.net/m7g-adapter-model	1.405s

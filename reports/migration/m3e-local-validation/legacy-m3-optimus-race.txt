@@ -1,0 +1,1 @@
+ok  	github.com/profe-ajedrez/badassitron/optimus	14.978s

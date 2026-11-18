@@ -1,0 +1,12 @@
+PASS: 01_optimus_basics
+PASS: 02_rounding
+PASS: 03_invoice
+PASS: 04_json
+PASS: 05_sql
+PASS: 06_dec128
+PASS: 07_dec256
+PASS: 08_dec512
+PASS: 09_conversions
+PASS: 10_concurrency
+PASS: 11_decimal_pipeline
+PASS: all 11 example outputs match their READMEs

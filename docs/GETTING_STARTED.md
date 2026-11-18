@@ -142,5 +142,6 @@ methods such as `Dec128Exact()` when loss is not permitted; see
 [the conversion example](../examples/09_conversions/README.md).
 
 For precise arithmetic differences, read [Decimal behavior](DECIMAL_BEHAVIOR.md).
-For every runnable example, use [the example index](../examples/README.md).
+For task-based examples, use [the recipe book](RECIPES.md), or browse
+[all runnable programs](../examples/README.md).
 For method signatures, see [GoDoc](https://pkg.go.dev/github.com/profe-ajedrez/badassitron/optimus).

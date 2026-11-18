@@ -1,0 +1,10 @@
+Present: true
+Scanned: 123.4500
+Value for SQL: 123.45
+Float rejected: true
+Previous value: 123.4500
+Null is present: false
+Null writes nil: true
+Zero is present: true
+Dec128 adapter: 42.500
+Dec128 direct scan: 17.25

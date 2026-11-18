@@ -1,0 +1,2 @@
+GOWORK=off GOTOOLCHAIN=local go mod download -json github.com/jokruger/dec128@v1.4.0
+go: go.mod requires go >= 1.27 (running go 1.23.2; GOTOOLCHAIN=local)

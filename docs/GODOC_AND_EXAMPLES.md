@@ -43,7 +43,8 @@ go doc github.com/profe-ajedrez/badassitron/dec512.Dec512
 ```
 
 For complete programs outside GoDoc, see
-[the examples directory](../examples/README.md). Each program has a
+[the examples directory](../examples/README.md) and the
+[recipe book](RECIPES.md). Each program has a
 README with usage, values, and expected output.
 
 ## Reproducibility

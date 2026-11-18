@@ -1,0 +1,17 @@
+package uint128
+
+import (
+	"github.com/jokruger/dec128/state"
+	ju "github.com/jokruger/dec128/uint128"
+	"github.com/profe-ajedrez/badassitron/dec128/errors"
+)
+
+// M7-G EXPERIMENT ONLY: fast success return, preserve all error states via
+// the established translation function and return zero for every failure.
+func FromString[S string | []byte](s S) (Uint128, errors.Error) {
+	n, status := ju.FromString(s)
+	if status == state.OK {
+		return Uint128(n), errors.None
+	}
+	return Zero, fromState(status)
+}

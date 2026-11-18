@@ -1,0 +1,18 @@
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/uint128
+cpu: INTEL(R) XEON(R) PLATINUM 8573C
+BenchmarkMigrationM3ThreeWay/Add/Facade  	62883087	         2.185 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/Add/Facade  	68279678	         1.760 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/Add/Facade  	90310611	         1.651 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/Add/UpstreamDirect         	79871052	         1.621 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/Add/UpstreamDirect         	97053156	         1.701 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/Add/UpstreamDirect         	82329700	         1.643 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/AddOverflow/Facade         	92157168	         1.751 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/AddOverflow/Facade         	82303962	         1.619 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/AddOverflow/Facade         	100000000	         1.783 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/AddOverflow/UpstreamDirect 	77072569	         1.578 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/AddOverflow/UpstreamDirect 	96696406	         1.447 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/AddOverflow/UpstreamDirect 	100000000	         1.503 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/profe-ajedrez/badassitron/dec128/uint128	1.871s

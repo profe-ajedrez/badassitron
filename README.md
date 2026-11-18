@@ -1,26 +1,29 @@
 # Badassitron
 
-**Decimal arithmetic in Go, with explicit rounding when it matters.** Badassitron
-provides an adaptive decimal (`optimus`), three fixed-width decimals, and a
-separate, older calculation pipeline. Decimal calculations do not use binary
-floating-point arithmetic internally.
+**Decimal arithmetic for Go with explicit rounding and bounded precision.**
 
-**New here?** Run the example below, then follow the
-[10-minute guide](docs/GETTING_STARTED.md). The [example index](examples/README.md)
-contains eleven runnable programs with expected output.
+Badassitron provides an adaptive decimal (`optimus`), fixed-width decimal
+types (`dec128`, `dec256`, `dec512`), and unsigned integer helpers. Decimal
+arithmetic uses base-10 coefficients rather than converting operands to binary
+`float64`.
+
+**[Get started](docs/GETTING_STARTED.md) · [Recipes](docs/RECIPES.md) ·
+[Runnable examples](examples/README.md) · [Documentation index](docs/README.md)**
 
 ## Install
 
-Go **1.27 or newer** is required by this source tree's `go.mod`.
+The source declares **Go 1.27** and depends on
+`github.com/jokruger/dec128 v1.4.0`. In an existing Go module:
 
 ```sh
 go get github.com/profe-ajedrez/badassitron
 ```
 
-The command above is for an existing Go module. To work on this repository,
-clone or unpack it and run commands from its root.
+This installs the version Go resolves from the module registry, **not** this
+unpublished documentation snapshot. To build this snapshot, extract its source
+and work in its directory.
 
-## First calculation
+## Calculate a total
 
 ```go
 package main
@@ -53,83 +56,56 @@ Output:
 37.50
 ```
 
-`NewFromString` reports parse failures as Go errors; arithmetic reports
-failures through `NaN` (`IsNaN` and `ErrorDetails`). For required input,
-**check for empty text yourself**: the historical parser treats an empty
-string as zero.
+`NewFromString` returns a Go error for invalid input; arithmetic operations
+usually report failures as `NaN`. Check `IsNaN()` before using a result.
+`RescaleRound` sets the stored number of decimal places and chooses how to
+round; `StringFixed()` displays that scale.
 
-`RescaleRound(2, RoundingHalfEven)` explicitly sets two fractional places.
-`RoundBank(2)` rounds existing places but does **not** add trailing zero places
-when the current scale is smaller. `StringFixed()` preserves the stored scale;
-`String()` formats without insignificant trailing fractional zeros.
+## Choose a type
 
-## Choose a package
+| Package | Decimal scale limit | Use it for |
+| --- | ---: | --- |
+| [`optimus`](optimus) | 154 | Most applications; adaptive 64–512-bit coefficients |
+| [`dec128`](dec128) | 19 | Existing fixed-width 128-bit integrations |
+| [`dec256`](dec256) | 77 | Larger fixed-width coefficients |
+| [`dec512`](dec512) | 154 | The largest fixed-width coefficients supported |
 
-| Package | Coefficient | Max fractional scale | Choose it when… |
-| --- | ---: | ---: | --- |
-| [`optimus`](optimus) | Adaptive 64–512 bits | 154 | You want a general-purpose decimal (recommended starting point). |
-| [`dec128`](dec128) | 128 bits | 19 | Fixed coefficient width or existing `Dec128` integration matters. |
-| [`dec256`](dec256) | 256 bits | 77 | You need a wider fixed-width value. |
-| [`dec512`](dec512) | 512 bits | 154 | You need the widest fixed-width value in this library. |
+The decimal *scale* is the count of fractional digits stored, not significant
+digits. All types have finite coefficient capacity. `optimus` may round some
+ordinary arithmetic when an exact result does not fit; fixed-width types
+have different overflow and division rules. See [Choosing a type](docs/DECIMAL_TYPES.md)
+and [Decimal behavior](docs/DECIMAL_BEHAVIOR.md).
 
-A stored decimal is a coefficient and decimal *scale*: coefficient `12345` at
-scale `2` represents `123.45`. `Precision()` returns the **fractional scale**,
-not the number of significant digits. Even `optimus` has finite capacity.
+## Learn by example
 
-`optimus` can keep exact results when representable and can round ordinary
-arithmetic when a result does not fit exactly. The fixed-width types instead
-return `NaN` when an exact ordinary arithmetic result cannot fit. Division,
-square roots, and explicit rounding have additional policies. See
-[decimal behavior and trade-offs](docs/DECIMAL_BEHAVIOR.md).
-
-## Common tasks
-
-| I want to… | Start here |
+| I want to… | Example |
 | --- | --- |
-| Parse, calculate, and display a decimal | [Getting started](docs/GETTING_STARTED.md) · [Optimus basics](examples/01_optimus_basics/README.md) |
-| Decide where and how to round | [Rounding example](examples/02_rounding/README.md) · [behavior guide](docs/DECIMAL_BEHAVIOR.md) |
-| Calculate an invoice line with discount and tax | [Invoice example](examples/03_invoice/README.md) |
-| Encode JSON without unintended floating-point conversion | [JSON example](examples/04_json/README.md) |
-| Read SQL `DECIMAL`/`NUMERIC` exactly, including NULL | [SQL example](examples/05_sql/README.md) |
-| Work with `dec128` | [Dec128 example](examples/06_dec128/README.md) · [precision](dec128/PRECISION.md) |
-| Convert between decimal widths | [Conversions](examples/09_conversions/README.md) |
-| Use shared decimals from goroutines | [Concurrency example](examples/10_concurrency/README.md) |
-| Run the historical tax/discount handler chain | [Pipeline example](examples/11_decimal_pipeline/README.md) |
+| Parse text, add, multiply, and format | [Optimus basics](examples/01_optimus_basics/README.md) |
+| Round a value or divide with a chosen scale | [Rounding](examples/02_rounding/README.md) |
+| Apply a stated discount and tax policy | [Invoice illustration](examples/03_invoice/README.md) |
+| Compare per-line rounding with total rounding | [Rounding boundaries](examples/13_rounding_boundaries/README.md) |
+| Read or write JSON | [JSON](examples/04_json/README.md) |
+| Handle nullable SQL decimals | [SQL](examples/05_sql/README.md) |
+| Convert between widths without silent loss | [Conversions](examples/09_conversions/README.md) |
+| Parse unsigned 128-bit integers | [Uint128](examples/12_uint128/README.md) |
 
-**Two important boundaries:** start with decimal strings or integers rather
-than `float64` when original decimal digits must be preserved. `WithStatus`
-methods report whether **nonzero digits were discarded**; the boolean is not
-an error indicator. Always check the result for `NaN` as well.
+[All thirteen runnable examples](examples/README.md) cover the remaining
+fixed-width types, concurrency, and the older calculation pipeline.
 
-## API reference and deeper reading
+Badassitron is a **numeric library**, not an accounting or tax-compliance
+engine. Rates, rounding points, and regulatory rules are supplied by the
+calling application. Input originating as `float64` may already have lost
+its original decimal digits; prefer text or integer inputs.
 
-- [Documentation map](docs/README.md) — quick answers versus technical detail.
-- [Optimus guide](docs/OPTIMUS_STAGE.md) — representation, precision, errors,
-  conversions, SQL, and concurrency.
-- [GoDoc for Optimus](https://pkg.go.dev/github.com/profe-ajedrez/badassitron/optimus)
-  and [GoDoc for Dec128](https://pkg.go.dev/github.com/profe-ajedrez/badassitron/dec128).
-- [Dec128 SQL adapter](dec128/SQL_SCANNING.md) — why its historical `Scan`
-  method is not a direct destination for `rows.Scan`.
-- [Calculation pipeline](docs/CALCULATION_PIPELINE.md) — separate from the
-  decimal arithmetic APIs; some older paths are incomplete.
-- [Dec128 FASTPATH V4](docs/FASTPATH_V4.md) — implementation notes and measured
-  results, **not** additional API requirements.
-- [Changelog](CHANGELOG.md) — source history; this snapshot does not itself
-  establish a published release tag.
+## Reference and project information
 
-## Verify a checkout
+- [Documentation index](docs/README.md) — guides organized by task
+- [GoDoc and API](docs/GODOC_AND_EXAMPLES.md) — exported methods and examples
+- [Architecture](docs/ARCHITECTURE.md) — implementation and concurrency limits
+- [Third-party notices](THIRD_PARTY_NOTICES.md) and [license](LICENSE)
+- [Maintainer release review](docs/RELEASE_STATUS.md) — current verification
+  and unresolved historical source-provenance approval
 
-```sh
-GOWORK=off go test ./... -count=1
-GOWORK=off go test -race ./... -count=1 -timeout=20m
-GOWORK=off go vet ./...
-python3 tools/check_doc_links.py
-```
-
-These commands test the current checkout; the race detector exercises only
-paths covered by tests. To run the examples, use `go run ./examples/03_invoice`
-(or another folder listed in the [examples index](examples/README.md)).
-
-Badassitron supplies numeric primitives, **not** a jurisdiction-specific money
-or tax policy. Your application must define rounding points, rates, and
-acceptable precision. The project is distributed under [LICENSE](LICENSE).
+**Source status:** This snapshot is not a published release. Its historical
+source provenance and redistribution permissions have not completed the
+independent review needed for publication. See [NOTICE](NOTICE.md).

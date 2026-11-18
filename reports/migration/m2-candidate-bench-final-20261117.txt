@@ -1,0 +1,66 @@
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/internal/dec128candidate
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkCandidateVsLegacy/Add/legacy-5         	48111078	         3.822 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Add/legacy-5         	47343453	         5.114 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Add/legacy-5         	43771976	         3.792 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Add/legacy-5         	52232836	         4.200 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Add/legacy-5         	46921492	         3.972 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Add/candidate-5      	44523762	         4.038 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Add/candidate-5      	39684787	         4.416 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Add/candidate-5      	42013776	         3.946 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Add/candidate-5      	44641084	         4.079 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Add/candidate-5      	44526184	         4.258 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Add/upstream-5       	46832850	         3.786 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Add/upstream-5       	45987324	         3.830 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Add/upstream-5       	50491510	         3.509 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Add/upstream-5       	52930449	         3.511 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Add/upstream-5       	52298215	         3.433 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/legacy-5         	45071415	         4.871 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/legacy-5         	43494554	         4.172 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/legacy-5         	42751708	         4.125 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/legacy-5         	41176725	         4.234 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/legacy-5         	38785612	         5.072 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/candidate-5      	42557557	         4.557 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/candidate-5      	37785825	         4.843 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/candidate-5      	40719890	         4.895 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/candidate-5      	41417185	         4.292 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/candidate-5      	38451316	         4.455 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/upstream-5       	43648785	         4.136 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/upstream-5       	44367813	         4.739 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/upstream-5       	45310980	         4.635 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/upstream-5       	40428460	         4.509 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Mul/upstream-5       	37468237	         4.496 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/legacy-5         	18386442	        11.02 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/legacy-5         	16052792	        10.48 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/legacy-5         	16185852	        10.55 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/legacy-5         	16472666	        10.28 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/legacy-5         	18661738	         9.836 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/candidate-5      	17019981	        10.52 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/candidate-5      	18360016	        11.95 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/candidate-5      	17152443	        11.42 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/candidate-5      	18316740	        10.92 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/candidate-5      	14861872	        10.58 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/upstream-5       	15217278	        12.58 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/upstream-5       	13139575	        12.42 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/upstream-5       	12618159	        13.13 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/upstream-5       	14902209	        14.66 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Div/upstream-5       	13004025	        13.31 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/legacy-5       	 9195099	        22.75 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/legacy-5       	 9174366	        23.00 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/legacy-5       	 9204337	        23.14 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/legacy-5       	 7731016	        22.06 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/legacy-5       	 7382286	        22.89 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/candidate-5    	 9838753	        18.94 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/candidate-5    	 8208216	        20.01 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/candidate-5    	 8791419	        17.88 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/candidate-5    	 9851352	        18.52 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/candidate-5    	 8536052	        19.07 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/upstream-5     	11421490	        16.94 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/upstream-5     	11517344	        16.22 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/upstream-5     	10018789	        16.80 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/upstream-5     	11335880	        15.99 ns/op	       0 B/op	       0 allocs/op
+BenchmarkCandidateVsLegacy/Parse/upstream-5     	10520584	        16.32 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/profe-ajedrez/badassitron/internal/dec128candidate	12.890s

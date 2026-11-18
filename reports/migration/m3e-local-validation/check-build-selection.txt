@@ -1,0 +1,3 @@
+PASS: default selects candidate (6 files), no mixed engine
+PASS: badassitron_legacy selects legacy (12 files), no mixed engine
+PASS: badassitron_m2 selects candidate (6 files), no mixed engine

@@ -1,0 +1,4 @@
+go version go1.23.2 linux/amd64
+LOCAL DIAGNOSTIC ONLY; temporary source-only replace was used
+baseline=/mnt/data/m7g_work/baseline/badassitron-master
+candidate=/mnt/data/m7g_work/candidates/m7e

@@ -1,25 +1,49 @@
-# Documentation map
+# Documentation
 
-Choose the shortest path that answers your question.
+Start with a working example, then use the reference when you need exact
+rounding, error, or capacity rules.
 
-| If you need… | Read |
+## Start here
+
+| Goal | Guide |
 | --- | --- |
-| To get useful results in ten minutes | [Getting started](GETTING_STARTED.md) |
-| A quick guide to rounding, capacity, NaN and scales | [Decimal behavior](DECIMAL_BEHAVIOR.md) |
-| Runnable code and expected output | [Example index](../examples/README.md) |
-| Full adaptive decimal behavior | [Optimus guide](OPTIMUS_STAGE.md) |
-| Fixed-width 128-bit scale and errors | [Dec128 precision](../dec128/PRECISION.md) |
-| `database/sql` integration | [SQL example](../examples/05_sql/README.md) and [Dec128 scanning](../dec128/SQL_SCANNING.md) |
-| A handler-based calculation pipeline | [Calculation pipeline](CALCULATION_PIPELINE.md) |
-| Thread-safety limitations | [Concurrency](../optimus/CONCURRENCY.md) |
-| Fixed-width designs | [Wide decimal stage](DECIMAL_WIDE_STAGE.md) |
-| Integer implementation details | [Wide integer foundation](WIDE_INTEGER_FOUNDATION.md) |
-| The V4 optimization, limits, and benchmarks | [FASTPATH V4](FASTPATH_V4.md) |
+| Make your first calculation | [Getting started](GETTING_STARTED.md) |
+| Find code for a specific task | [Recipe book](RECIPES.md) |
+| Run complete programs | [Example index](../examples/README.md) |
+| Choose between Optimus and fixed widths | [Decimal types](DECIMAL_TYPES.md) |
 
-The `*_STAGE.md` documents include implementation history. Read the current
-package GoDoc and runnable examples for a precise description of the checkout
-in use. The project contains several historical reports; not every external
-audit artifact is bundled in this source ZIP.
+## Everyday tasks
 
-For API symbols use `go doc -all ./optimus`, `go doc -all ./dec128`, or
-[pkg.go.dev](https://pkg.go.dev/github.com/profe-ajedrez/badassitron).
+| Topic | Guide | Runnable example |
+| --- | --- | --- |
+| Parsing and formatting | [Optimus guide](OPTIMUS.md) | [Basics](../examples/01_optimus_basics/README.md) |
+| Rounding and inexact results | [Rounding and errors](ROUNDING_AND_ERRORS.md) | [Rounding](../examples/02_rounding/README.md), [line vs. total](../examples/13_rounding_boundaries/README.md) |
+| Decimal behavior and edge cases | [Behavior reference](DECIMAL_BEHAVIOR.md) | [Fixed-width Dec128](../examples/06_dec128/README.md) |
+| JSON and SQL | [Data input/output](DATA_IO.md) | [JSON](../examples/04_json/README.md), [SQL](../examples/05_sql/README.md) |
+| Exact width conversion | [Decimal types](DECIMAL_TYPES.md) | [Conversions](../examples/09_conversions/README.md) |
+| Unsigned 128-bit arithmetic | [Integer representation](UNSIGNED_INTEGERS.md) | [Uint128](../examples/12_uint128/README.md) |
+| Concurrent calculations | [Concurrency notes](../optimus/CONCURRENCY.md) | [Concurrency](../examples/10_concurrency/README.md) |
+| Existing handler pipeline | [Pipeline and known limits](CALCULATION_PIPELINE.md) | [Pipeline](../examples/11_decimal_pipeline/README.md) |
+
+## API reference
+
+- [GoDoc and executable examples](GODOC_AND_EXAMPLES.md)
+- [Dec128 precision and method details](../dec128/PRECISION.md)
+- [Dec128 SQL scanning](../dec128/SQL_SCANNING.md)
+- [Architecture](ARCHITECTURE.md)
+
+From a local checkout, `go doc -all ./optimus` and `go doc -all ./dec128`
+show exported API declarations. Hosted GoDoc is available only for module
+versions indexed by pkg.go.dev.
+
+## Maintainers
+
+- [Release verification and outstanding requirements](RELEASE_STATUS.md)
+- [Source provenance review](PROVENANCE_REVIEW.md) and [third-party notices](../THIRD_PARTY_NOTICES.md)
+- [Verification commands](../tools/release/README.md)
+- [Engineering history](MIGRATION_ARCHIVE.md) — dated experiments and superseded plans,
+  not instructions for the current code
+
+The source snapshot is **not yet approved for publication**. The numeric API
+can be studied and tested separately from the still-open historical
+provenance review.

@@ -1,0 +1,119 @@
+# example.net/m7g-adapter-model [example.net/m7g-adapter-model.test]
+./adapter.go:19:6: cannot inline upstreamStub: marked go:noinline
+./adapter.go:35:6: cannot inline fallback: marked go:noinline
+./adapter.go:57:6: cannot inline M7D: marked go:noinline
+./adapter.go:72:6: cannot inline M7E: marked go:noinline
+./adapter.go:79:6: cannot inline G2: marked go:noinline
+./adapter.go:88:6: cannot inline G3: marked go:noinline
+./adapter_test.go:9:6: cannot inline TestAdapterModel: function too complex: cost 244 exceeds budget 80
+./adapter_test.go:20:6: cannot inline BenchmarkAdapters: function too complex: cost 104 exceeds budget 80
+./adapter_test.go:25:18: cannot inline BenchmarkAdapters.func1: function too complex: cost 100 exceeds budget 80
+./adapter_test.go:26:18: inlining call to testing.(*B).ReportAllocs
+./adapter.go:19:19: s does not escape
+./adapter.go:57:10: s does not escape
+./adapter.go:72:10: s does not escape
+./adapter.go:79:9: s does not escape
+./adapter.go:88:9: s does not escape
+./adapter_test.go:15:60: c escapes to heap:
+./adapter_test.go:15:60:   flow: {storage for ... argument} = &{storage for c}:
+./adapter_test.go:15:60:     from c (spill) at ./adapter_test.go:15:60
+./adapter_test.go:15:60:     from ... argument (slice-literal-element) at ./adapter_test.go:15:13
+./adapter_test.go:15:60:   flow: {heap} = {storage for ... argument}:
+./adapter_test.go:15:60:     from ... argument (spill) at ./adapter_test.go:15:13
+./adapter_test.go:15:60:     from (*testing.common).Errorf(t.common, "%s %q: %v/%v vs %v/%v", ... argument...) (call parameter) at ./adapter_test.go:15:13
+./adapter_test.go:15:57: n escapes to heap:
+./adapter_test.go:15:57:   flow: {storage for ... argument} = &{storage for n}:
+./adapter_test.go:15:57:     from n (spill) at ./adapter_test.go:15:57
+./adapter_test.go:15:57:     from ... argument (slice-literal-element) at ./adapter_test.go:15:13
+./adapter_test.go:15:57:   flow: {heap} = {storage for ... argument}:
+./adapter_test.go:15:57:     from ... argument (spill) at ./adapter_test.go:15:13
+./adapter_test.go:15:57:     from (*testing.common).Errorf(t.common, "%s %q: %v/%v vs %v/%v", ... argument...) (call parameter) at ./adapter_test.go:15:13
+./adapter_test.go:15:53: c1 escapes to heap:
+./adapter_test.go:15:53:   flow: {storage for ... argument} = &{storage for c1}:
+./adapter_test.go:15:53:     from c1 (spill) at ./adapter_test.go:15:53
+./adapter_test.go:15:53:     from ... argument (slice-literal-element) at ./adapter_test.go:15:13
+./adapter_test.go:15:53:   flow: {heap} = {storage for ... argument}:
+./adapter_test.go:15:53:     from ... argument (spill) at ./adapter_test.go:15:13
+./adapter_test.go:15:53:     from (*testing.common).Errorf(t.common, "%s %q: %v/%v vs %v/%v", ... argument...) (call parameter) at ./adapter_test.go:15:13
+./adapter_test.go:15:49: n1 escapes to heap:
+./adapter_test.go:15:49:   flow: {storage for ... argument} = &{storage for n1}:
+./adapter_test.go:15:49:     from n1 (spill) at ./adapter_test.go:15:49
+./adapter_test.go:15:49:     from ... argument (slice-literal-element) at ./adapter_test.go:15:13
+./adapter_test.go:15:49:   flow: {heap} = {storage for ... argument}:
+./adapter_test.go:15:49:     from ... argument (spill) at ./adapter_test.go:15:13
+./adapter_test.go:15:49:     from (*testing.common).Errorf(t.common, "%s %q: %v/%v vs %v/%v", ... argument...) (call parameter) at ./adapter_test.go:15:13
+./adapter_test.go:15:46: s escapes to heap:
+./adapter_test.go:15:46:   flow: {storage for ... argument} = &{storage for s}:
+./adapter_test.go:15:46:     from s (spill) at ./adapter_test.go:15:46
+./adapter_test.go:15:46:     from ... argument (slice-literal-element) at ./adapter_test.go:15:13
+./adapter_test.go:15:46:   flow: {heap} = {storage for ... argument}:
+./adapter_test.go:15:46:     from ... argument (spill) at ./adapter_test.go:15:13
+./adapter_test.go:15:46:     from (*testing.common).Errorf(t.common, "%s %q: %v/%v vs %v/%v", ... argument...) (call parameter) at ./adapter_test.go:15:13
+./adapter_test.go:15:39: label escapes to heap:
+./adapter_test.go:15:39:   flow: {storage for ... argument} = &{storage for label}:
+./adapter_test.go:15:39:     from label (spill) at ./adapter_test.go:15:39
+./adapter_test.go:15:39:     from ... argument (slice-literal-element) at ./adapter_test.go:15:13
+./adapter_test.go:15:39:   flow: {heap} = {storage for ... argument}:
+./adapter_test.go:15:39:     from ... argument (spill) at ./adapter_test.go:15:13
+./adapter_test.go:15:39:     from (*testing.common).Errorf(t.common, "%s %q: %v/%v vs %v/%v", ... argument...) (call parameter) at ./adapter_test.go:15:13
+./adapter_test.go:9:23: parameter t leaks to {heap} with derefs=0:
+./adapter_test.go:9:23:   flow: {heap} = t:
+./adapter_test.go:9:23:     from t.common (dot of pointer) at ./adapter_test.go:15:6
+./adapter_test.go:9:23:     from t.common (address-of) at ./adapter_test.go:15:6
+./adapter_test.go:9:23:     from (*testing.common).Errorf(t.common, "%s %q: %v/%v vs %v/%v", ... argument...) (call parameter) at ./adapter_test.go:15:13
+./adapter_test.go:9:23: leaking param: t
+./adapter_test.go:10:28: []string{...} does not escape
+./adapter_test.go:12:64: map[string]func(string) (Number, Code){...} does not escape
+./adapter_test.go:15:13: ... argument does not escape
+./adapter_test.go:15:39: label escapes to heap
+./adapter_test.go:15:46: s escapes to heap
+./adapter_test.go:15:49: n1 escapes to heap
+./adapter_test.go:15:53: c1 escapes to heap
+./adapter_test.go:15:57: n escapes to heap
+./adapter_test.go:15:60: c escapes to heap
+./adapter_test.go:25:18: func literal escapes to heap:
+./adapter_test.go:25:18:   flow: {heap} = &{storage for func literal}:
+./adapter_test.go:25:18:     from func literal (spill) at ./adapter_test.go:25:18
+./adapter_test.go:25:18:     from (*testing.B).Run(b, tt.name, func literal) (call parameter) at ./adapter_test.go:25:8
+./adapter_test.go:21:9: BenchmarkAdapters capturing by value: tt (addr=false assign=false width=24)
+./adapter_test.go:20:24: parameter b leaks to {heap} with derefs=0:
+./adapter_test.go:20:24:   flow: {heap} = b:
+./adapter_test.go:20:24:     from (*testing.B).Run(b, tt.name, func literal) (call parameter) at ./adapter_test.go:25:8
+./adapter_test.go:20:24: leaking param: b
+./adapter_test.go:25:23: b does not escape
+./adapter_test.go:24:3: []struct { name string; fn func(string) (Number, Code) }{...} does not escape
+./adapter_test.go:25:18: func literal escapes to heap
+./adapter_test.go:30:24: index bounds check elided
+# example.net/m7g-adapter-model.test
+_testmain.go:39:6: can inline init.0 with cost 3 as: func() { testdeps.ImportPath = "example.net/m7g-adapter-model" }
+_testmain.go:44:6: cannot inline main: function too complex: cost 187 exceeds budget 80
+<autogenerated>:1: inlining call to reflect.flag.kind
+<autogenerated>:1: inlining call to reflect.flag.kind
+<autogenerated>:1: inlining call to reflect.flag.mustBe
+<autogenerated>:1: inlining call to reflect.flag.kind
+<autogenerated>:1: inlining call to reflect.flag.mustBe
+<autogenerated>:1: inlining call to reflect.flag.kind
+<autogenerated>:1: inlining call to reflect.flag.mustBeAssignable
+<autogenerated>:1: inlining call to reflect.flag.mustBeAssignable
+<autogenerated>:1: inlining call to reflect.flag.mustBeExported
+<autogenerated>:1: inlining call to reflect.flag.mustBeExported
+<autogenerated>:1: inlining call to reflect.flag.ro
+<autogenerated>:1: inlining call to reflect.flag.ro
+_testmain.go:45:42: testdeps.TestDeps{} escapes to heap:
+_testmain.go:45:42:   flow: {heap} = &{storage for testdeps.TestDeps{}}:
+_testmain.go:45:42:     from testdeps.TestDeps{} (spill) at _testmain.go:45:42
+_testmain.go:45:42:     from testing.MainStart(testdeps.TestDeps{}, tests, benchmarks, fuzzTargets, examples) (call parameter) at _testmain.go:45:24
+_testmain.go:45:42: testdeps.TestDeps{} escapes to heap
+<autogenerated>:1: &reflect.ValueError{...} escapes to heap:
+<autogenerated>:1:   flow: {heap} = &{storage for &reflect.ValueError{...}}:
+<autogenerated>:1:     from &reflect.ValueError{...} (spill) at <autogenerated>:1
+<autogenerated>:1:     from &reflect.ValueError{...} (interface-converted) at <autogenerated>:1
+<autogenerated>:1:     from panic(&reflect.ValueError{...}) (call parameter) at <autogenerated>:1
+<autogenerated>:1: &reflect.ValueError{...} escapes to heap
+<autogenerated>:1: &reflect.ValueError{...} escapes to heap:
+<autogenerated>:1:   flow: {heap} = &{storage for &reflect.ValueError{...}}:
+<autogenerated>:1:     from &reflect.ValueError{...} (spill) at <autogenerated>:1
+<autogenerated>:1:     from &reflect.ValueError{...} (interface-converted) at <autogenerated>:1
+<autogenerated>:1:     from panic(&reflect.ValueError{...}) (call parameter) at <autogenerated>:1
+<autogenerated>:1: &reflect.ValueError{...} escapes to heap
+ok  	example.net/m7g-adapter-model	0.001s [no tests to run]

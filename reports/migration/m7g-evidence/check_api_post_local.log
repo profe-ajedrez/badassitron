@@ -1,0 +1,2 @@
+PASS: 1030 historical public identifiers preserved; 2 additions: [('dec128', 'func', 'Dec128.DivAtPrecision'), ('dec128', 'func', 'Dec128.ErrorCode')]
+PASS: all 66 unsigned public declarations retain exact source signatures

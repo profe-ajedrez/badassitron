@@ -47,11 +47,17 @@ var code2err = [...]error{
 
 // Value returns this arithmetic error as a Go error.
 func (e Error) Value() error {
+	if int(e) >= len(code2err) {
+		return errors.New("invalid state code")
+	}
 	return code2err[e]
 }
 
 // Error returns the textual description of this arithmetic error.
 // Do not call Error on None, because None has no underlying error value.
 func (e Error) Error() string {
-	return e.Value().Error()
+	if err := e.Value(); err != nil {
+		return err.Error()
+	}
+	return ""
 }

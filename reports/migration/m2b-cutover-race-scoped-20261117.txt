@@ -1,0 +1,12 @@
+?   	github.com/profe-ajedrez/badassitron/dec128/uint128	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/dec128	1.022s
+ok  	github.com/profe-ajedrez/badassitron/dec128/errors	1.010s
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/benchmark	1.020s [no tests to run]
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/unit	2.506s
+ok  	github.com/profe-ajedrez/badassitron/dec256	2.201s
+ok  	github.com/profe-ajedrez/badassitron/dec256/uint256	1.667s
+ok  	github.com/profe-ajedrez/badassitron/dec512	2.641s
+ok  	github.com/profe-ajedrez/badassitron/dec512/uint512	3.722s
+ok  	github.com/profe-ajedrez/badassitron/internal/dec128bridge	3.106s
+ok  	github.com/profe-ajedrez/badassitron/internal/dec128candidate	1.482s
+ok  	github.com/profe-ajedrez/badassitron/testdata/migration/external-client	1.014s

@@ -1,0 +1,18 @@
+Local scratch verification Go 1.23.2; downloaded official v1.4.0 NOT used.
+- go test ./... -count=1: PASS
+- go vet ./...: PASS
+- go test -tags badassitron_m2,badassitron_m3 [dec128,dec256,dec512,optimus]: PASS
+- race -p2 ./...: interrupted by host timeout, no reported failures; NOT a global PASS
+- race test on optimus, then remaining packages: PASS, other packages PASS in initial run
+- new TestReleaseM7CStateEncoding: PASS
+- new TestReleaseM7CImportedArithmeticAndErrors: PASS, 12,000 operand sets
+- frozen main oracle: 3518/3518, 0 unexpected differences
+- frozen extended oracle: 1725/1725, 0 unexpected differences
+- math/big independent checks: no mismatches
+- external Go client in scratch module with temporary replacements: PASS
+- release script Python tests: 19 PASS
+- frozen API declarations: 1030 historical identifiers, 66 exact uint128 signatures PASS
+- backend single-engine guard: PASS on clean delivery source
+- Markdown local links: PASS, 369 links after evidence addition
+
+Official Go 1.27.1 check on this M7-C source: NOT RUN.

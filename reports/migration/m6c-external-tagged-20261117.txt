@@ -1,0 +1,1 @@
+ok  	example.net/badassitron-m6-external-fixture	0.002s

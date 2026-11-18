@@ -1,0 +1,12 @@
+Compact: 123.45
+Stored scale: 4
+Fixed: 123.4500
+Total: 247
+Original: 123.45
+Same value: true
+Invalid input: true
+Parser returned an error: true
+Division by zero: true
+Error details available: true
+Large integer: 18446744073709551616
+Coefficient bits: 128

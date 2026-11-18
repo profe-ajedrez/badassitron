@@ -1,0 +1,5 @@
+JSON: {"amount":"123.45"}
+Same value: true
+Restored scale: 2
+Long decimal: 0.1234567890123456789012345
+Null becomes zero: true

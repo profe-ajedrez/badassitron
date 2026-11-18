@@ -1,0 +1,5 @@
+PASS: uint128 default selects historical without mixed arithmetic
+PASS: uint128 badassitron_m3 selects M3 without mixed arithmetic
+PASS: uint128 badassitron_legacy selects historical without mixed arithmetic
+PASS: uint128 badassitron_m2,badassitron_m3 selects M3 without mixed arithmetic
+PASS: uint128 badassitron_legacy,badassitron_m3 selects M3 without mixed arithmetic

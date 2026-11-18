@@ -49,7 +49,7 @@ not be used as an economic classification.
 `Equal` and `Compare` compare numeric values across representations.
 A plain Go `==` comparison is not available for Optimus; use `Equal`.
 
-For the full arithmetic contract, see [Optimus details](OPTIMUS_STAGE.md).
+For the full arithmetic contract, see [Optimus details](OPTIMUS.md).
 
 ## Conversions
 
@@ -67,4 +67,4 @@ or the complete [conversion program](../examples/09_conversions/README.md).
 own fixed-width unsigned operations. They report overflow rather than
 silently wrapping on checked arithmetic. They are building blocks for
 decimal coefficients, not themselves signed decimal types.
-See [integer foundation](WIDE_INTEGER_FOUNDATION.md).
+See [integer foundation](UNSIGNED_INTEGERS.md).

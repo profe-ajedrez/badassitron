@@ -9,7 +9,7 @@ func TestModPreservesLegacyInternalSignedZero(t *testing.T) {
 	b := FromString("1")
 	_, legacyRemainder := a.QuoRem(b)
 	actual := a.Mod(b)
-	if !legacyRemainder.IsZero() || !actual.IsZero() || legacyRemainder.negative() != actual.negative() {
+	if !legacyRemainder.IsZero() || !actual.IsZero() || legacyRemainder.StoredNegative() != actual.StoredNegative() {
 		t.Fatalf("Mod changed remainder sign: QuoRem=%#v Mod=%#v", legacyRemainder, actual)
 	}
 }

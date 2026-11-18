@@ -1,0 +1,1 @@
+PASS: 1030 historical public identifiers retained, 2 additions: [('dec128', 'func', 'Dec128.DivAtPrecision'), ('dec128', 'func', 'Dec128.ErrorCode')]

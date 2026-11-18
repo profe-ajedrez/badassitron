@@ -1,0 +1,16 @@
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/tests/benchmark
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkM2Cutover/Rescale/Truncate         	30426187	         4.076 ns/op	       0 B/op	       0 allocs/op
+BenchmarkM2Cutover/Rescale/Truncate         	28879767	         4.347 ns/op	       0 B/op	       0 allocs/op
+BenchmarkM2Cutover/Rescale/Truncate         	31025661	         4.053 ns/op	       0 B/op	       0 allocs/op
+BenchmarkM2Cutover/Rescale/Truncate         	28487085	         4.165 ns/op	       0 B/op	       0 allocs/op
+BenchmarkM2Cutover/Rescale/Truncate         	27714054	         4.146 ns/op	       0 B/op	       0 allocs/op
+BenchmarkM2Cutover/Rescale/RoundHalfEven    	19916394	         5.641 ns/op	       0 B/op	       0 allocs/op
+BenchmarkM2Cutover/Rescale/RoundHalfEven    	21623451	         5.481 ns/op	       0 B/op	       0 allocs/op
+BenchmarkM2Cutover/Rescale/RoundHalfEven    	22480110	         5.606 ns/op	       0 B/op	       0 allocs/op
+BenchmarkM2Cutover/Rescale/RoundHalfEven    	21666578	         5.712 ns/op	       0 B/op	       0 allocs/op
+BenchmarkM2Cutover/Rescale/RoundHalfEven    	21198536	         5.740 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/benchmark	1.277s

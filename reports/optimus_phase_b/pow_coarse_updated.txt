@@ -1,9 +1,0 @@
-goos: linux
-goarch: amd64
-pkg: github.com/profe-ajedrez/badassitron/optimus
-cpu: INTEL(R) XEON(R) PLATINUM 8573C
-BenchmarkPhaseBPowCoarse 	    7786	     52365 ns/op	   36811 B/op	     281 allocs/op
-BenchmarkPhaseBPowCoarse 	    7455	     53319 ns/op	   36811 B/op	     281 allocs/op
-BenchmarkPhaseBPowCoarse 	    7064	     53361 ns/op	   36811 B/op	     281 allocs/op
-PASS
-ok  	github.com/profe-ajedrez/badassitron/optimus	1.887s

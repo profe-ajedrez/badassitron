@@ -1,0 +1,2 @@
+Go: go version go1.23.2 linux/amd64
+M7-D verification requires Go 1.27 or newer, got go1.23.2

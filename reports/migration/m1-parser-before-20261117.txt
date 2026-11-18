@@ -1,0 +1,16 @@
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/internal/dec128bridge
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationCodecParse/legacy         	 7410889	        45.00 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/legacy         	 8024728	        50.91 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/legacy         	 7203547	        52.67 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/legacy         	 7607642	        50.87 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/legacy         	 7113037	        46.91 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/bridge         	 3473557	       100.5 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/bridge         	 3276572	       113.7 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/bridge         	 3055195	       101.6 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/bridge         	 3628116	       103.2 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/bridge         	 2958086	       118.7 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/profe-ajedrez/badassitron/internal/dec128bridge	4.722s

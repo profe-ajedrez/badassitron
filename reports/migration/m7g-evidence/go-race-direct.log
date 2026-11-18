@@ -1,0 +1,2 @@
+GOWORK=off GOTOOLCHAIN=local go test -race ./... -count=1
+go: go.mod requires go >= 1.27 (running go 1.23.2; GOTOOLCHAIN=local)

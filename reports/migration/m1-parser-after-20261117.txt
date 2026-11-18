@@ -1,0 +1,76 @@
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/internal/dec128bridge
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationCodecParse/legacy         	 4903669	        46.70 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/legacy         	 4377823	        46.34 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/legacy         	 4068854	        53.25 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/legacy         	 4612720	        49.19 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/legacy         	 4804714	        48.15 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/bridge         	 6619779	        44.21 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/bridge         	 5982304	        43.71 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/bridge         	 4783506	        41.94 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/bridge         	 5510024	        44.66 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationCodecParse/bridge         	 5613252	        40.27 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_integer/legacy         	11199022	        21.50 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_integer/legacy         	12319528	        20.00 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_integer/legacy         	12207290	        19.17 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_integer/legacy         	11319774	        20.77 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_integer/legacy         	11802967	        20.70 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_integer/bridge         	10744947	        21.82 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_integer/bridge         	10233226	        23.06 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_integer/bridge         	10419211	        22.03 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_integer/bridge         	10725969	        22.29 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_integer/bridge         	 9659622	        22.21 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_fraction/legacy        	19004234	        12.79 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_fraction/legacy        	18204080	        12.88 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_fraction/legacy        	19354040	        12.38 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_fraction/legacy        	19579344	        12.21 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_fraction/legacy        	21851938	        12.76 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_fraction/bridge        	17330430	        14.78 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_fraction/bridge        	18041109	        14.18 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_fraction/bridge        	16876861	        14.18 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_fraction/bridge        	16888917	        13.88 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/short_fraction/bridge        	16936221	        14.32 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_fraction/legacy         	 5697783	        41.59 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_fraction/legacy         	 5794375	        41.91 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_fraction/legacy         	 5729293	        44.00 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_fraction/legacy         	 5441920	        41.11 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_fraction/legacy         	 5741180	        42.47 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_fraction/bridge         	 7051078	        34.13 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_fraction/bridge         	 7086212	        34.82 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_fraction/bridge         	 7095354	        34.20 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_fraction/bridge         	 7065732	        33.80 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_fraction/bridge         	 7042825	        36.99 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_integer/legacy          	 2143245	       110.4 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_integer/legacy          	 2186460	       112.3 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_integer/legacy          	 2163459	       107.8 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_integer/legacy          	 2203291	       109.0 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_integer/legacy          	 2116279	       107.3 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_integer/bridge          	 4030129	        57.15 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_integer/bridge          	 4315783	        56.41 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_integer/bridge          	 4289150	        58.20 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_integer/bridge          	 4142492	        59.61 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_integer/bridge          	 4369965	        55.57 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_zero/legacy             	 1996466	       127.8 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_zero/legacy             	 1920327	       126.3 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_zero/legacy             	 1961188	       121.8 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_zero/legacy             	 1973005	       123.1 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_zero/legacy             	 1865020	       124.0 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_zero/bridge             	 3362518	        70.67 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_zero/bridge             	 3665562	        67.54 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_zero/bridge             	 3391855	        67.34 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_zero/bridge             	 3426026	        75.51 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/long_zero/bridge             	 3201634	        77.05 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/overlong_scale/legacy        	54933345	         4.614 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/overlong_scale/legacy        	52770668	         4.595 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/overlong_scale/legacy        	55291792	         4.568 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/overlong_scale/legacy        	54241394	         4.511 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/overlong_scale/legacy        	51369895	         4.484 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/overlong_scale/bridge        	42011253	         5.775 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/overlong_scale/bridge        	39800974	         5.897 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/overlong_scale/bridge        	41455136	         6.205 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/overlong_scale/bridge        	36114663	         6.115 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationParserShapes/overlong_scale/bridge        	43109517	         5.969 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/profe-ajedrez/badassitron/internal/dec128bridge	20.620s

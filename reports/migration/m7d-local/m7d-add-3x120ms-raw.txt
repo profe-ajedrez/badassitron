@@ -1,0 +1,18 @@
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/uint128
+cpu: INTEL(R) XEON(R) PLATINUM 8573C
+BenchmarkMigrationM3ThreeWay/Add/Facade  	100000000	         1.239 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/Add/Facade  	100000000	         1.251 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/Add/Facade  	100000000	         1.252 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/Add/UpstreamDirect         	96985567	         1.598 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/Add/UpstreamDirect         	92841949	         1.753 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/Add/UpstreamDirect         	100000000	         1.679 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/AddOverflow/Facade         	100000000	         1.308 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/AddOverflow/Facade         	100000000	         1.204 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/AddOverflow/Facade         	100000000	         1.359 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/AddOverflow/UpstreamDirect 	99064050	         1.611 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/AddOverflow/UpstreamDirect 	100000000	         1.480 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/AddOverflow/UpstreamDirect 	100000000	         1.817 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/profe-ajedrez/badassitron/dec128/uint128	1.768s

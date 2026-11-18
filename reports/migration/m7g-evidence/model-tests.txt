@@ -1,0 +1,4 @@
+=== RUN   TestAdapterModel
+--- PASS: TestAdapterModel (0.00s)
+PASS
+ok  	example.net/m7g-adapter-model	0.002s

@@ -1,0 +1,11 @@
+Attached Jokruger SOURCE SNAPSHOT, not an authenticated v1.4.0 tag.
+File: dec128-main(2).zip
+ZIP SHA256: c93593087448a3d888e887fbfcbc6a98abfb9d9ae8484a1e7bb44c38d9101d3b
+Original module path: github.com/jokruger/dec128
+Original go.mod requirement: go 1.24
+Original uint128/from.go SHA256: b326095a6828cc57c64b56a84e7c835c8adb4f06fcb792d5673d95e8d23316fa
+Temporary local module go.mod lowered to go 1.23.
+Temporary Badassitron module go.mod lowered to go 1.23 and used a local replace.
+No source parser changes; no temporary go.mod or replace is shipped.
+Official module v1.4.0 identity NOT verified from this ZIP.
+Go tests and benchmarks use the attached snapshot only and CANNOT confer official acceptance.

@@ -1,0 +1,4 @@
+STAGED g2: only dec128/uint128/from_upstream_string.go differs
+baseline parser:  6351f382fb109a6f6db2fba6c25445bedb8367156e2a123d608cc8a6796c42cd
+candidate parser: b30f8679d9738eb3c4a5cc6048039c9040a732c8a1e81de71e7b16b3d90f3d3a
+output: /mnt/data/m7g_work/candidates/g2

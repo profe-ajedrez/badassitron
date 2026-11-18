@@ -1,0 +1,144 @@
+TEXT example.net/m7g-adapter-model.M7D(SB) /mnt/data/m7g_work/evidence/adapter-model/adapter.go
+  adapter.go:57		0x51dee0		493b6610		CMPQ SP, 0x10(R14)					
+  adapter.go:57		0x51dee4		7664			JBE 0x51df4a						
+  adapter.go:57		0x51dee6		55			PUSHQ BP						
+  adapter.go:57		0x51dee7		4889e5			MOVQ SP, BP						
+  adapter.go:57		0x51deea		4883ec10		SUBQ $0x10, SP						
+  adapter.go:57		0x51deee		4889442420		MOVQ AX, 0x20(SP)					
+  adapter.go:58		0x51def3		e848ffffff		CALL example.net/m7g-adapter-model.upstreamStub(SB)	
+  adapter.go:60		0x51def8		84c9			TESTL CL, CL						
+  adapter.go:60		0x51defa		7446			JE 0x51df42						
+  adapter.go:60		0x51defc		0f1f4000		NOPL 0(AX)						
+  adapter.go:62		0x51df00		80f905			CMPL CL, $0x5						
+  adapter.go:62		0x51df03		742d			JE 0x51df32						
+  adapter.go:64		0x51df05		80f909			CMPL CL, $0x9						
+  adapter.go:64		0x51df08		7510			JNE 0x51df1a						
+  adapter.go:65		0x51df0a		31c0			XORL AX, AX						
+  adapter.go:65		0x51df0c		4889c3			MOVQ AX, BX						
+  adapter.go:65		0x51df0f		b907000000		MOVL $0x7, CX						
+  adapter.go:65		0x51df14		4883c410		ADDQ $0x10, SP						
+  adapter.go:65		0x51df18		5d			POPQ BP							
+  adapter.go:65		0x51df19		c3			RET							
+  adapter.go:67		0x51df1a		89c8			MOVL CX, AX						
+  adapter.go:67		0x51df1c		0f1f4000		NOPL 0(AX)						
+  adapter.go:67		0x51df20		e85bffffff		CALL example.net/m7g-adapter-model.fallback(SB)		
+  adapter.go:67		0x51df25		31db			XORL BX, BX						
+  adapter.go:67		0x51df27		89c1			MOVL AX, CX						
+  adapter.go:67		0x51df29		4889d8			MOVQ BX, AX						
+  adapter.go:67		0x51df2c		4883c410		ADDQ $0x10, SP						
+  adapter.go:67		0x51df30		5d			POPQ BP							
+  adapter.go:67		0x51df31		c3			RET							
+  adapter.go:63		0x51df32		31c0			XORL AX, AX						
+  adapter.go:63		0x51df34		4889c3			MOVQ AX, BX						
+  adapter.go:63		0x51df37		b903000000		MOVL $0x3, CX						
+  adapter.go:63		0x51df3c		4883c410		ADDQ $0x10, SP						
+  adapter.go:63		0x51df40		5d			POPQ BP							
+  adapter.go:63		0x51df41		c3			RET							
+  adapter.go:61		0x51df42		31c9			XORL CX, CX						
+  adapter.go:61		0x51df44		4883c410		ADDQ $0x10, SP						
+  adapter.go:61		0x51df48		5d			POPQ BP							
+  adapter.go:61		0x51df49		c3			RET							
+  adapter.go:57		0x51df4a		4889442408		MOVQ AX, 0x8(SP)					
+  adapter.go:57		0x51df4f		48895c2410		MOVQ BX, 0x10(SP)					
+  adapter.go:57		0x51df54		e80742f5ff		CALL runtime.morestack_noctxt.abi0(SB)			
+  adapter.go:57		0x51df59		488b442408		MOVQ 0x8(SP), AX					
+  adapter.go:57		0x51df5e		488b5c2410		MOVQ 0x10(SP), BX					
+  adapter.go:57		0x51df63		e978ffffff		JMP example.net/m7g-adapter-model.M7D(SB)		
+
+TEXT example.net/m7g-adapter-model.M7E(SB) /mnt/data/m7g_work/evidence/adapter-model/adapter.go
+  adapter.go:72		0x51df80		493b6610		CMPQ SP, 0x10(R14)					
+  adapter.go:72		0x51df84		7622			JBE 0x51dfa8						
+  adapter.go:72		0x51df86		55			PUSHQ BP						
+  adapter.go:72		0x51df87		4889e5			MOVQ SP, BP						
+  adapter.go:72		0x51df8a		4883ec10		SUBQ $0x10, SP						
+  adapter.go:72		0x51df8e		4889442420		MOVQ AX, 0x20(SP)					
+  adapter.go:73		0x51df93		e8a8feffff		CALL example.net/m7g-adapter-model.upstreamStub(SB)	
+  adapter.go:75		0x51df98		8d5103			LEAL 0x3(CX), DX					
+  adapter.go:75		0x51df9b		c0ea03			SHRL $0x3, DL						
+  adapter.go:75		0x51df9e		d1e2			SHLL $0x1, DX						
+  adapter.go:75		0x51dfa0		29d1			SUBL DX, CX						
+  adapter.go:75		0x51dfa2		4883c410		ADDQ $0x10, SP						
+  adapter.go:75		0x51dfa6		5d			POPQ BP							
+  adapter.go:75		0x51dfa7		c3			RET							
+  adapter.go:72		0x51dfa8		4889442408		MOVQ AX, 0x8(SP)					
+  adapter.go:72		0x51dfad		48895c2410		MOVQ BX, 0x10(SP)					
+  adapter.go:72		0x51dfb2		e8a941f5ff		CALL runtime.morestack_noctxt.abi0(SB)			
+  adapter.go:72		0x51dfb7		488b442408		MOVQ 0x8(SP), AX					
+  adapter.go:72		0x51dfbc		488b5c2410		MOVQ 0x10(SP), BX					
+  adapter.go:72		0x51dfc1		ebbd			JMP example.net/m7g-adapter-model.M7E(SB)		
+
+TEXT example.net/m7g-adapter-model.G2(SB) /mnt/data/m7g_work/evidence/adapter-model/adapter.go
+  adapter.go:79		0x51dfe0		493b6610		CMPQ SP, 0x10(R14)					
+  adapter.go:79		0x51dfe4		7632			JBE 0x51e018						
+  adapter.go:79		0x51dfe6		55			PUSHQ BP						
+  adapter.go:79		0x51dfe7		4889e5			MOVQ SP, BP						
+  adapter.go:79		0x51dfea		4883ec10		SUBQ $0x10, SP						
+  adapter.go:79		0x51dfee		4889442420		MOVQ AX, 0x20(SP)					
+  adapter.go:80		0x51dff3		e848feffff		CALL example.net/m7g-adapter-model.upstreamStub(SB)	
+  adapter.go:81		0x51dff8		84c9			TESTL CL, CL						
+  adapter.go:81		0x51dffa		7508			JNE 0x51e004						
+  adapter.go:82		0x51dffc		31c9			XORL CX, CX						
+  adapter.go:82		0x51dffe		4883c410		ADDQ $0x10, SP						
+  adapter.go:82		0x51e002		5d			POPQ BP							
+  adapter.go:82		0x51e003		c3			RET							
+  adapter.go:84		0x51e004		89c8			MOVL CX, AX						
+  adapter.go:84		0x51e006		e875feffff		CALL example.net/m7g-adapter-model.fallback(SB)		
+  adapter.go:84		0x51e00b		31db			XORL BX, BX						
+  adapter.go:84		0x51e00d		89c1			MOVL AX, CX						
+  adapter.go:84		0x51e00f		4889d8			MOVQ BX, AX						
+  adapter.go:84		0x51e012		4883c410		ADDQ $0x10, SP						
+  adapter.go:84		0x51e016		5d			POPQ BP							
+  adapter.go:84		0x51e017		c3			RET							
+  adapter.go:79		0x51e018		4889442408		MOVQ AX, 0x8(SP)					
+  adapter.go:79		0x51e01d		48895c2410		MOVQ BX, 0x10(SP)					
+  adapter.go:79		0x51e022		e83941f5ff		CALL runtime.morestack_noctxt.abi0(SB)			
+  adapter.go:79		0x51e027		488b442408		MOVQ 0x8(SP), AX					
+  adapter.go:79		0x51e02c		488b5c2410		MOVQ 0x10(SP), BX					
+  adapter.go:79		0x51e031		ebad			JMP example.net/m7g-adapter-model.G2(SB)		
+
+TEXT example.net/m7g-adapter-model.G3(SB) /mnt/data/m7g_work/evidence/adapter-model/adapter.go
+  adapter.go:88		0x51e040		493b6610		CMPQ SP, 0x10(R14)					
+  adapter.go:88		0x51e044		7664			JBE 0x51e0aa						
+  adapter.go:88		0x51e046		55			PUSHQ BP						
+  adapter.go:88		0x51e047		4889e5			MOVQ SP, BP						
+  adapter.go:88		0x51e04a		4883ec10		SUBQ $0x10, SP						
+  adapter.go:88		0x51e04e		4889442420		MOVQ AX, 0x20(SP)					
+  adapter.go:89		0x51e053		e8e8fdffff		CALL example.net/m7g-adapter-model.upstreamStub(SB)	
+  adapter.go:90		0x51e058		84c9			TESTL CL, CL						
+  adapter.go:90		0x51e05a		7446			JE 0x51e0a2						
+  adapter.go:90		0x51e05c		0f1f4000		NOPL 0(AX)						
+  adapter.go:93		0x51e060		80f905			CMPL CL, $0x5						
+  adapter.go:93		0x51e063		742d			JE 0x51e092						
+  adapter.go:96		0x51e065		80f909			CMPL CL, $0x9						
+  adapter.go:96		0x51e068		7510			JNE 0x51e07a						
+  adapter.go:97		0x51e06a		31c0			XORL AX, AX						
+  adapter.go:97		0x51e06c		4889c3			MOVQ AX, BX						
+  adapter.go:97		0x51e06f		b907000000		MOVL $0x7, CX						
+  adapter.go:97		0x51e074		4883c410		ADDQ $0x10, SP						
+  adapter.go:97		0x51e078		5d			POPQ BP							
+  adapter.go:97		0x51e079		c3			RET							
+  adapter.go:99		0x51e07a		89c8			MOVL CX, AX						
+  adapter.go:99		0x51e07c		0f1f4000		NOPL 0(AX)						
+  adapter.go:99		0x51e080		e8fbfdffff		CALL example.net/m7g-adapter-model.fallback(SB)		
+  adapter.go:99		0x51e085		31db			XORL BX, BX						
+  adapter.go:99		0x51e087		89c1			MOVL AX, CX						
+  adapter.go:99		0x51e089		4889d8			MOVQ BX, AX						
+  adapter.go:99		0x51e08c		4883c410		ADDQ $0x10, SP						
+  adapter.go:99		0x51e090		5d			POPQ BP							
+  adapter.go:99		0x51e091		c3			RET							
+  adapter.go:94		0x51e092		31c0			XORL AX, AX						
+  adapter.go:94		0x51e094		4889c3			MOVQ AX, BX						
+  adapter.go:94		0x51e097		b903000000		MOVL $0x3, CX						
+  adapter.go:94		0x51e09c		4883c410		ADDQ $0x10, SP						
+  adapter.go:94		0x51e0a0		5d			POPQ BP							
+  adapter.go:94		0x51e0a1		c3			RET							
+  adapter.go:91		0x51e0a2		31c9			XORL CX, CX						
+  adapter.go:91		0x51e0a4		4883c410		ADDQ $0x10, SP						
+  adapter.go:91		0x51e0a8		5d			POPQ BP							
+  adapter.go:91		0x51e0a9		c3			RET							
+  adapter.go:88		0x51e0aa		4889442408		MOVQ AX, 0x8(SP)					
+  adapter.go:88		0x51e0af		48895c2410		MOVQ BX, 0x10(SP)					
+  adapter.go:88		0x51e0b4		e8a740f5ff		CALL runtime.morestack_noctxt.abi0(SB)			
+  adapter.go:88		0x51e0b9		488b442408		MOVQ 0x8(SP), AX					
+  adapter.go:88		0x51e0be		488b5c2410		MOVQ 0x10(SP), BX					
+  adapter.go:88		0x51e0c3		e978ffffff		JMP example.net/m7g-adapter-model.G3(SB)		

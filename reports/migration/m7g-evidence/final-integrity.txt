@@ -1,0 +1,14 @@
+M7-G source snapshot supplemental validation — integrity review (2026-11-18)
+Stable origin: supplied M7-F ZIP (M7-D production unchanged)
+Compared 78 non-test production Go sources: byte-identical
+Original go.mod and go.sum: byte-identical
+Parser SHA256: 6351f382fb109a6f6db2fba6c25445bedb8367156e2a123d608cc8a6796c42cd
+No vendor, replace or go.work in delivered project
+No Jokruger source was copied into delivered repository
+Original Go 1.27 and Jokruger v1.4.0 pins remain intact
+Local Go 1.23.2 source-snapshot tests/race/vet + 5,243 frozen oracles: PASS
+Local 8-block A/B: ParseShort -1.7%, 95% descriptive CI [-7.2%,+2.2%] => REJECT
+Original Jokruger source snapshot declares go 1.24; its tagged v1.4.0 identity is not established
+Official Go 1.27.1 and pinned module verification remain unavailable
+Decision B: preserve M7-D; production changes zero
+Manifest below is SHA-256 over all files except this manifest itself

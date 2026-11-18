@@ -1,0 +1,150 @@
+Real imported Jokruger code, temporary local-module validation, Go 1.23.2.
+github.com/profe-ajedrez/badassitron/dec128/uint128.FromString[go.shape.string](SB) /mnt/data/m7g_work/local-real/baseline/dec128/uint128/from_upstream_string.go
+  from_upstream_string.go:11	0x54a9e0		493b6610		CMPQ SP, 0x10(R14)									
+  from_upstream_string.go:11	0x54a9e4		0f86da000000		JBE 0x54aac4										
+  from_upstream_string.go:11	0x54a9ea		55			PUSHQ BP										
+  from_upstream_string.go:11	0x54a9eb		4889e5			MOVQ SP, BP										
+  from_upstream_string.go:11	0x54a9ee		4883ec18		SUBQ $0x18, SP										
+  from_upstream_string.go:11	0x54a9f2		48895c2430		MOVQ BX, 0x30(SP)									
+  from_upstream_string.go:12	0x54a9f7		488b00			MOVQ 0(AX), AX										
+  from_upstream_string.go:12	0x54a9fa		e8c112ffff		CALL github.com/jokruger/dec128/uint128.FromString[go.shape.string](SB)			
+  from_upstream_string.go:12	0x54a9ff		90			NOPL											
+  from_upstream_string.go:14	0x54aa00		84c9			TESTL CL, CL										
+  from_upstream_string.go:14	0x54aa02		0f84b4000000		JE 0x54aabc										
+  from_upstream_string.go:16	0x54aa08		80f905			CMPL CL, $0x5										
+  from_upstream_string.go:16	0x54aa0b		0f8492000000		JE 0x54aaa3										
+  from_upstream_string.go:18	0x54aa11		80f909			CMPL CL, $0x9										
+  from_upstream_string.go:18	0x54aa14		7474			JE 0x54aa8a										
+  m3_adapter.go:19		0x54aa16		0fb6d1			MOVZX CL, DX										
+  m3_adapter.go:19		0x54aa19		4883fa0e		CMPQ DX, $0xe										
+  m3_adapter.go:19		0x54aa1d		774d			JA 0x54aa6c										
+  m3_adapter.go:19		0x54aa1f		488d059ac80700		LEAQ 0x7c89a(IP), AX									
+  m3_adapter.go:19		0x54aa26		ff24d0			JMP 0(AX)(DX*8)										
+  m3_adapter.go:19		0x54aa29		31c0			XORL AX, AX										
+  from_upstream_string.go:22	0x54aa2b		eb44			JMP 0x54aa71										
+  from_upstream_string.go:22	0x54aa2d		b802000000		MOVL $0x2, AX										
+  from_upstream_string.go:22	0x54aa32		eb3d			JMP 0x54aa71										
+  from_upstream_string.go:22	0x54aa34		b803000000		MOVL $0x3, AX										
+  from_upstream_string.go:22	0x54aa39		eb36			JMP 0x54aa71										
+  from_upstream_string.go:22	0x54aa3b		b804000000		MOVL $0x4, AX										
+  from_upstream_string.go:22	0x54aa40		eb2f			JMP 0x54aa71										
+  from_upstream_string.go:22	0x54aa42		b805000000		MOVL $0x5, AX										
+  from_upstream_string.go:22	0x54aa47		eb28			JMP 0x54aa71										
+  from_upstream_string.go:22	0x54aa49		b806000000		MOVL $0x6, AX										
+  from_upstream_string.go:22	0x54aa4e		eb21			JMP 0x54aa71										
+  from_upstream_string.go:22	0x54aa50		b807000000		MOVL $0x7, AX										
+  from_upstream_string.go:22	0x54aa55		eb1a			JMP 0x54aa71										
+  from_upstream_string.go:22	0x54aa57		b80a000000		MOVL $0xa, AX										
+  from_upstream_string.go:22	0x54aa5c		eb13			JMP 0x54aa71										
+  from_upstream_string.go:22	0x54aa5e		b808000000		MOVL $0x8, AX										
+  from_upstream_string.go:22	0x54aa63		eb0c			JMP 0x54aa71										
+  from_upstream_string.go:22	0x54aa65		b809000000		MOVL $0x9, AX										
+  from_upstream_string.go:22	0x54aa6a		eb05			JMP 0x54aa71										
+  from_upstream_string.go:22	0x54aa6c		b801000000		MOVL $0x1, AX										
+  from_upstream_string.go:22	0x54aa71		488b1548451900		MOVQ github.com/profe-ajedrez/badassitron/dec128/uint128.Zero(SB), DX			
+  from_upstream_string.go:22	0x54aa78		488b1d49451900		MOVQ github.com/profe-ajedrez/badassitron/dec128/uint128.Zero+8(SB), BX			
+  from_upstream_string.go:22	0x54aa7f		89c1			MOVL AX, CX										
+  from_upstream_string.go:22	0x54aa81		4889d0			MOVQ DX, AX										
+  from_upstream_string.go:22	0x54aa84		4883c418		ADDQ $0x18, SP										
+  from_upstream_string.go:22	0x54aa88		5d			POPQ BP											
+  from_upstream_string.go:22	0x54aa89		c3			RET											
+  from_upstream_string.go:19	0x54aa8a		488b052f451900		MOVQ github.com/profe-ajedrez/badassitron/dec128/uint128.Zero(SB), AX			
+  from_upstream_string.go:19	0x54aa91		488b1d30451900		MOVQ github.com/profe-ajedrez/badassitron/dec128/uint128.Zero+8(SB), BX			
+  from_upstream_string.go:19	0x54aa98		b907000000		MOVL $0x7, CX										
+  from_upstream_string.go:19	0x54aa9d		4883c418		ADDQ $0x18, SP										
+  from_upstream_string.go:19	0x54aaa1		5d			POPQ BP											
+  from_upstream_string.go:19	0x54aaa2		c3			RET											
+  from_upstream_string.go:17	0x54aaa3		488b0516451900		MOVQ github.com/profe-ajedrez/badassitron/dec128/uint128.Zero(SB), AX			
+  from_upstream_string.go:17	0x54aaaa		488b1d17451900		MOVQ github.com/profe-ajedrez/badassitron/dec128/uint128.Zero+8(SB), BX			
+  from_upstream_string.go:17	0x54aab1		b903000000		MOVL $0x3, CX										
+  from_upstream_string.go:17	0x54aab6		4883c418		ADDQ $0x18, SP										
+  from_upstream_string.go:17	0x54aaba		5d			POPQ BP											
+  from_upstream_string.go:17	0x54aabb		c3			RET											
+  from_upstream_string.go:15	0x54aabc		31c9			XORL CX, CX										
+  from_upstream_string.go:15	0x54aabe		4883c418		ADDQ $0x18, SP										
+  from_upstream_string.go:15	0x54aac2		5d			POPQ BP											
+  from_upstream_string.go:15	0x54aac3		c3			RET											
+  from_upstream_string.go:11	0x54aac4		4889442408		MOVQ AX, 0x8(SP)									
+  from_upstream_string.go:11	0x54aac9		48895c2410		MOVQ BX, 0x10(SP)									
+  from_upstream_string.go:11	0x54aace		48894c2418		MOVQ CX, 0x18(SP)									
+  from_upstream_string.go:11	0x54aad3		e82878f2ff		CALL runtime.morestack_noctxt.abi0(SB)							
+  from_upstream_string.go:11	0x54aad8		488b442408		MOVQ 0x8(SP), AX									
+  from_upstream_string.go:11	0x54aadd		488b5c2410		MOVQ 0x10(SP), BX									
+  from_upstream_string.go:11	0x54aae2		488b4c2418		MOVQ 0x18(SP), CX									
+  from_upstream_string.go:11	0x54aae7		e9f4feffff		JMP github.com/profe-ajedrez/badassitron/dec128/uint128.FromString[go.shape.string](SB)	
+
+TEXT github.com/profe-ajedrez/badassitron/dec128/uint128.FromString[go.shape.[]uint8](SB) /mnt/data/m7g_work/local-real/baseline/dec128/uint128/from_upstream_string.go
+  from_upstream_string.go:11	0x54ab00		493b6610		CMPQ SP, 0x10(R14)										
+  from_upstream_string.go:11	0x54ab04		0f86da000000		JBE 0x54abe4											
+  from_upstream_string.go:11	0x54ab0a		55			PUSHQ BP											
+  from_upstream_string.go:11	0x54ab0b		4889e5			MOVQ SP, BP											
+  from_upstream_string.go:11	0x54ab0e		4883ec20		SUBQ $0x20, SP											
+  from_upstream_string.go:11	0x54ab12		48895c2438		MOVQ BX, 0x38(SP)										
+  from_upstream_string.go:12	0x54ab17		488b00			MOVQ 0(AX), AX											
+  from_upstream_string.go:12	0x54ab1a		e801010000		CALL github.com/jokruger/dec128/uint128.FromString[go.shape.[]uint8](SB)			
+  from_upstream_string.go:12	0x54ab1f		90			NOPL												
+  from_upstream_string.go:14	0x54ab20		84c9			TESTL CL, CL											
+  from_upstream_string.go:14	0x54ab22		0f84b4000000		JE 0x54abdc											
+  from_upstream_string.go:16	0x54ab28		80f905			CMPL CL, $0x5											
+  from_upstream_string.go:16	0x54ab2b		0f8492000000		JE 0x54abc3											
+  from_upstream_string.go:18	0x54ab31		80f909			CMPL CL, $0x9											
+  from_upstream_string.go:18	0x54ab34		7474			JE 0x54abaa											
+  m3_adapter.go:19		0x54ab36		0fb6d1			MOVZX CL, DX											
+  m3_adapter.go:19		0x54ab39		4883fa0e		CMPQ DX, $0xe											
+  m3_adapter.go:19		0x54ab3d		774d			JA 0x54ab8c											
+  m3_adapter.go:19		0x54ab3f		488d05fac70700		LEAQ 0x7c7fa(IP), AX										
+  m3_adapter.go:19		0x54ab46		ff24d0			JMP 0(AX)(DX*8)											
+  m3_adapter.go:19		0x54ab49		31c0			XORL AX, AX											
+  from_upstream_string.go:22	0x54ab4b		eb44			JMP 0x54ab91											
+  from_upstream_string.go:22	0x54ab4d		b802000000		MOVL $0x2, AX											
+  from_upstream_string.go:22	0x54ab52		eb3d			JMP 0x54ab91											
+  from_upstream_string.go:22	0x54ab54		b803000000		MOVL $0x3, AX											
+  from_upstream_string.go:22	0x54ab59		eb36			JMP 0x54ab91											
+  from_upstream_string.go:22	0x54ab5b		b804000000		MOVL $0x4, AX											
+  from_upstream_string.go:22	0x54ab60		eb2f			JMP 0x54ab91											
+  from_upstream_string.go:22	0x54ab62		b805000000		MOVL $0x5, AX											
+  from_upstream_string.go:22	0x54ab67		eb28			JMP 0x54ab91											
+  from_upstream_string.go:22	0x54ab69		b806000000		MOVL $0x6, AX											
+  from_upstream_string.go:22	0x54ab6e		eb21			JMP 0x54ab91											
+  from_upstream_string.go:22	0x54ab70		b807000000		MOVL $0x7, AX											
+  from_upstream_string.go:22	0x54ab75		eb1a			JMP 0x54ab91											
+  from_upstream_string.go:22	0x54ab77		b80a000000		MOVL $0xa, AX											
+  from_upstream_string.go:22	0x54ab7c		eb13			JMP 0x54ab91											
+  from_upstream_string.go:22	0x54ab7e		b808000000		MOVL $0x8, AX											
+  from_upstream_string.go:22	0x54ab83		eb0c			JMP 0x54ab91											
+  from_upstream_string.go:22	0x54ab85		b809000000		MOVL $0x9, AX											
+  from_upstream_string.go:22	0x54ab8a		eb05			JMP 0x54ab91											
+  from_upstream_string.go:22	0x54ab8c		b801000000		MOVL $0x1, AX											
+  from_upstream_string.go:22	0x54ab91		488b1528441900		MOVQ github.com/profe-ajedrez/badassitron/dec128/uint128.Zero(SB), DX				
+  from_upstream_string.go:22	0x54ab98		488b1d29441900		MOVQ github.com/profe-ajedrez/badassitron/dec128/uint128.Zero+8(SB), BX				
+  from_upstream_string.go:22	0x54ab9f		89c1			MOVL AX, CX											
+  from_upstream_string.go:22	0x54aba1		4889d0			MOVQ DX, AX											
+  from_upstream_string.go:22	0x54aba4		4883c420		ADDQ $0x20, SP											
+  from_upstream_string.go:22	0x54aba8		5d			POPQ BP												
+  from_upstream_string.go:22	0x54aba9		c3			RET												
+  from_upstream_string.go:19	0x54abaa		488b050f441900		MOVQ github.com/profe-ajedrez/badassitron/dec128/uint128.Zero(SB), AX				
+  from_upstream_string.go:19	0x54abb1		488b1d10441900		MOVQ github.com/profe-ajedrez/badassitron/dec128/uint128.Zero+8(SB), BX				
+  from_upstream_string.go:19	0x54abb8		b907000000		MOVL $0x7, CX											
+  from_upstream_string.go:19	0x54abbd		4883c420		ADDQ $0x20, SP											
+  from_upstream_string.go:19	0x54abc1		5d			POPQ BP												
+  from_upstream_string.go:19	0x54abc2		c3			RET												
+  from_upstream_string.go:17	0x54abc3		488b05f6431900		MOVQ github.com/profe-ajedrez/badassitron/dec128/uint128.Zero(SB), AX				
+  from_upstream_string.go:17	0x54abca		488b1df7431900		MOVQ github.com/profe-ajedrez/badassitron/dec128/uint128.Zero+8(SB), BX				
+  from_upstream_string.go:17	0x54abd1		b903000000		MOVL $0x3, CX											
+  from_upstream_string.go:17	0x54abd6		4883c420		ADDQ $0x20, SP											
+  from_upstream_string.go:17	0x54abda		5d			POPQ BP												
+  from_upstream_string.go:17	0x54abdb		c3			RET												
+  from_upstream_string.go:15	0x54abdc		31c9			XORL CX, CX											
+  from_upstream_string.go:15	0x54abde		4883c420		ADDQ $0x20, SP											
+  from_upstream_string.go:15	0x54abe2		5d			POPQ BP												
+  from_upstream_string.go:15	0x54abe3		c3			RET												
+  from_upstream_string.go:11	0x54abe4		4889442408		MOVQ AX, 0x8(SP)										
+  from_upstream_string.go:11	0x54abe9		48895c2410		MOVQ BX, 0x10(SP)										
+  from_upstream_string.go:11	0x54abee		48894c2418		MOVQ CX, 0x18(SP)										
+  from_upstream_string.go:11	0x54abf3		48897c2420		MOVQ DI, 0x20(SP)										
+  from_upstream_string.go:11	0x54abf8		e80377f2ff		CALL runtime.morestack_noctxt.abi0(SB)								
+  from_upstream_string.go:11	0x54abfd		488b442408		MOVQ 0x8(SP), AX										
+  from_upstream_string.go:11	0x54ac02		488b5c2410		MOVQ 0x10(SP), BX										
+  from_upstream_string.go:11	0x54ac07		488b4c2418		MOVQ 0x18(SP), CX										
+  from_upstream_string.go:11	0x54ac0c		488b7c2420		MOVQ 0x20(SP), DI										
+  from_upstream_string.go:11	0x54ac11		e9eafeffff		JMP github.com/profe-ajedrez/badassitron/dec128/uint128.FromString[go.shape.[]uint8](SB)	

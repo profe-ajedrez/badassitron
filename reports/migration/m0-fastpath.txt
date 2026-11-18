@@ -1,0 +1,46 @@
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128
+cpu: INTEL(R) XEON(R) PLATINUM 8573C
+BenchmarkFastPath/Add/SameScale         	 9292038	        19.86 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Add/SameScale         	 4689681	        26.56 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Add/DifferentScale    	 7224064	        26.08 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Add/DifferentScale    	 5440258	        23.29 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Add/OppositeSign      	 5608095	        45.61 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Add/OppositeSign      	 2797525	        53.54 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Add/Wide              	14930472	         7.306 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Add/Wide              	16298872	        14.23 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Add/Overflow          	 1995748	        79.26 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Add/Overflow          	 1400425	       104.5 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Sub/SameScale         	11596203	        11.82 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Sub/SameScale         	26008692	         4.982 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Sub/DifferentScale    	 7898102	        16.68 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Sub/DifferentScale    	 7406575	        16.22 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Sub/OppositeSign      	10248952	        12.25 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Sub/OppositeSign      	 9360325	        15.60 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Sub/Wide              	26384521	         5.792 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Sub/Wide              	24447182	         4.730 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Sub/Overflow          	26414541	         4.688 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Sub/Overflow          	22942905	         5.858 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Compare/SameScale     	20809135	         5.469 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Compare/SameScale     	21553279	         5.418 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Compare/DifferentScale         	10311405	        11.93 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Compare/DifferentScale         	 9312512	        12.96 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Compare/OppositeSign           	15096055	         6.987 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Compare/OppositeSign           	19225753	         6.373 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Compare/Wide                   	24996885	         5.774 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Compare/Wide                   	23733904	         5.220 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Compare/Overflow               	24221539	         8.114 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Compare/Overflow               	13229775	         8.192 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Mul/SameScale                  	17046194	         8.159 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Mul/SameScale                  	19732483	         5.777 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Mul/DifferentScale             	23687550	         7.416 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Mul/DifferentScale             	14339253	         7.349 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Mul/OppositeSign               	14825888	        12.46 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Mul/OppositeSign               	11785554	        13.27 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Mul/Wide                       	 3320984	        52.23 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Mul/Wide                       	 3747104	        27.68 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Mul/Overflow                   	 3344610	        45.48 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFastPath/Mul/Overflow                   	 3368527	        39.07 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/profe-ajedrez/badassitron/dec128	7.258s

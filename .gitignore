@@ -23,3 +23,15 @@ go.work.sum
 
 # env file
 .env
+
+# Python analysis and tooling caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local benchmarking/build scratch and temporary workspaces
+*.prof
+*.pprof
+coverage*.txt
+*.tmp
+*.bak

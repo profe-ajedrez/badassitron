@@ -1,0 +1,8 @@
+ok  	github.com/profe-ajedrez/badassitron/dec128	1.014s
+ok  	github.com/profe-ajedrez/badassitron/dec128/errors	1.014s
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/benchmark	1.021s [no tests to run]
+?   	github.com/profe-ajedrez/badassitron/dec128/uint128	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/unit	2.316s
+ok  	github.com/profe-ajedrez/badassitron/dec256	1.921s
+ok  	github.com/profe-ajedrez/badassitron/dec256/uint256	1.559s
+ok  	github.com/profe-ajedrez/badassitron/dec512	2.372s

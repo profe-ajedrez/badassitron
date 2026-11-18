@@ -1,0 +1,2 @@
+PASS: Go 1.27 + imported Jokruger v1.4.0; no replace/vendor/workspace
+PASS: one production 128-bit engine; rollback sources absent; unsupported tags fail closed

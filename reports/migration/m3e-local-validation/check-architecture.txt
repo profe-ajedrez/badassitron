@@ -1,0 +1,1 @@
+ok  	github.com/profe-ajedrez/badassitron/tools/migration-m3-architecture	0.022s

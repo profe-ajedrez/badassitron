@@ -1,0 +1,23 @@
+package uint128
+
+import (
+	"github.com/jokruger/dec128/state"
+	ju "github.com/jokruger/dec128/uint128"
+	"github.com/profe-ajedrez/badassitron/dec128/errors"
+)
+
+// M7-G EXPERIMENT ONLY: one fast success branch, explicit errors, future-state
+// fallback identical to M7-D. All parsing delegates to imported Jokruger.
+func FromString[S string | []byte](s S) (Uint128, errors.Error) {
+	n, status := ju.FromString(s)
+	if status == state.OK {
+		return Uint128(n), errors.None
+	}
+	if status == state.Overflow {
+		return Zero, errors.Overflow
+	}
+	if status == state.InvalidFormat {
+		return Zero, errors.InvalidFormat
+	}
+	return Zero, fromState(status)
+}

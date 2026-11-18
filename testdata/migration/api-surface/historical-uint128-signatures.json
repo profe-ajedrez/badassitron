@@ -1,0 +1,332 @@
+[
+  {
+    "kind": "const",
+    "name": "MaxSafeStrLen64",
+    "signature": "= 19"
+  },
+  {
+    "kind": "const",
+    "name": "MaxStrLen",
+    "signature": "= 39"
+  },
+  {
+    "kind": "const",
+    "name": "MaxStrLen64",
+    "signature": "= 20"
+  },
+  {
+    "kind": "const",
+    "name": "MaxUint128Str",
+    "signature": "= \"340282366920938463463374607431768211455\""
+  },
+  {
+    "kind": "const",
+    "name": "MaxUint64Str",
+    "signature": "= \"18446744073709551615\""
+  },
+  {
+    "kind": "const",
+    "name": "ZeroStr",
+    "signature": "= \"0\""
+  },
+  {
+    "kind": "func",
+    "name": "*Uint128.Scan",
+    "signature": "func(s fmt.ScanState, ch rune) error"
+  },
+  {
+    "kind": "func",
+    "name": "*Uint128.UnmarshalText",
+    "signature": "func(b []byte) error"
+  },
+  {
+    "kind": "func",
+    "name": "FromBigInt",
+    "signature": "func(i *big.Int) (Uint128, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "FromBytes",
+    "signature": "func(bs [16]byte) Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "FromBytesBigEndian",
+    "signature": "func(b [16]byte) Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "FromString",
+    "signature": "func[S string | []byte](s S) (Uint128, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "FromUint64",
+    "signature": "func(u uint64) Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "QuoRem192By64",
+    "signature": "func(u Uint128, carry uint64, v uint64) (Uint128, uint64, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "QuoRem256By128",
+    "signature": "func(u Uint128, carry Uint128, v Uint128) (Uint128, Uint128, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "SubUnsafe",
+    "signature": "func(u Uint128, v Uint128) Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Add",
+    "signature": "func(other Uint128) (Uint128, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Add64",
+    "signature": "func(other uint64) (Uint128, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.And",
+    "signature": "func(other Uint128) Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.And64",
+    "signature": "func(other uint64) Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.AppendBytes",
+    "signature": "func(bs []byte) []byte"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.AppendBytesBigEndian",
+    "signature": "func(bs []byte) []byte"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.BigInt",
+    "signature": "func() *big.Int"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.BitLen",
+    "signature": "func() int"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Bytes",
+    "signature": "func() [16]byte"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.BytesBigEndian",
+    "signature": "func() [16]byte"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Compare",
+    "signature": "func(other Uint128) int"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Div",
+    "signature": "func(other Uint128) (Uint128, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Div64",
+    "signature": "func(other uint64) (Uint128, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Equal",
+    "signature": "func(other Uint128) bool"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.IsZero",
+    "signature": "func() bool"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.LeadingZeroBitsCount",
+    "signature": "func() int"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Lsh",
+    "signature": "func(n uint) Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.MarshalText",
+    "signature": "func() ([]byte, error)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Mod",
+    "signature": "func(other Uint128) (Uint128, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Mod64",
+    "signature": "func(other uint64) (uint64, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Mul",
+    "signature": "func(other Uint128) (Uint128, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Mul64",
+    "signature": "func(other uint64) (Uint128, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.MulCarry",
+    "signature": "func(other Uint128) (Uint128, Uint128)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.NonZeroBitsCount",
+    "signature": "func() int"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Or",
+    "signature": "func(other Uint128) Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Or64",
+    "signature": "func(other uint64) Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.PutBytes",
+    "signature": "func(bs []byte) errors.Error"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.PutBytesBigEndian",
+    "signature": "func(bs []byte) errors.Error"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.QuoRem",
+    "signature": "func(other Uint128) (Uint128, Uint128, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.QuoRem64",
+    "signature": "func(other uint64) (Uint128, uint64, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.ReverseBits",
+    "signature": "func() Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.ReverseBytes",
+    "signature": "func() Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.RotateBitsLeft",
+    "signature": "func(k int) Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.RotateBitsRight",
+    "signature": "func(k int) Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Rsh",
+    "signature": "func(n uint) Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.String",
+    "signature": "func() string"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.StringToBuf",
+    "signature": "func(buf []byte) []byte"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Sub",
+    "signature": "func(other Uint128) (Uint128, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Sub64",
+    "signature": "func(other uint64) (Uint128, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.TrailingZeroBitsCount",
+    "signature": "func() int"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Uint64",
+    "signature": "func() (uint64, errors.Error)"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Xor",
+    "signature": "func(other Uint128) Uint128"
+  },
+  {
+    "kind": "func",
+    "name": "Uint128.Xor64",
+    "signature": "func(other uint64) Uint128"
+  },
+  {
+    "kind": "type",
+    "name": "Uint128",
+    "signature": "struct {\n\tLo\tuint64\n\tHi\tuint64\n}"
+  },
+  {
+    "kind": "var",
+    "name": "Max",
+    "signature": "= Uint128{math.MaxUint64, math.MaxUint64}"
+  },
+  {
+    "kind": "var",
+    "name": "Max64",
+    "signature": "= Uint128{math.MaxUint64, 0}"
+  },
+  {
+    "kind": "var",
+    "name": "One",
+    "signature": "= Uint128{Lo: 1}"
+  },
+  {
+    "kind": "var",
+    "name": "Pow10Uint128",
+    "signature": "= [...]Uint128{\n\t{Lo: 1},\n\t{Lo: 10},\n\t{Lo: 100},\n\t{Lo: 1000},\n\t{Lo: 10000},\n\t{Lo: 100000},\n\t{Lo: 1000000},\n\t{Lo: 10000000},\n\t{Lo: 100000000},\n\t{Lo: 1000000000},\n\t{Lo: 10000000000},\n\t{Lo: 100000000000},\n\t{Lo: 1000000000000},\n\t{Lo: 10000000000000},\n\t{Lo: 100000000000000},\n\t{Lo: 1000000000000000},\n\t{Lo: 10000000000000000},\n\t{Lo: 100000000000000000},\n\t{Lo: 1000000000000000000},\n\t{Lo: 10000000000000000000},\n\t{Lo: 7766279631452241920, Hi: 5},\n\t{Lo: 3875820019684212736, Hi: 54},\n\t{Lo: 1864712049423024128, Hi: 542},\n\t{Lo: 200376420520689664, Hi: 5421},\n\t{Lo: 2003764205206896640, Hi: 54210},\n\t{Lo: 1590897978359414784, Hi: 542101},\n\t{Lo: 15908979783594147840, Hi: 5421010},\n\t{Lo: 11515845246265065472, Hi: 54210108},\n\t{Lo: 4477988020393345024, Hi: 542101086},\n\t{Lo: 7886392056514347008, Hi: 5421010862},\n\t{Lo: 5076944270305263616, Hi: 54210108624},\n\t{Lo: 13875954555633532928, Hi: 542101086242},\n\t{Lo: 9632337040368467968, Hi: 5421010862427},\n\t{Lo: 4089650035136921600, Hi: 54210108624275},\n\t{Lo: 4003012203950112768, Hi: 542101086242752},\n\t{Lo: 3136633892082024448, Hi: 5421010862427522},\n\t{Lo: 12919594847110692864, Hi: 54210108624275221},\n\t{Lo: 68739955140067328, Hi: 542101086242752217},\n\t{Lo: 687399551400673280, Hi: 5421010862427522170},\n}"
+  },
+  {
+    "kind": "var",
+    "name": "Pow10Uint64",
+    "signature": "= [...]uint64{\n\t1,\n\t10,\n\t100,\n\t1000,\n\t10000,\n\t100000,\n\t1000000,\n\t10000000,\n\t100000000,\n\t1000000000,\n\t10000000000,\n\t100000000000,\n\t1000000000000,\n\t10000000000000,\n\t100000000000000,\n\t1000000000000000,\n\t10000000000000000,\n\t100000000000000000,\n\t1000000000000000000,\n\t10000000000000000000,\n}"
+  },
+  {
+    "kind": "var",
+    "name": "Zero",
+    "signature": "= Uint128{}"
+  }
+]

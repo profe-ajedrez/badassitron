@@ -1,0 +1,16 @@
+=== RUN   TestCandidatePublicCodecInterfaces
+--- PASS: TestCandidatePublicCodecInterfaces (0.00s)
+=== RUN   TestCandidateSignedZeroAndRounding
+--- PASS: TestCandidateSignedZeroAndRounding (0.00s)
+=== RUN   TestCandidateRandomizedSqrt
+--- PASS: TestCandidateRandomizedSqrt (0.05s)
+=== RUN   TestCandidateRandomizedArithmetic
+--- PASS: TestCandidateRandomizedArithmetic (0.06s)
+=== RUN   TestCandidateFloatSpecial
+--- PASS: TestCandidateFloatSpecial (0.00s)
+=== RUN   TestCandidateIndependentOfUpstreamProcessPolicy
+--- PASS: TestCandidateIndependentOfUpstreamProcessPolicy (0.00s)
+=== RUN   TestCandidateDivisionSignedZeroAtScaleZero
+--- PASS: TestCandidateDivisionSignedZeroAtScaleZero (0.00s)
+PASS
+ok  	github.com/profe-ajedrez/badassitron/internal/dec128candidate	0.113s

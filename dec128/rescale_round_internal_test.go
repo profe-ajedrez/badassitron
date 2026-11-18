@@ -8,7 +8,7 @@ import (
 
 func TestV4RescaleRoundExactNegativeZeroRepresentation(t *testing.T) {
 	negativeZero := New(uint128.Zero, 3, true)
-	if !negativeZero.negative() {
+	if !negativeZero.StoredNegative() {
 		t.Fatal("test fixture must retain an internal negative-zero sign bit")
 	}
 	for _, prec := range []uint8{0, 2, 3, 19} {

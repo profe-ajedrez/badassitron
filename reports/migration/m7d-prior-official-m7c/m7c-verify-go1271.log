@@ -1,0 +1,103 @@
+Go: go version go1.27.1 linux/amd64
+PASS: Go 1.27 + imported Jokruger v1.4.0; no replace/vendor/workspace
+PASS: one production 128-bit engine; rollback sources absent; unsupported tags fail closed
+...................
+----------------------------------------------------------------------
+Ran 19 tests in 0.013s
+
+OK
+PASS: 1030 historical public identifiers preserved; 2 additions: [('dec128', 'func', 'Dec128.DivAtPrecision'), ('dec128', 'func', 'Dec128.ErrorCode')]
+PASS: all 66 unsigned public declarations retain exact source signatures
+all modules verified
+PASS: github.com/jokruger/dec128@v1.4.0 has matching download/go.sum checksums; review the license comparison
+ok  	github.com/profe-ajedrez/badassitron/dec128	0.004s
+ok  	github.com/profe-ajedrez/badassitron/dec128/errors	0.002s
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/benchmark	0.003s [no tests to run]
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/unit	0.216s
+ok  	github.com/profe-ajedrez/badassitron/dec128/uint128	0.325s
+ok  	github.com/profe-ajedrez/badassitron/dec256	0.163s
+ok  	github.com/profe-ajedrez/badassitron/dec256/uint256	0.073s
+ok  	github.com/profe-ajedrez/badassitron/dec512	0.206s
+ok  	github.com/profe-ajedrez/badassitron/dec512/uint512	0.337s
+?   	github.com/profe-ajedrez/badassitron/examples/01_optimus_basics	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/02_rounding	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/03_invoice	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/04_json	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/05_sql	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/06_dec128	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/07_dec256	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/08_dec512	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/09_conversions	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/10_concurrency	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/11_decimal_pipeline	[no test files]
+?   	github.com/profe-ajedrez/badassitron/internal	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/internal/dec128bridge	0.276s
+ok  	github.com/profe-ajedrez/badassitron/internal/dec128candidate	0.092s
+?   	github.com/profe-ajedrez/badassitron/internal/decimalwide	[no test files]
+?   	github.com/profe-ajedrez/badassitron/internal/uintwide	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/optimus	6.012s
+?   	github.com/profe-ajedrez/badassitron/tools/migration-api	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/tools/migration-m3-architecture	0.012s
+?   	github.com/profe-ajedrez/badassitron/tools/migration-oracle	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withdec128	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withdec128/handler	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withdec128/internal	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/withdec128/tests	0.005s
+?   	github.com/profe-ajedrez/badassitron/withfloat64	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withfloat64/handler	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/withfloat64/internal	0.005s
+ok  	github.com/profe-ajedrez/badassitron/withfloat64/tests	0.006s
+ok  	github.com/profe-ajedrez/badassitron/dec128	1.019s
+ok  	github.com/profe-ajedrez/badassitron/dec128/errors	1.008s
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/benchmark	1.007s [no tests to run]
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/unit	1.905s
+ok  	github.com/profe-ajedrez/badassitron/dec128/uint128	1.862s
+ok  	github.com/profe-ajedrez/badassitron/dec256	1.653s
+ok  	github.com/profe-ajedrez/badassitron/dec256/uint256	1.466s
+ok  	github.com/profe-ajedrez/badassitron/dec512	1.906s
+ok  	github.com/profe-ajedrez/badassitron/dec512/uint512	3.118s
+?   	github.com/profe-ajedrez/badassitron/examples/01_optimus_basics	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/02_rounding	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/03_invoice	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/04_json	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/05_sql	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/06_dec128	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/07_dec256	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/08_dec512	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/09_conversions	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/10_concurrency	[no test files]
+?   	github.com/profe-ajedrez/badassitron/examples/11_decimal_pipeline	[no test files]
+?   	github.com/profe-ajedrez/badassitron/internal	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/internal/dec128bridge	2.637s
+ok  	github.com/profe-ajedrez/badassitron/internal/dec128candidate	1.466s
+?   	github.com/profe-ajedrez/badassitron/internal/decimalwide	[no test files]
+?   	github.com/profe-ajedrez/badassitron/internal/uintwide	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/optimus	11.005s
+?   	github.com/profe-ajedrez/badassitron/tools/migration-api	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/tools/migration-m3-architecture	1.053s
+?   	github.com/profe-ajedrez/badassitron/tools/migration-oracle	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withdec128	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withdec128/handler	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withdec128/internal	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/withdec128/tests	1.011s
+?   	github.com/profe-ajedrez/badassitron/withfloat64	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withfloat64/handler	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/withfloat64/internal	1.008s
+ok  	github.com/profe-ajedrez/badassitron/withfloat64/tests	1.010s
+ok  	github.com/profe-ajedrez/badassitron/dec128	0.003s
+ok  	github.com/profe-ajedrez/badassitron/dec128/errors	0.002s
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/benchmark	0.003s [no tests to run]
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/unit	0.192s
+ok  	github.com/profe-ajedrez/badassitron/dec128/uint128	0.305s
+ok  	github.com/profe-ajedrez/badassitron/dec256	0.140s
+ok  	github.com/profe-ajedrez/badassitron/dec256/uint256	0.069s
+ok  	github.com/profe-ajedrez/badassitron/dec512	0.192s
+ok  	github.com/profe-ajedrez/badassitron/dec512/uint512	0.332s
+ok  	github.com/profe-ajedrez/badassitron/optimus	5.951s
+baseline_cases=3518 candidate_cases=3518 approved_differences=0 unexpected_differences=0
+exact_results_checked=389 nan_or_error_skipped=159 arithmetic_mismatches=0
+baseline_cases=1725 candidate_cases=1725 approved_differences=0 unexpected_differences=0
+extended_exact_checks=1634 skipped=563 lossy_encodes=38 mismatches=0
+ok  	example.net/badassitron-m7-external-fixture	0.003s
+PASS: 369 local links in 95 Markdown files
+M7-C technical verification passed. This is NOT a license/provenance or publishing approval.

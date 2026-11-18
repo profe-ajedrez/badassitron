@@ -1,0 +1,41 @@
+# Interleaved M7-D vs M7-E — parser adapter
+
+- Toolchain: `go version go1.23.2 linux/amd64`; **8 ABBA/BAAB blocks**, 16 independent invocations per release.
+- Benchmark duration: `250ms` for each subbenchmark; both binaries compiled once from copies.
+- Identical benchmark sources and operands in both builds; direct Jokruger is measured in each invocation.
+- The only differing production source file is `dec128/uint128/from_upstream_string.go`.
+- Negative facade delta means M7-E faster. Bootstrap interval resamples blocks (descriptive, not a formal guarantee).
+
+| Operation | M7-D facade | M7-E facade | Paired delta | 95% bootstrap CI | Direct Jokruger drift | Normalized delta | Blocks E wins |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `ParseShort` | 10.160 | 9.866 | -1.7% | [-7.2%, +2.2%] | +4.2% | -6.7% | 5/8 |
+| `ParseShortMixed` | 10.110 | 9.689 | -5.4% | [-9.8%, +2.4%] | +1.2% | -6.7% | 6/8 |
+| `ParseLong` | 48.860 | 47.030 | -3.5% | [-6.9%, +6.0%] | +0.8% | -1.0% | 5/8 |
+| `QuoRem` | 7.898 | 7.771 | +0.0% | [-7.1%, +6.5%] | +2.1% | -0.6% | 4/8 |
+| `WideQuoRem` | 11.590 | 11.645 | +3.4% | [-6.5%, +5.0%] | -0.4% | +1.0% | 3/8 |
+
+**Decision gate:** NO PROMOTION: negative parser results or a control regression.
+
+This run does not alter the M7-D release baseline. A candidate is not accepted merely because
+its facade/upstream percentage improved in separate, non-interleaved campaigns.
+
+## Block-level facade changes (%)
+
+| Block | `ParseShort` | `ParseShortMixed` | `ParseLong` | `QuoRem` | `WideQuoRem` |
+|---|---:|---:|---:|---:|---:|
+| 1 | -1.79% | -9.82% | +5.98% | +5.50% | +3.19% |
+| 2 | -7.66% | -6.74% | -4.57% | -7.14% | +4.25% |
+| 3 | -7.23% | -4.32% | -2.91% | -3.64% | -11.31% |
+| 4 | -1.64% | -6.26% | +3.36% | +10.09% | +9.90% |
+| 5 | +2.25% | -10.74% | -6.89% | -9.29% | -6.53% |
+| 6 | +7.38% | +10.48% | -12.18% | -2.73% | -4.03% |
+| 7 | -5.78% | +2.36% | +6.55% | +6.48% | +5.04% |
+| 8 | +1.25% | -4.47% | -4.05% | +2.80% | +3.68% |
+
+## Conditions and limitations
+
+CPU scheduling, thermal state, and code-layout differences can affect sub-nanosecond comparisons.
+Direct Jokruger samples track common environmental drift; they do not remove all confounding.
+Re-run with Go 1.27.1, BENCHTIME at least 250ms and at least eight blocks on the target hardware.
+Functional `tools/release/verify.sh` and license/provenance approval are separate gates.
+

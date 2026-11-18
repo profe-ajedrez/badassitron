@@ -1,0 +1,4 @@
+All 175 Go files SHA-256 identical to M7-G.
+go.mod and go.sum SHA-256 identical to M7-G.
+No production code, public interface, or arithmetic change in M7-H.
+Original M7-G ZIP sha256: 0e3696fd949b5f993695a85df662d9f36c1569174a1eebf4860e20c55ba55b29

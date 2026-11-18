@@ -1,0 +1,15 @@
+{
+  "schema": "badassitron-migration-contract-v1",
+  "source": "badassitron-master(6).zip",
+  "cases": [
+    {"operation":"parse", "input":"12.3400", "expected_string":"12.34", "expected_fixed":"12.3400", "expected_scale":4},
+    {"operation":"canonical", "input":"12.3400", "expected_fixed":"12.34", "expected_scale":2},
+    {"operation":"parse", "input":"", "expected_string":"0", "expected_scale":0},
+    {"operation":"parse", "input":"5.", "expected_string":"5", "expected_scale":0},
+    {"operation":"mul", "lhs":"12.50", "rhs":"3", "expected_fixed":"37.50", "expected_scale":2},
+    {"operation":"mul", "lhs":"0.0000000001", "rhs":"0.0000000001", "expected_nan":"Overflow"},
+    {"operation":"round", "input":"1.235", "scale":2, "expected_fixed":"1.24"},
+    {"operation":"round", "input":"-1.235", "scale":2, "expected_fixed":"-1.24"},
+    {"operation":"round_bank", "input":"2.125", "scale":2, "expected_fixed":"2.12"}
+  ]
+}

@@ -1,0 +1,9 @@
+Half away from zero: 3
+Half even: 2
+Truncate: -1.23
+Floor: -1.24
+Ceiling: -1.23
+One third: 0.33 inexact: true
+One quarter: 0.25 inexact: false
+Two decimal places: 12.00
+Square root of two: 1.414214 inexact: true

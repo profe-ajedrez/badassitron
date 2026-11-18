@@ -1,0 +1,22 @@
+ok  	github.com/profe-ajedrez/badassitron/dec128	0.036s
+ok  	github.com/profe-ajedrez/badassitron/dec128/errors	0.001s
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/benchmark	0.002s [no tests to run]
+ok  	github.com/profe-ajedrez/badassitron/dec128/tests/unit	0.205s
+ok  	github.com/profe-ajedrez/badassitron/dec128/uint128	0.030s
+ok  	github.com/profe-ajedrez/badassitron/dec256	0.160s
+ok  	github.com/profe-ajedrez/badassitron/dec256/uint256	0.077s
+ok  	github.com/profe-ajedrez/badassitron/dec512	0.213s
+ok  	github.com/profe-ajedrez/badassitron/dec512/uint512	0.404s
+?   	github.com/profe-ajedrez/badassitron/internal	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/internal/dec128bridge	0.273s
+ok  	github.com/profe-ajedrez/badassitron/internal/dec128candidate	0.104s
+?   	github.com/profe-ajedrez/badassitron/internal/decimalwide	[no test files]
+?   	github.com/profe-ajedrez/badassitron/internal/uintwide	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withdec128	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withdec128/handler	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withdec128/internal	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/withdec128/tests	0.001s
+?   	github.com/profe-ajedrez/badassitron/withfloat64	[no test files]
+?   	github.com/profe-ajedrez/badassitron/withfloat64/handler	[no test files]
+ok  	github.com/profe-ajedrez/badassitron/withfloat64/internal	0.001s
+ok  	github.com/profe-ajedrez/badassitron/withfloat64/tests	0.002s

@@ -1,5 +1,16 @@
 # Decimal architecture and safe use
 
+## Current backend and scope
+
+The 128-bit decimal coefficient engine and public `dec128/uint128` unsigned
+arithmetic use **imported Jokruger v1.4.0**, with Badassitron-owned nominal
+value types and public error conventions. Historical fallback arithmetic
+engines are not present in production. `dec256`, `dec512` and `optimus`
+remain Badassitron public types and are not simply Jokruger aliases.
+
+This describes the implementation, not a certification of the historical
+source provenance. See the [maintainer release review](RELEASE_STATUS.md).
+
 ## Representation
 
 Each decimal stores a signed base 10 value through a nonnegative integer

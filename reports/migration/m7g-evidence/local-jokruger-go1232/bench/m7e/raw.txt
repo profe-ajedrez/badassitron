@@ -1,0 +1,204 @@
+### block=1 sequence=1 version=M7-D
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/uint128
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationM3ThreeWay/QuoRem/Facade  	14704416	         7.849 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/QuoRem/UpstreamDirect         	10266186	         9.909 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/Facade             	 9600003	        11.04 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/UpstreamDirect     	 9462849	        11.51 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/Facade                	 2369874	        45.42 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/UpstreamDirect        	 2424376	        44.96 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/Facade               	10417218	        10.82 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/UpstreamDirect       	13544996	         8.042 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/Facade          	10666016	        11.42 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/UpstreamDirect  	12702454	         8.325 ns/op	       0 B/op	       0 allocs/op
+PASS
+
+### block=1 sequence=2 version=M7-E
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/uint128
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationM3ThreeWay/QuoRem/Facade  	14616637	         7.682 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/QuoRem/UpstreamDirect         	10835652	        10.31 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/Facade             	 9960250	        11.18 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/UpstreamDirect     	 9345706	        11.64 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/Facade                	 2399605	        45.89 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/UpstreamDirect        	 2424685	        45.02 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/Facade               	11949649	         9.197 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/UpstreamDirect       	13766187	         7.677 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/Facade          	12026437	         9.372 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/UpstreamDirect  	13321448	         8.410 ns/op	       0 B/op	       0 allocs/op
+PASS
+
+### block=1 sequence=3 version=M7-E
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/uint128
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationM3ThreeWay/QuoRem/Facade  	13271134	         7.571 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/QuoRem/UpstreamDirect         	10616818	        10.39 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/Facade             	 7308482	        17.00 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/UpstreamDirect     	 7864664	        12.37 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/Facade                	 2157271	        48.27 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/UpstreamDirect        	 2219196	        47.97 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/Facade               	11573221	         9.245 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/UpstreamDirect       	14358493	         7.732 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/Facade          	11967830	         9.433 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/UpstreamDirect  	13286097	         7.823 ns/op	       0 B/op	       0 allocs/op
+PASS
+
+### block=1 sequence=4 version=M7-D
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/uint128
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationM3ThreeWay/QuoRem/Facade  	14102056	         7.619 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/QuoRem/UpstreamDirect         	10123671	        10.27 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/Facade             	 9713892	        11.46 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/UpstreamDirect     	 9287230	        12.57 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/Facade                	 1812348	        57.12 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/UpstreamDirect        	 2301301	        48.72 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/Facade               	10543544	        10.02 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/UpstreamDirect       	12613737	         8.565 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/Facade          	10680727	        11.85 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/UpstreamDirect  	13275381	         8.270 ns/op	       0 B/op	       0 allocs/op
+PASS
+
+### block=2 sequence=1 version=M7-E
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/uint128
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationM3ThreeWay/QuoRem/Facade  	12453954	         7.529 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/QuoRem/UpstreamDirect         	10984134	        10.87 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/Facade             	10098490	        11.19 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/UpstreamDirect     	 9071149	        12.55 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/Facade                	 2241018	        48.87 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/UpstreamDirect        	 2214624	        46.47 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/Facade               	10518573	         9.436 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/UpstreamDirect       	14183184	         7.851 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/Facade          	11012086	         9.372 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/UpstreamDirect  	13617074	         8.110 ns/op	       0 B/op	       0 allocs/op
+PASS
+
+### block=2 sequence=2 version=M7-D
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/uint128
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationM3ThreeWay/QuoRem/Facade  	13664829	         7.503 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/QuoRem/UpstreamDirect         	10741920	        10.42 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/Facade             	 9475911	        12.11 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/UpstreamDirect     	 8624082	        11.91 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/Facade                	 2203500	        50.66 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/UpstreamDirect        	 2380562	        47.95 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/Facade               	10512678	        10.18 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/UpstreamDirect       	12871969	         8.139 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/Facade          	 9803134	        10.55 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/UpstreamDirect  	12828266	         8.038 ns/op	       0 B/op	       0 allocs/op
+PASS
+
+### block=2 sequence=3 version=M7-D
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/uint128
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationM3ThreeWay/QuoRem/Facade  	14291833	         7.793 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/QuoRem/UpstreamDirect         	10391338	        10.34 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/Facade             	 9849003	        11.71 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/UpstreamDirect     	 9165956	        11.97 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/Facade                	 2165583	        48.89 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/UpstreamDirect        	 2361555	        45.35 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/Facade               	10026325	        10.45 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/UpstreamDirect       	13181203	         7.911 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/Facade          	10247074	        10.35 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/UpstreamDirect  	12865290	         8.932 ns/op	       0 B/op	       0 allocs/op
+PASS
+
+### block=2 sequence=4 version=M7-E
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/uint128
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationM3ThreeWay/QuoRem/Facade  	14037349	         8.153 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/QuoRem/UpstreamDirect         	 9983858	        11.32 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/Facade             	 9653233	        11.42 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/UpstreamDirect     	 9562861	        11.54 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/Facade                	 2312416	        46.56 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/UpstreamDirect        	 2280445	        46.54 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/Facade               	11938232	         9.526 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/UpstreamDirect       	13420576	         8.015 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/Facade          	11427039	         9.679 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/UpstreamDirect  	13712116	         8.147 ns/op	       0 B/op	       0 allocs/op
+PASS
+
+### block=3 sequence=1 version=M7-D
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/uint128
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationM3ThreeWay/QuoRem/Facade  	12681932	         8.169 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/QuoRem/UpstreamDirect         	11160681	         9.840 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/Facade             	 9531223	        10.90 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/UpstreamDirect     	 9184402	        11.37 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/Facade                	 2305598	        45.48 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/UpstreamDirect        	 2383938	        50.07 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/Facade               	11223278	         9.545 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/UpstreamDirect       	14069510	         7.821 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/Facade          	10574374	        10.03 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/UpstreamDirect  	13480419	         8.011 ns/op	       0 B/op	       0 allocs/op
+PASS
+
+### block=3 sequence=2 version=M7-E
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/uint128
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationM3ThreeWay/QuoRem/Facade  	14499856	         7.387 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/QuoRem/UpstreamDirect         	11215363	         9.865 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/Facade             	 9549565	        11.04 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/UpstreamDirect     	 9285664	        11.45 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/Facade                	 2405197	        45.30 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/UpstreamDirect        	 2453064	        45.07 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/Facade               	11662022	         9.107 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/UpstreamDirect       	14306793	         7.818 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/Facade          	11742687	         9.158 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/UpstreamDirect  	13792122	         7.977 ns/op	       0 B/op	       0 allocs/op
+PASS
+
+### block=3 sequence=3 version=M7-E
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/uint128
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationM3ThreeWay/QuoRem/Facade  	14551431	         8.065 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/QuoRem/UpstreamDirect         	10896132	        11.28 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/Facade             	 9803731	        11.36 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/UpstreamDirect     	 9488059	        11.94 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/Facade                	 2244916	        48.44 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/UpstreamDirect        	 2356722	        48.48 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/Facade               	10666426	         9.808 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/UpstreamDirect       	12516727	         8.420 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/Facade          	11639466	         9.362 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/UpstreamDirect  	12471534	         8.170 ns/op	       0 B/op	       0 allocs/op
+PASS
+
+### block=3 sequence=4 version=M7-D
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128/uint128
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationM3ThreeWay/QuoRem/Facade  	13843966	         7.995 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/QuoRem/UpstreamDirect         	10705576	        12.19 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/Facade             	 8921665	        11.90 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ThreeWay/WideQuoRem/UpstreamDirect     	 9013495	        12.25 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/Facade                	 2086742	        48.12 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseLong/UpstreamDirect        	 2341046	        46.02 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/Facade               	11216566	        10.73 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3FCodec/ParseShort/UpstreamDirect       	14156430	         7.979 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/Facade          	10685072	        10.54 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReleaseM7ETargets/ParseShortMixed/UpstreamDirect  	13010280	         8.314 ns/op	       0 B/op	       0 allocs/op
+PASS
+

@@ -1,0 +1,14 @@
+goos: linux
+goarch: amd64
+pkg: github.com/profe-ajedrez/badassitron/dec128
+cpu: AMD EPYC 9V74 80-Core Processor                
+BenchmarkMigrationM3ECoefficientBoundary/Internal         	100000000	         1.445 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ECoefficientBoundary/Internal         	100000000	         1.425 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ECoefficientBoundary/Internal         	100000000	         1.444 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ECoefficientBoundary/Internal         	108384517	         1.453 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ECoefficientBoundary/PublicNew        	84684346	         1.745 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ECoefficientBoundary/PublicNew        	81474308	         1.742 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ECoefficientBoundary/PublicNew        	92841006	         1.913 ns/op	       0 B/op	       0 allocs/op
+BenchmarkMigrationM3ECoefficientBoundary/PublicNew        	91813798	         1.844 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/profe-ajedrez/badassitron/dec128	1.350s

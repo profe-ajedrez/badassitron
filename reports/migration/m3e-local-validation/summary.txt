@@ -1,0 +1,2 @@
+PASS default tests+vet
+PASS m3 tests+vet
